@@ -2,8 +2,13 @@
 // Bara den publika anon-nyckeln hamnar i sidan – aldrig service_role.
 import { writeFileSync } from "node:fs";
 
-const url = process.env.SUPABASE_URL || "";
-const anon = process.env.SUPABASE_ANON_KEY || "";
+// Publika värden: projektets adress och anon-nyckeln är gjorda för att synas i sidan.
+// Skyddet ligger i databasens behörigheter (RLS), inte i att nyckeln är hemlig.
+const DEFAULT_URL = "https://nwtzxyuqbhichtqhhzdk.supabase.co";
+const DEFAULT_ANON = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im53dHp4eXVxYmhpY2h0cWhoemRrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTMzNDgyMjEsImV4cCI6MjEwODkyNDIyMX0.17_QfVzfSZpK69_7wDfvQbz1PZAtk_4XZxdIFxlkU3g";
+
+const url = process.env.SUPABASE_URL || DEFAULT_URL;
+const anon = process.env.SUPABASE_ANON_KEY || DEFAULT_ANON;
 const ai = !!process.env.ANTHROPIC_API_KEY;
 const shared = (process.env.SHARED_LOGIN_EMAIL || "initiativtavlan@lfm30.se").toLowerCase();
 
