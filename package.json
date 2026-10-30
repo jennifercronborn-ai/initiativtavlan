@@ -1,0 +1,13 @@
+{
+  "name": "initiativtavlan",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "config": "node scripts/write-config.mjs",
+    "invite": "node scripts/invite.mjs",
+    "import": "node scripts/import.mjs"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.45.0"
+  }
+}

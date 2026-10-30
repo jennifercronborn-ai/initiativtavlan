@@ -1,0 +1,1531 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Initiativtavlan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
+<style>
+/* Layout: luftig toppnavigering i UnderDB-anda. Vit grund, tonade blå kort med stora radier, stora blå rubriker med tät spärrning. */
+:root {
+  --bg: #FFFFFF; --surface: #F2F6FF; --surface-2: #E6EEFF; --ink: #16203A; --muted: #5A6785;
+  --line: #DCE5F7; --accent: #2457D6; --accent-ink: #FFFFFF; --accent-soft: #E3ECFF; --accent-strong: #1A43AE;
+  --signal: #C2531B; --signal-soft: #FDEBDF; --danger: #B3261E; --card: #FFFFFF;
+  --i-upk: #2457D6; --i-obkn: #B7791F; --i-kas: #7C4DCC; --i-hs30: #0E8A7D; --i-kio: #C2531B; --i-gka: #4E8A1F; --i-lfm30: #3F5878; --i-ccc: #A3367A; --i-bruka: #8A5A3C; --i-k2030: #0F6E9E; --i-coaction: #B03A48; --i-gpkb: #8C7A0B; --i-vks: #0B6B4B; --i-hbg: #8E2AB5; --i-shift: #00838F; --on-init: #FFFFFF;
+  --font-display: "Inter", "Helvetica Neue", Arial, sans-serif;
+  --font-body: "Inter", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "Inter", "Helvetica Neue", Arial, sans-serif;
+  --r: 8px; --r-lg: 12px;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0B1222; --surface: #131D33; --surface-2: #1B2843; --ink: #E8EEFB; --muted: #9AA8C6;
+  --line: #24324F; --accent: #82A6FF; --accent-ink: #0B1222; --accent-soft: #1A2A4D; --accent-strong: #A9C2FF;
+  --signal: #F2A06E; --signal-soft: #3A2516; --danger: #F2938B; --card: #101A2E;
+  --i-upk: #82A6FF; --i-obkn: #E3B45A; --i-kas: #B597F0; --i-hs30: #5CC9BB; --i-kio: #F2A06E; --i-gka: #9CCB67; --i-lfm30: #A3B5D1; --i-ccc: #E58BC4; --i-bruka: #D6A47F; --i-k2030: #6CC0E8; --i-coaction: #F08A96; --i-gpkb: #D9C75A; --i-vks: #5FCFA4; --i-hbg: #D08AF0; --i-shift: #5FD6E0; --on-init: #0B1222;
+  color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: #0B1222; --surface: #131D33; --surface-2: #1B2843; --ink: #E8EEFB; --muted: #9AA8C6;
+  --line: #24324F; --accent: #82A6FF; --accent-ink: #0B1222; --accent-soft: #1A2A4D; --accent-strong: #A9C2FF;
+  --signal: #F2A06E; --signal-soft: #3A2516; --danger: #F2938B; --card: #101A2E;
+  --i-upk: #82A6FF; --i-obkn: #E3B45A; --i-kas: #B597F0; --i-hs30: #5CC9BB; --i-kio: #F2A06E; --i-gka: #9CCB67; --i-lfm30: #A3B5D1; --i-ccc: #E58BC4; --i-bruka: #D6A47F; --i-k2030: #6CC0E8; --i-coaction: #F08A96; --i-gpkb: #D9C75A; --i-vks: #5FCFA4; --i-hbg: #D08AF0; --i-shift: #5FD6E0; --on-init: #0B1222;
+  color-scheme: dark; }
+
+* { box-sizing: border-box; }
+html, body { min-height: 100%; }
+body { background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 15px; line-height: 1.55; letter-spacing: -0.01em; -webkit-font-smoothing: antialiased; }
+h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; line-height: 1.12; }
+h1 { font-size: clamp(2rem, 4.4vw, 2.9rem); font-weight: 700; letter-spacing: -0.045em; color: var(--accent); }
+h2 { font-size: 1.35rem; font-weight: 700; letter-spacing: -0.03em; color: var(--accent); }
+h3 { font-size: 1.02rem; font-weight: 600; letter-spacing: -0.02em; }
+p { margin: 0; }
+a { color: var(--accent); }
+button, input, select, textarea { font: inherit; color: inherit; letter-spacing: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.mono { font-variant-numeric: tabular-nums; }
+.label { font-size: 0.78rem; color: var(--muted); font-weight: 600; letter-spacing: 0; }
+.muted { color: var(--muted); }
+
+/* Inloggning */
+#gate { min-height: 100vh; display: grid; place-items: center; padding-inline: 16px; padding-block: 48px; }
+.gate-box { width: 100%; max-width: 440px; display: grid; gap: 24px; }
+.gate-box h1 { font-size: clamp(2rem, 6vw, 2.6rem); }
+.gate-box form { display: grid; gap: 14px; background: var(--surface); border-radius: var(--r-lg); padding: 28px; }
+.gate-mark { display: flex; gap: 6px; }
+.gate-mark { gap: 0; } .gate-mark span { width: 22px; height: 8px; border-radius: 0; } .gate-mark span:first-child { border-radius: 3px 0 0 3px; } .gate-mark span:last-child { border-radius: 0 3px 3px 0; }
+
+/* App-skal: sidomeny */
+#app { min-height: 100vh; display: grid; grid-template-columns: 248px minmax(0, 1fr); align-items: start; }
+nav.side { position: sticky; top: env(safe-area-inset-top, 0px); height: 100vh; overflow-y: auto; display: flex; flex-direction: column; gap: 24px; padding-inline: 16px; padding-block: 22px; border-right: 1px solid var(--line); background: var(--bg); z-index: 20; }
+.brand { display: flex; align-items: center; gap: 10px; padding-inline: 8px; }
+.brand::before { content: ""; width: 26px; height: 22px; flex: none; border-radius: 3px; background: linear-gradient(to right, var(--i-upk) 0.00% 6.67%, var(--i-obkn) 6.67% 13.33%, var(--i-kas) 13.33% 20.00%, var(--i-hs30) 20.00% 26.67%, var(--i-kio) 26.67% 33.33%, var(--i-gka) 33.33% 40.00%, var(--i-lfm30) 40.00% 46.67%, var(--i-ccc) 46.67% 53.33%, var(--i-bruka) 53.33% 60.00%, var(--i-k2030) 60.00% 66.67%, var(--i-coaction) 66.67% 73.33%, var(--i-gpkb) 73.33% 80.00%, var(--i-vks) 80.00% 86.67%, var(--i-hbg) 86.67% 93.33%, var(--i-shift) 93.33% 100.00%); }
+.brand b { font-weight: 700; font-size: 1rem; letter-spacing: -0.03em; line-height: 1.2; }
+.brand small { display: none; }
+.navlist { display: grid; gap: 2px; }
+.navlist button { background: none; border: 0; padding: 9px 12px; border-radius: var(--r); cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 8px; color: var(--ink); text-align: left; font-weight: 500; }
+.navlist button:hover { background: var(--surface); }
+.navlist button[aria-current="page"] { background: var(--accent); color: var(--accent-ink); }
+.navlist .count { font-size: 0.74rem; opacity: 0.65; font-variant-numeric: tabular-nums; }
+.side-foot { margin-top: auto; display: grid; gap: 6px; font-size: 0.8rem; color: var(--muted); padding-inline: 8px; }
+.side-foot .btn { justify-self: start; padding-inline: 0; }
+main { padding-inline: clamp(16px, 4vw, 48px); padding-block: 40px 80px; max-width: 1280px; margin-inline: auto; width: 100%; }
+.page-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px; margin-bottom: 28px; }
+.page-head .sub { color: var(--muted); margin-top: 10px; max-width: 62ch; font-size: 1.02rem; }
+
+/* Knappar */
+.btn { display: inline-flex; align-items: center; gap: 6px; padding: 10px 18px; border-radius: var(--r); border: 0; background: var(--surface); color: var(--accent); cursor: pointer; font-weight: 500; font-size: 0.92rem; white-space: nowrap; transition: background .15s; }
+.btn:hover { background: var(--surface-2); }
+.btn.primary { background: var(--accent); color: var(--accent-ink); }
+.btn.primary:hover { background: var(--accent-strong); }
+.btn.ghost { background: none; color: var(--accent); padding-inline: 4px; }
+.btn.ghost:hover { text-decoration: underline; }
+.btn.danger { color: var(--danger); }
+.btn:disabled { opacity: 0.55; cursor: default; }
+.row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+
+/* Filter */
+.filters { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; padding: 14px 16px; background: var(--surface); border-radius: var(--r-lg); margin-bottom: 24px; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { display: inline-flex; align-items: center; gap: 7px; padding: 6px 12px; border: 0; border-radius: 999px; background: var(--card); cursor: pointer; font-size: 0.84rem; font-weight: 500; }
+.chip:hover { background: var(--surface-2); }
+.chip[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); }
+.chip[aria-pressed="true"] .dot { box-shadow: 0 0 0 2px var(--accent-ink); }
+.dot { width: 9px; height: 9px; border-radius: 2px; display: inline-block; flex: none; }
+.field { display: grid; gap: 6px; }
+.field label { font-size: 0.82rem; font-weight: 600; color: var(--muted); }
+input[type=text], input[type=search], input[type=date], input[type=url], input[type=email], input[type=password], select, textarea {
+  border: 1px solid var(--line); background: var(--card); border-radius: var(--r); padding: 9px 12px; width: 100%; min-width: 0; }
+input:focus, select:focus, textarea:focus { border-color: var(--accent); outline: none; box-shadow: 0 0 0 3px var(--accent-soft); }
+textarea { resize: vertical; min-height: 140px; line-height: 1.5; }
+.filters input[type=search] { width: 220px; }
+.filters select { width: auto; }
+
+/* Taggar */
+.init-tag { display: inline-flex; align-items: center; gap: 7px; font-size: 0.82rem; font-weight: 600; }
+.theme-tag { display: inline-block; font-size: 0.75rem; padding: 3px 10px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); font-weight: 500; }
+.src { font-size: 0.74rem; color: var(--muted); }
+.src.manual { color: var(--signal); }
+
+/* Sektioner */
+.grid-2 { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 40px; }
+.section { display: grid; gap: 16px; align-content: start; }
+.section-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+
+/* Utvald avstämning */
+.feature { background: var(--accent); color: var(--accent-ink); border-radius: var(--r-lg); padding: clamp(22px, 4vw, 40px); display: grid; gap: 22px; position: relative; overflow: hidden; }
+.feature::after { content: ""; position: absolute; inset: 0 0 0 55%; pointer-events: none; background-image: linear-gradient(color-mix(in srgb, var(--accent-ink) 9%, transparent) 1px, transparent 1px), linear-gradient(90deg, color-mix(in srgb, var(--accent-ink) 9%, transparent) 1px, transparent 1px); background-size: 28px 28px; -webkit-mask-image: linear-gradient(90deg, transparent, #000 60%); mask-image: linear-gradient(90deg, transparent, #000 60%); }
+.feature .label, .feature .muted, .feature .init-tag { color: inherit; }
+.feature .muted { opacity: 0.8; }
+.feature-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; flex-wrap: wrap; position: relative; z-index: 1; }
+.feature-label { opacity: 0.85; }
+.feature-title { font-size: clamp(1.6rem, 3.4vw, 2.3rem); margin-top: 8px; color: inherit; letter-spacing: -0.04em; }
+.feature .btn.primary { background: var(--accent-ink); color: var(--accent); }
+.feature .btn.primary:hover { opacity: 0.92; }
+.feature-syn { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; position: relative; z-index: 1; }
+.feature-syn > div { background: color-mix(in srgb, var(--accent-ink) 12%, transparent); border-radius: var(--r); padding: 14px 16px; }
+.feature-syn p { font-size: 0.95rem; margin-top: 6px; }
+.feature-ups { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; position: relative; z-index: 1; }
+.feature-ups p { font-size: 0.87rem; opacity: 0.85; margin-top: 6px; }
+.feature .dot { box-shadow: 0 0 0 2px var(--accent-ink); }
+.empty-feature { justify-items: start; }
+
+/* På gång */
+.news-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 18px; }
+.news { display: grid; grid-template-rows: auto 1fr; background: color-mix(in srgb, var(--c) 6%, var(--bg)); border-bottom: 3px solid var(--c); border-radius: var(--r-lg); overflow: hidden; text-decoration: none; color: var(--ink); transition: transform .18s, box-shadow .18s; }
+.news:hover { transform: translateY(-3px); box-shadow: 0 12px 28px -14px color-mix(in srgb, var(--accent) 45%, transparent); }
+.news-img { aspect-ratio: 16 / 8; max-width: 100%; position: relative; overflow: hidden; color: var(--ink); padding: 14px 16px; display: flex; flex-direction: column; justify-content: space-between; align-items: flex-start;
+  background-color: color-mix(in srgb, var(--c) 16%, var(--bg));
+  background-image: linear-gradient(color-mix(in srgb, var(--c) 18%, transparent) 1px, transparent 1px), linear-gradient(90deg, color-mix(in srgb, var(--c) 18%, transparent) 1px, transparent 1px); background-size: 22px 22px; background-position: -1px -1px; }
+.news-img.has-img { background-image: none; background-color: color-mix(in srgb, var(--c) 45%, #fff); }
+.news-img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.05); mix-blend-mode: multiply; }
+.news-badge { position: relative; z-index: 1; background: var(--c); color: var(--on-init); font-size: 0.76rem; font-weight: 700; padding: 3px 10px; border-radius: 999px; }
+.news-img em { position: relative; z-index: 1; font-style: normal; font-size: 0.74rem; background: color-mix(in srgb, var(--bg) 88%, transparent); color: var(--ink); padding: 3px 10px; border-radius: 999px; font-weight: 500; }
+.example-banner { position: relative; z-index: 1; background: repeating-linear-gradient(135deg, var(--signal-soft) 0 14px, color-mix(in srgb, var(--signal-soft) 70%, var(--bg)) 14px 28px); color: var(--ink); border: 2px dashed var(--signal); border-radius: var(--r); padding: 10px 14px; font-size: 0.92rem; }
+.example-banner strong { color: var(--signal); text-transform: uppercase; letter-spacing: 0.06em; font-size: 0.8rem; margin-right: 8px; }
+.news-body { padding: 14px 16px 16px; display: grid; gap: 12px; align-content: space-between; }
+.news-body h3 { font-size: 1rem; line-height: 1.3; color: var(--ink); }
+.news-meta { display: flex; justify-content: space-between; gap: 8px; font-size: 0.78rem; color: var(--muted); flex-wrap: wrap; }
+a.out { color: inherit; text-decoration: none; }
+a.out:hover { text-decoration: underline; color: var(--accent); }
+
+/* Material & verktyg */
+.res-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+.res { display: grid; grid-template-rows: auto auto 1fr auto auto; gap: 8px; background: color-mix(in srgb, var(--ic) 11%, var(--bg)); border-radius: var(--r-lg); padding: 16px 18px; text-decoration: none; color: var(--ink); border-top: 4px solid var(--ic); transition: transform .15s, box-shadow .15s; }
+.res:hover { transform: translateY(-2px); box-shadow: 0 10px 24px -14px color-mix(in srgb, var(--accent) 45%, transparent); }
+.res-top { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.res-type { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: color-mix(in srgb, var(--ic) 70%, var(--ink)); }
+.res .theme-tag { background: color-mix(in srgb, var(--bg) 70%, transparent); color: var(--ink); }
+.res-get { color: color-mix(in srgb, var(--ic) 70%, var(--ink)) !important; }
+.res h3 { font-size: 1rem; line-height: 1.3; }
+.res p { font-size: 0.86rem; color: var(--muted); line-height: 1.45; }
+.res-foot { display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: center; }
+.res-get { font-size: 0.82rem; font-weight: 600; color: var(--accent); }
+
+/* Vad händer just nu */
+.now-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; }
+.now-card { background: var(--surface); border-radius: var(--r-lg); padding: 16px 18px; display: grid; gap: 8px; align-content: start; }
+.now-card .card-init { color: color-mix(in srgb, var(--ic) 70%, var(--ink)); }
+.now-card p { font-size: 0.92rem; }
+.now-card ul { margin: 0; padding-left: 18px; color: var(--muted); font-size: 0.86rem; }
+
+
+/* Anslagstavla */
+.board-wrap { overflow: auto; border-radius: var(--r-lg); background: var(--surface); max-height: 75vh; overscroll-behavior: contain; }
+.pinboard { position: relative; background-image: radial-gradient(color-mix(in srgb, var(--accent) 22%, transparent) 1.2px, transparent 1.3px); background-size: 24px 24px; }
+.board-empty { position: absolute; left: 40px; top: 40px; max-width: 360px; display: grid; gap: 6px; color: var(--muted); padding: 20px; border: 2px dashed var(--line); border-radius: var(--r-lg); background: var(--bg); }
+.board-empty b { color: var(--ink); }
+.pnote { position: absolute; width: 220px; min-height: 130px; padding: 12px 14px 10px; display: grid; gap: 8px; grid-template-rows: auto 1fr auto; background: color-mix(in srgb, var(--ic) 20%, var(--bg)); border-top: 5px solid var(--ic); border-radius: 4px 4px 10px 10px; box-shadow: 0 8px 18px -10px rgba(10, 25, 60, 0.45); cursor: grab; touch-action: none; user-select: none; transition: box-shadow .15s; }
+.pnote:hover { box-shadow: 0 14px 26px -12px rgba(10, 25, 60, 0.55); }
+.pnote.dragging { cursor: grabbing; z-index: 30; box-shadow: 0 22px 40px -14px rgba(10, 25, 60, 0.6); transform: rotate(0deg) scale(1.03) !important; transition: none; }
+.pnote-head { display: flex; justify-content: space-between; align-items: center; gap: 6px; }
+.pnote-type { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: color-mix(in srgb, var(--ic) 75%, var(--ink)); }
+.pnote-x { border: 0; background: none; color: var(--muted); cursor: pointer; font-size: 1.1rem; line-height: 1; padding: 0 2px; border-radius: 4px; }
+.pnote-x:hover { color: var(--danger); }
+.pnote-x.confirm { font-size: 0.72rem; color: var(--bg); background: var(--danger); padding: 3px 6px; font-weight: 600; }
+.pnote-text { font-size: 0.92rem; line-height: 1.4; white-space: pre-wrap; overflow-wrap: anywhere; }
+.pnote-foot { display: flex; justify-content: space-between; align-items: center; gap: 6px; }
+.pnote-init { font-size: 0.72rem; font-weight: 600; color: var(--muted); min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pnote-plus { flex: none; border: 0; cursor: pointer; font-size: 0.74rem; font-weight: 600; padding: 4px 9px; border-radius: 999px; background: color-mix(in srgb, var(--bg) 75%, transparent); color: var(--ink); }
+.pnote-plus:hover { background: var(--bg); }
+.pnote-plus[aria-pressed="true"] { background: var(--ic); color: var(--on-init); }
+.pnote-also { display: flex; gap: 4px; flex-wrap: wrap; }
+
+/* Arkiv */
+.archive { display: grid; gap: 6px; }
+.arch-month { font-size: 1.1rem; margin-top: 18px; }
+.arch-list { display: grid; background: var(--surface); border-radius: var(--r-lg); padding: 4px 16px; }
+.arch-row { display: grid; grid-template-columns: 64px minmax(0, 1fr) auto; gap: 14px; align-items: baseline; padding-block: 11px; border-bottom: 1px solid var(--line); }
+.arch-row:last-child { border-bottom: 0; }
+.arch-date { font-weight: 600; font-variant-numeric: tabular-nums; color: var(--muted); font-size: 0.88rem; }
+.arch-title { font-weight: 600; }
+@media (max-width: 560px) { .arch-row { grid-template-columns: 52px minmax(0, 1fr); } .arch-row .init-tag { grid-column: 2; } }
+
+/* Evenemangslista */
+.ev-list { display: grid; gap: 8px; }
+.ev { display: grid; grid-template-columns: 62px minmax(0, 1fr) auto; gap: 16px; padding: 14px 16px; background: var(--surface); border-radius: var(--r-lg); align-items: start; }
+.ev-date { line-height: 1.05; font-variant-numeric: tabular-nums; background: var(--card); border-radius: 12px; padding: 8px 0; text-align: center; }
+.ev-date .d { font-size: 1.45rem; font-weight: 700; letter-spacing: -0.04em; color: var(--accent); }
+.ev-date .m { font-size: 0.7rem; color: var(--muted); font-weight: 500; }
+.ev-date.now { background: var(--accent); }
+.ev-date.now .d, .ev-date.now .m { color: var(--accent-ink); }
+.ev-body { display: grid; gap: 4px; min-width: 0; }
+.ev-title { font-weight: 600; letter-spacing: -0.02em; }
+.ev-meta { font-size: 0.86rem; color: var(--muted); display: flex; flex-wrap: wrap; gap: 2px 12px; }
+.ev-side { display: grid; gap: 6px; justify-items: end; text-align: right; font-size: 0.86rem; }
+.ev-side a { font-weight: 500; text-decoration: none; }
+.ev-side a:hover { text-decoration: underline; }
+.week-label { font-size: 0.8rem; font-weight: 600; color: var(--muted); padding-top: 18px; padding-bottom: 2px; }
+.week-label.current { color: var(--accent); }
+
+/* Matris */
+.matrix-wrap { overflow-x: auto; background: var(--surface); border-radius: var(--r-lg); padding: 6px; }
+table.matrix { border-collapse: collapse; width: 100%; font-size: 0.86rem; }
+.matrix th, .matrix td { padding: 8px 10px; border-bottom: 1px solid var(--line); text-align: center; white-space: nowrap; }
+.matrix th:first-child, .matrix td:first-child { text-align: left; position: sticky; left: 0; background: var(--surface); }
+.matrix thead th { font-size: 0.74rem; font-weight: 600; color: var(--muted); }
+.matrix tr:last-child td { border-bottom: 0; }
+.cell-n { display: inline-grid; place-items: center; width: 26px; height: 22px; border-radius: 4px; font-size: 0.78rem; font-weight: 600; color: var(--on-init); }
+.mx-flag { font-size: 0.7rem; font-weight: 600; padding: 2px 8px; border-radius: 999px; margin-left: 6px; }
+.mx-flag.shared { background: var(--accent); color: var(--accent-ink); }
+.mx-flag.unique { background: var(--signal-soft); color: var(--signal); }
+
+/* Arbetsgrupper och projekt */
+.board { column-count: 3; column-gap: 14px; }
+.board .card { break-inside: avoid; margin-bottom: 14px; }
+.card { background: color-mix(in srgb, var(--ic) 11%, var(--bg)); border-top: 4px solid var(--ic); border-radius: var(--r-lg); padding: 16px 18px; display: grid; gap: 7px; position: relative; }
+.card::before { content: ""; position: absolute; left: 18px; top: 0; width: 28px; height: 4px; border-radius: 0 0 4px 4px; background: currentColor; opacity: 0; }
+.card-init { display: flex; align-items: center; gap: 7px; font-size: 0.76rem; font-weight: 700; color: color-mix(in srgb, var(--ic) 70%, var(--ink)); }
+.card-top { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 2px; }
+.card h3 { font-size: 1rem; line-height: 1.28; color: var(--ink); }
+.card p { font-size: 0.86rem; color: var(--muted); line-height: 1.45; }
+.card .theme-tag { background: color-mix(in srgb, var(--bg) 70%, transparent); color: var(--ink); }
+button.theme-tag { border: 0; cursor: pointer; font: inherit; font-size: 0.74rem; font-weight: 500; }
+button.theme-tag:hover { background: var(--accent); color: var(--accent-ink); }
+
+/* Månadsvy */
+.month { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 4px; }
+.month .dh { font-size: 0.74rem; font-weight: 600; color: var(--muted); padding: 4px 8px; }
+.month .day { min-height: 100px; padding: 8px; background: var(--surface); border-radius: 12px; display: grid; gap: 3px; align-content: start; min-width: 0; }
+.month .day.out { background: transparent; color: var(--muted); }
+.month .day.today { box-shadow: inset 0 0 0 2px var(--accent); }
+.month .day.today .n { color: var(--accent); font-weight: 700; }
+.month .n { font-size: 0.78rem; justify-self: start; font-variant-numeric: tabular-nums; }
+.mev { font-size: 0.72rem; line-height: 1.25; padding: 3px 6px 3px 7px; border: 0; border-left: 3px solid; background: var(--card); border-radius: 6px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; cursor: pointer; text-align: left; }
+.month-nav { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+
+/* Avstämningar */
+.notes-layout { display: grid; grid-template-columns: 270px minmax(0, 1fr); gap: 36px; align-items: start; }
+.note-list { display: grid; gap: 6px; }
+.note-list button { text-align: left; background: var(--surface); border: 0; border-radius: var(--r); padding: 12px 14px; cursor: pointer; display: grid; gap: 2px; }
+.note-list button[aria-current="true"] { background: var(--accent); color: var(--accent-ink); }
+.note-list button[aria-current="true"] .muted { color: inherit; opacity: 0.8; }
+.upd { display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 18px; padding-block: 16px; border-bottom: 1px solid var(--line); }
+.upd ul { margin: 6px 0 0; padding-left: 18px; color: var(--muted); font-size: 0.9rem; }
+.syn { padding: 14px 16px; background: var(--accent-soft); border-radius: var(--r); display: grid; gap: 4px; }
+.sugg { display: flex; justify-content: space-between; gap: 12px; align-items: center; padding-block: 12px; border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+.example-flag { font-size: 0.74rem; font-weight: 600; color: var(--signal); background: var(--signal-soft); padding: 3px 10px; border-radius: 999px; }
+.panel { background: var(--surface); border-radius: var(--r-lg); padding: 24px; display: grid; gap: 16px; }
+.status-line { font-size: 0.88rem; color: var(--muted); }
+
+/* Källor */
+.sources { display: grid; gap: 8px; }
+.source { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 12px; padding: 14px 16px; background: var(--surface); border-radius: var(--r-lg); align-items: center; }
+.pill { font-size: 0.74rem; font-weight: 600; padding: 3px 10px; border-radius: 999px; }
+.pill.ok { background: var(--accent-soft); color: var(--accent); }
+.pill.fel { background: var(--signal-soft); color: var(--signal); }
+.cmd { display: flex; gap: 8px; align-items: center; background: var(--surface); border-radius: var(--r); padding: 12px 14px; font-size: 0.88rem; flex-wrap: wrap; }
+.cmd code { flex: 1; min-width: 0; overflow-wrap: anywhere; font-family: inherit; }
+
+/* Dialog */
+dialog { border: 0; border-radius: var(--r-lg); background: var(--bg); color: var(--ink); padding: 0; width: min(580px, calc(100vw - 32px)); box-shadow: 0 30px 60px -20px rgba(10, 25, 60, 0.35); }
+dialog::backdrop { background: rgba(11, 18, 34, 0.45); backdrop-filter: blur(2px); }
+dialog form { display: grid; gap: 16px; padding: 26px; }
+dialog .ev { background: var(--surface); }
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.form-grid .full { grid-column: 1 / -1; }
+.empty { padding: 30px 20px; text-align: center; color: var(--muted); background: var(--surface); border-radius: var(--r-lg); }
+.banner { padding: 12px 16px; border-radius: var(--r); background: var(--signal-soft); color: var(--ink); font-size: 0.9rem; margin-bottom: 24px; }
+.toast { position: fixed; bottom: calc(24px + env(safe-area-inset-bottom, 0px)); left: 50%; transform: translateX(-50%); background: var(--ink); color: var(--bg); padding: 11px 18px; border-radius: var(--r); font-size: 0.9rem; z-index: 50; }
+
+@media (max-width: 1000px) {
+  .grid-2 { grid-template-columns: minmax(0, 1fr); }
+  .notes-layout { grid-template-columns: minmax(0, 1fr); }
+  .board { column-count: 2; }
+}
+@media (max-width: 860px) {
+  #app { grid-template-columns: minmax(0, 1fr); }
+  nav.side { height: auto; flex-direction: row; flex-wrap: wrap; align-items: center; gap: 10px 16px; padding-block: 12px; border-right: 0; border-bottom: 1px solid var(--line); }
+  .navlist { order: 3; flex-basis: 100%; display: flex; flex-wrap: wrap; gap: 4px; }
+  .navlist button { padding: 6px 12px; border-radius: 999px; background: var(--surface); }
+  .side-foot { margin: 0 0 0 auto; padding: 0; display: flex; align-items: center; }
+  #sync-foot { display: none; }
+  .month .day { min-height: 56px; padding: 5px; }
+  .mev { font-size: 0; height: 6px; padding: 0; }
+  .upd { grid-template-columns: minmax(0, 1fr); gap: 4px; }
+  .filters input[type=search] { width: 100%; }
+}
+@media (max-width: 560px) {
+  .board { column-count: 1; }
+  .ev { grid-template-columns: 54px minmax(0, 1fr); }
+  .ev-side { grid-column: 2; justify-items: start; text-align: left; display: flex; gap: 10px; flex-wrap: wrap; }
+  .form-grid { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* Mobil */
+@media (max-width: 860px) {
+  nav.side { position: sticky; top: 0; flex-wrap: nowrap; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px 12px; padding-block: 10px 0; padding-inline: 0; box-shadow: 0 1px 0 var(--line); border-bottom: 0; }
+  .brand { padding-inline: 16px 0; }
+  .side-foot { padding-right: 16px; }
+  .navlist { grid-column: 1 / -1; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; padding: 2px 16px 10px; scroll-padding-inline: 16px; -webkit-overflow-scrolling: touch; }
+  .navlist::-webkit-scrollbar { display: none; }
+  .navlist button { flex: none; white-space: nowrap; }
+  main { padding-block: 24px 64px; }
+}
+@media (max-width: 560px) {
+  .filters { padding: 12px; gap: 10px; }
+  .filters .chips { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; width: calc(100% + 24px); margin-inline: -12px; padding-inline: 12px; }
+  .filters .chips::-webkit-scrollbar { display: none; }
+  .filters .chip { flex: none; white-space: nowrap; }
+  .filters select { width: 100%; }
+  .page-head { margin-bottom: 20px; }
+  .page-head h1 { font-size: clamp(1.8rem, 8vw, 2.4rem); }
+  .page-head > .btn, .page-head > div > .btn { min-height: 44px; }
+  .news-img { aspect-ratio: 16 / 5; }
+  .board-wrap { max-height: none; overflow: visible; background: none; }
+  .pinboard { width: auto !important; height: auto !important; display: grid; gap: 12px; background-image: none; }
+  .pnote { position: static; width: auto; min-height: 0; transform: none !important; cursor: default; touch-action: auto; user-select: auto; }
+  .board-empty { position: static; max-width: none; }
+  .navlist button, .chip { min-height: 36px; }
+  dialog { width: calc(100vw - 24px); max-width: none; margin: auto; }
+  dialog form { padding: 18px; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+
+.pill.wait { background: var(--surface); color: var(--muted); border: 1px solid var(--line); }
+.survey-meter { display: grid; justify-items: end; gap: 2px; text-align: right; }
+.survey-meter b { font-size: 1.6rem; color: var(--accent); }
+.survey-meter span { font-size: 0.82rem; color: var(--muted); }
+.prof-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 14px; }
+.prof { display: grid; gap: 12px; align-content: start; padding: 18px; border-radius: var(--r); background: color-mix(in srgb, var(--ic) 11%, var(--bg)); border: 1px solid color-mix(in srgb, var(--ic) 25%, var(--line)); border-top: 4px solid var(--ic); }
+.prof-head { display: flex; justify-content: space-between; gap: 10px; align-items: start; }
+.prof-head h3 { font-size: 1.05rem; }
+.prof-head .pill { white-space: nowrap; flex-shrink: 0; }
+.prof-sec { display: grid; gap: 4px; font-size: 0.92rem; }
+.prof-sec p { margin: 0; }
+.contact-mail { font-family: var(--font-mono, monospace); font-size: 0.82rem; overflow-wrap: anywhere; }
+.focus-list { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
+.prof-stats { display: flex; flex-wrap: wrap; gap: 4px 10px; }
+.prof-stats .btn { padding: 2px 0; font-size: 0.85rem; }
+.map-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; font-size: 0.92rem; }
+.map-list b { display: inline-block; min-width: 38px; color: var(--accent); font-family: var(--font-mono, monospace); }
+.conf-table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--r); }
+.conf-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; min-width: 640px; }
+.conf-table th, .conf-table td { text-align: left; vertical-align: top; padding: 10px 12px; border-bottom: 1px solid var(--line); }
+.conf-table th { font-size: 0.75rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); background: var(--surface); }
+.conf-table td:first-child { background: color-mix(in srgb, var(--ic) 11%, var(--bg)); white-space: nowrap; }
+.overlap { display: grid; gap: 4px; }
+.ov-row { display: grid; grid-template-columns: minmax(120px, 1.2fr) 1fr 24px auto; gap: 10px; align-items: center; background: none; border: 0; padding: 6px 0; text-align: left; font: inherit; color: inherit; cursor: pointer; border-bottom: 1px solid var(--line); }
+.ov-bar { height: 8px; background: var(--surface); border-radius: 2px; overflow: hidden; }
+.ov-bar span { display: block; height: 100%; background: var(--accent); }
+.ov-dots { display: flex; gap: 3px; }
+.seek { padding: 12px 14px; border-radius: var(--r); background: color-mix(in srgb, var(--ic) 11%, var(--bg)); border-left: 4px solid var(--ic); display: grid; gap: 4px; }
+.seek p { margin: 0; font-size: 0.92rem; }
+.ideas { display: grid; gap: 8px; }
+.idea { display: grid; grid-template-columns: auto 1fr; gap: 14px; padding: 14px; border: 1px solid var(--line); border-radius: var(--r); background: var(--bg); }
+.idea p { margin: 4px 0 0; font-size: 0.92rem; }
+.idea-vote .btn { min-width: 56px; font-family: var(--font-mono, monospace); }
+.chk-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 6px; margin-top: 6px; }
+.flag-open, .flag-share { font-size: 0.72rem; font-weight: 600; padding: 2px 8px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); }
+.flag-share.nej { background: var(--signal-soft); color: var(--signal); }
+.flag-share.kontakt { background: var(--surface); color: var(--muted); border: 1px solid var(--line); }
+.cell-n.focus { box-shadow: 0 0 0 2px var(--bg), 0 0 0 3.5px var(--ink); }
+.cell-star { color: var(--accent); font-size: 0.8rem; margin-left: 2px; }
+@media (max-width: 600px) { .ov-row { grid-template-columns: 1fr 24px; } .ov-bar, .ov-dots { display: none; } .survey-meter { justify-items: start; text-align: left; } }
+</style>
+
+<div id="gate">
+  <div class="gate-box">
+    <div class="gate-mark" aria-hidden="true">
+      <span style="background:var(--i-upk)"></span><span style="background:var(--i-obkn)"></span><span style="background:var(--i-kas)"></span><span style="background:var(--i-hs30)"></span><span style="background:var(--i-kio)"></span><span style="background:var(--i-gka)"></span><span style="background:var(--i-lfm30)"></span><span style="background:var(--i-ccc)"></span><span style="background:var(--i-bruka)"></span><span style="background:var(--i-k2030)"></span><span style="background:var(--i-coaction)"></span><span style="background:var(--i-gpkb)"></span><span style="background:var(--i-vks)"></span><span style="background:var(--i-hbg)"></span><span style="background:var(--i-shift)"></span>
+    </div>
+    <div>
+      <h1>Initiativtavlan</h1>
+      <p class="muted" style="margin-top:8px">Gemensamt arbetsrum för kanslierna i Sveriges lokala och regionala klimatinitiativ inom bygg och anläggning.</p>
+    </div>
+    <form id="gate-form">
+      <div class="field" id="gate-step-email">
+        <label for="gate-email">E-postadress</label>
+        <input type="email" id="gate-email" autocomplete="email" required>
+      </div>
+      <div class="field" id="gate-step-code" hidden>
+        <label for="gate-code">Kod från mejlet</label>
+        <input type="text" id="gate-code" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6}" maxlength="6">
+      </div>
+      <p id="gate-err" class="status-line" hidden style="color:var(--danger)"></p>
+      <p id="gate-info" class="status-line" hidden></p>
+      <button class="btn primary" type="submit" id="gate-btn">Skicka inloggningskod</button>
+      <p class="status-line">Bara inbjudna adresser kan logga in. Saknar du inbjudan? Kontakta LFM30:s kansli.</p>
+    </form>
+  </div>
+</div>
+
+<div id="app" hidden>
+  <nav class="side" aria-label="Huvudmeny">
+    <div class="brand">
+      <b>Initiativtavlan</b>
+      <small class="muted">Bygg &amp; anläggning · kansliforum</small>
+    </div>
+    <div class="navlist" id="nav"></div>
+    <div class="side-foot">
+      <span id="sync-foot"></span>
+      <button class="btn ghost" id="logout" style="justify-self:start;padding-inline:0">Logga ut</button>
+    </div>
+  </nav>
+  <main id="main"></main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="config.js"></script>
+<script src="claude-shim.js"></script>
+<dialog id="dlg"><form id="dlg-form" method="dialog"></form></dialog>
+<div class="toast" id="toast" hidden role="status"></div>
+
+<script>
+const INIT = [
+  { key: "upk", site: "https://klimatprotokollet.uppsala.se/", name: "Uppsala klimatprotokoll", short: "Uppsala", region: "Uppsala", url: "https://klimatprotokollet.uppsala.se/kalendarium/" },
+  { key: "obkn", site: "https://obkn.se/", name: "Östergötland bygger klimatneutralt", short: "ÖBKN", region: "Östergötland", url: "https://obkn.se/kalendarium/" },
+  { key: "kas", site: "https://klimatarenastockholm.se/", name: "Klimatarena Stockholm", short: "Klimatarena Stockholm", region: "Stockholm", url: "https://klimatarenastockholm.se/kalendarium/" },
+  { key: "hs30", site: "https://hs30.se/", name: "Hållbart Stockholm 2030", short: "HS30", region: "Mälardalen", url: "https://hs30.se/" },
+  { key: "kio", site: "https://www.klimatinitiativ.se/", name: "Klimatinitiativ Örebro län", short: "Örebro", region: "Örebro län", url: "https://www.klimatinitiativ.se/kalender" },
+  { key: "gka", site: "https://www.gavle.se/kommun-och-politik/samarbeten-projekt-och-arbetssatt/gavle-klimatavtal/", name: "Gävle klimatavtal", short: "Gävle", region: "Gävle", url: "https://www.gavle.se/kommun-och-politik/samarbeten-projekt-och-arbetssatt/gavle-klimatavtal/" },
+  { key: "lfm30", site: "https://lfm30.se/", name: "LFM30", short: "LFM30", region: "Malmö / Skåne", url: "https://lfm30.se/events/" },
+  { key: "ccc", site: "https://www.cccjonkopingslan.com/", name: "CCC Jönköpings län", short: "CCC Jkpg", region: "Jönköpings län", url: "https://www.cccjonkopingslan.com/event/" },
+  { key: "bruka", site: "https://www.brukahalland.se/", name: "BRUKA Halland", short: "BRUKA", region: "Halland", url: "https://www.brukahalland.se/kalender-aktiviteter" },
+  { key: "k2030", site: "https://klimat2030.se/", name: "Klimat 2030 – Västra Götaland", short: "Klimat 2030", region: "Västra Götaland", url: "https://klimat2030.se/pa-gang/" },
+  { key: "coaction", site: "https://lund.se/coaction-lund", name: "CoAction Lund", short: "CoAction", region: "Lund", url: "https://lund.se/coaction-lund" },
+  { key: "gpkb", site: "https://www.businessregiongoteborg.se/naringslivsutveckling/hallbar-utveckling/goteborgs-plattform-klimatneutralt-byggande", name: "Göteborgs plattform för klimatneutralt byggande", short: "Göteborg", region: "Göteborgsregionen", url: "https://www.businessregiongoteborg.se/naringslivsutveckling/hallbar-utveckling/goteborgs-plattform-klimatneutralt-byggande/goteborgs-byggkalender" },
+  { key: "vks", site: "https://vasterasklimatsamverkan.se/", name: "Västerås Klimatsamverkan", short: "Västerås", region: "Västerås", url: "https://vasterasklimatsamverkan.se/aktuellt" },
+  { key: "hbg", site: "https://innovation.helsingborg.se/", name: "Helsingborgs stad", short: "Helsingborg", region: "Helsingborg", url: "https://innovation.helsingborg.se/" },
+  { key: "shift", site: "https://shiftsweden.se/", name: "ShiftSweden", short: "ShiftSweden", region: "Nationellt", url: "https://shiftsweden.se/" },
+];
+const IMAP = Object.fromEntries(INIT.map(i => [i.key, i]));
+const THEMES = ["Klimatberäkningar", "Återbruk & cirkularitet", "Upphandling & krav", "Material (betong, trä)", "Biologisk mångfald", "Energi", "Transport & logistik", "Befintligt bestånd", "Klimatfärdplaner", "Social hållbarhet", "Data & AI", "Nätverk & medlemmar"];
+const STATUS = [
+  { key: "planeras", label: "Planeras" },
+  { key: "pagar", label: "Pågår" },
+  { key: "avslutas", label: "Avslutas" },
+];
+const MONTHS = ["jan", "feb", "mar", "apr", "maj", "jun", "jul", "aug", "sep", "okt", "nov", "dec"];
+const MONTHS_LONG = ["januari", "februari", "mars", "april", "maj", "juni", "juli", "augusti", "september", "oktober", "november", "december"];
+const DAYS = ["Mån", "Tis", "Ons", "Tor", "Fre", "Lör", "Sön"];
+
+const S = {
+  view: "oversikt", events: [], groups: [], notes: [], sources: [], news: [], network: [], resources: [], board: [], uid: null, boardInit: new Set(), profiles: [], contacts: [], ideas: [],
+  rsInit: new Set(), rsTheme: "", rsQ: "", rsType: "",
+  nwInit: new Set(), nwTheme: "", nwQ: "", nwMode: "aktuellt",
+  dbState: "loading", db: null, sample: null,
+  evInit: new Set(), evTheme: "", evQ: "", evPast: false, evMode: "lista", monthOffset: 0,
+  grInit: new Set(), grTheme: "", grQ: "",
+  noteSel: null, parsing: false, parseMsg: "",
+};
+
+// ---------- hjälpfunktioner ----------
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const pad = n => String(n).padStart(2, "0");
+const ymd = d => d.getFullYear() + "-" + pad(d.getMonth() + 1) + "-" + pad(d.getDate());
+const parseYmd = s => { const [y, m, d] = String(s).split("-").map(Number); return new Date(y, (m || 1) - 1, d || 1); };
+const today = () => { const d = new Date(); d.setHours(0, 0, 0, 0); return d; };
+function isoWeek(d) {
+  const t = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
+  const day = t.getUTCDay() || 7; t.setUTCDate(t.getUTCDate() + 4 - day);
+  const y0 = new Date(Date.UTC(t.getUTCFullYear(), 0, 1));
+  return Math.ceil(((t - y0) / 86400000 + 1) / 7);
+}
+function mondayOf(d) { const m = new Date(d); const day = (m.getDay() + 6) % 7; m.setDate(m.getDate() - day); m.setHours(0, 0, 0, 0); return m; }
+function addDays(d, n) { const x = new Date(d); x.setDate(x.getDate() + n); return x; }
+function fmtDate(s) { const d = parseYmd(s); return d.getDate() + " " + MONTHS[d.getMonth()]; }
+function initTag(k) { const i = IMAP[k]; return `<span class="init-tag"><span class="dot" style="background:var(--i-${esc(k)})"></span>${esc(i ? i.name : k)}</span>`; }
+function initDot(k) { return `<span class="dot" style="background:var(--i-${esc(k)})"></span>`; }
+function toast(msg) { const t = $("#toast"); t.textContent = msg; t.hidden = false; clearTimeout(toast._t); toast._t = setTimeout(() => t.hidden = true, 2600); }
+function store(k, v) { try { v === undefined ? localStorage.getItem(k) : localStorage.setItem(k, v); } catch (e) {} }
+function load(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+function sortEvents(a, b) { return (a.date || "").localeCompare(b.date || "") || (a.time || "").localeCompare(b.time || ""); }
+
+// ---------- inloggning ----------
+function authed() { return !!(window.IT && IT.auth.isAuthed()); }
+let _gateEmail = "";
+function gateMsg(err, info) {
+  const e = $("#gate-err"), i = $("#gate-info");
+  e.hidden = !err; e.textContent = err || ""; i.hidden = !info; i.textContent = info || "";
+}
+$("#gate-form").addEventListener("submit", async e => {
+  e.preventDefault();
+  if (!window.IT) { gateMsg("Sidan är inte rätt konfigurerad. Kontakta administratören."); return; }
+  const btn = $("#gate-btn"); btn.disabled = true;
+  try {
+    if (!_gateEmail) {
+      const email = $("#gate-email").value.trim().toLowerCase();
+      const { error } = await IT.auth.sendCode(email);
+      if (error) { gateMsg("Vi kunde inte skicka en kod. Kontrollera adressen eller be om en inbjudan."); return; }
+      _gateEmail = email;
+      $("#gate-step-email").hidden = true; $("#gate-step-code").hidden = false; $("#gate-code").required = true;
+      btn.textContent = "Logga in"; gateMsg("", "Vi har skickat en kod till " + email + ". Du kan också klicka på länken i mejlet.");
+      $("#gate-code").focus();
+    } else {
+      const { error } = await IT.auth.verifyCode(_gateEmail, $("#gate-code").value.trim());
+      if (error) { gateMsg("Fel eller utgången kod. Försök igen."); return; }
+      gateMsg(""); enter(); connect();
+    }
+  } finally { btn.disabled = false; }
+});
+$("#logout").addEventListener("click", async () => {
+  try { await IT.auth.signOut(); } catch (err) {}
+  location.reload();
+});
+function enter() { $("#gate").hidden = true; $("#app").hidden = false; renderNow(); }
+
+// ---------- data ----------
+async function connect() {
+  if (S._connected) return; if (!authed()) { S.dbState = "loading"; return; } S._connected = true;
+  if (!window.claude || !window.claude.use) { S.dbState = "none"; render(); return; }
+  claude.use("sample").then(s => { S.sample = s; if (S.view === "avstamningar") render(); }).catch(() => {});
+  let db = null;
+  try { db = await claude.use("db"); } catch (e) { db = null; }
+  if (!db) { S.dbState = "none"; render(); return; }
+  S.db = db; S.dbState = "ok";
+  const sub = (name, field) => db.collection(name).onSnapshot(snap => {
+    S[field] = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    render();
+  }, err => { S.dbState = "error"; render(); });
+  sub("events", "events"); sub("groups", "groups"); sub("notes", "notes"); sub("sources", "sources"); sub("news", "news"); sub("network", "network"); sub("resources", "resources"); sub("board", "board"); sub("profiles", "profiles"); sub("contacts", "contacts"); sub("ideas", "ideas");
+  claude.use("user").then(async u => { if (u) { try { S.uid = await u.id(); } catch (e) {} } }).catch(() => {});
+}
+
+// ---------- navigering ----------
+const VIEWS = [
+  { key: "oversikt", label: "Översikt" },
+  { key: "pagang", label: "På gång" },
+  { key: "kalendarium", label: "Kalendarium" },
+  { key: "arbetsgrupper", label: "Arbetsgrupper och projekt" },
+  { key: "resurser", label: "Material & verktyg" },
+  { key: "avstamningar", label: "Avstämningar" },
+  { key: "tavla", label: "Anslagstavla" },
+  { key: "konferens", label: "Klimattinget" },
+  { key: "initiativ", label: "Initiativ" },
+];
+function go(v) { S.view = v; store("kp-view", v); renderNow(); window.scrollTo(0, 0); }
+function renderNav() {
+  const counts = {
+    pagang: S.news.length,
+    resurser: S.resources.length,
+    kalendarium: S.events.filter(e => e.date >= ymd(today())).length,
+    arbetsgrupper: S.groups.length, avstamningar: S.notes.length, tavla: S.board.length, initiativ: INIT.length,
+  };
+  const navHtml = VIEWS.map(v => `<button type="button" data-nav="${v.key}" ${S.view === v.key ? 'aria-current="page"' : ""}>${v.label}${counts[v.key] != null ? `<span class="count">${counts[v.key]}</span>` : ""}</button>`).join("");
+  const nav = $("#nav");
+  if (nav._html !== navHtml) {
+    nav._html = navHtml; nav.innerHTML = navHtml;
+    const cur = nav.querySelector("[aria-current]"); if (cur && nav.scrollWidth > nav.clientWidth) nav.scrollLeft = Math.max(0, cur.offsetLeft - nav.offsetLeft - 16);
+    nav.querySelectorAll("button[data-nav]").forEach(b => { b.onclick = ev => { ev.preventDefault(); ev.stopPropagation(); go(b.dataset.nav); }; });
+  }
+  const last = S.sources.map(s => s.lastSync).filter(Boolean).sort().pop();
+  $("#sync-foot").textContent = last ? "Synkat från webbplatserna " + fmtDate(last.slice(0, 10)) : "";
+}
+
+let _rq = false;
+function render() {
+  if (_rq) return; _rq = true;
+  Promise.resolve().then(() => { _rq = false; try { renderNow(); } catch (err) { console.error(err); } });
+}
+function renderNow() {
+  if (S.dragging) { S.renderPending = true; return; }
+  if ($("#app").hidden) return;
+  renderNav();
+  const m = $("#main");
+  let html = "";
+  if (S.dbState === "none") html += `<div class="banner">Delad data kunde inte laddas. Ladda om sidan eller logga in igen.</div>`;
+  if (S.dbState === "error") html += `<div class="banner">Anslutningen till den delade datan bröts. Ladda om sidan.</div>`;
+  if (S.view === "oversikt") html += viewOverview();
+  if (S.view === "pagang") html += viewNews();
+  if (S.view === "resurser") html += viewResources();
+  if (S.view === "kalendarium") html += viewCalendar();
+  if (S.view === "arbetsgrupper") html += viewGroups();
+  if (S.view === "avstamningar") html += viewNotes();
+  if (S.view === "tavla") html += viewBoard();
+  if (S.view === "konferens") html += viewConference();
+  if (S.view === "initiativ") html += viewSources();
+  if (m._html === html) return;
+  m._html = html;
+  const bw = document.getElementById("board-wrap"); const bScroll = bw ? [bw.scrollLeft, bw.scrollTop] : null;
+  const scroll = window.scrollY;
+  const focusId = document.activeElement && document.activeElement.id;
+  const sel = focusId && document.activeElement.selectionStart;
+  m.innerHTML = html;
+  if (focusId) { const el = document.getElementById(focusId); if (el) { el.focus(); try { if (sel != null) el.setSelectionRange(sel, sel); } catch (e) {} } }
+  window.scrollTo(0, scroll);
+  const bw2 = document.getElementById("board-wrap"); if (bw2 && bScroll) { bw2.scrollLeft = bScroll[0]; bw2.scrollTop = bScroll[1]; }
+}
+
+// ---------- Veckan ----------
+const SHARE = { ja: "Får spridas", kontakt: "Spridning efter kontakt", nej: "Sprids ej" };
+function evRow(e, opts = {}) {
+  const d = parseYmd(e.date); const isToday = e.date === ymd(today());
+  return `<div class="ev">
+    <div class="ev-date ${isToday ? "now" : ""}"><div class="d">${d.getDate()}</div><div class="m">${DAYS[(d.getDay() + 6) % 7]} ${MONTHS[d.getMonth()]}</div></div>
+    <div class="ev-body">
+      <div class="ev-title">${e.url ? `<a class="out" href="${esc(e.url)}" target="_blank" rel="noopener">${esc(e.title)}</a>` : esc(e.title)}</div>
+      <div class="ev-meta">${e.time ? `<span class="mono">${esc(e.time)}</span>` : ""}${e.place ? `<span>${esc(e.place)}</span>` : ""}</div>
+      <div class="row" style="gap:6px 12px;margin-top:2px">${initTag(e.initiative)}${e.theme ? `<span class="theme-tag">${esc(e.theme)}</span>` : ""}${e.open ? `<span class="flag-open">Öppen för externa</span>` : ""}${e.share ? `<span class="flag-share ${esc(e.share)}">${esc(SHARE[e.share] || "")}</span>` : ""}</div>
+    </div>
+    <div class="ev-side">
+      ${e.url ? `<a href="${esc(e.url)}" target="_blank" rel="noopener">Till ${esc(IMAP[e.initiative]?.short || "")} ↗</a>` : ""}
+      <span class="src ${e.source === "manuell" ? "manual" : ""}">${e.source === "manuell" ? "Tillagd manuellt" : "Från webbplats"}</span>
+      ${opts.del && e.source === "manuell" ? `<button class="btn ghost danger" data-del-ev="${esc(e.id)}" style="padding:0">Ta bort</button>` : ""}
+    </div>
+  </div>`;
+}
+
+function nowBlock() {
+  const n = [...S.notes].sort((x, y) => (y.meetingDate || "").localeCompare(x.meetingDate || ""))[0];
+  const ups = n?.parsed?.updates || [];
+  if (!ups.length) return "";
+  return `<div class="section" style="margin-bottom:36px">
+    <div class="section-head"><h2>Vad händer just nu</h2><button class="btn ghost" data-open-note="${esc(n.id)}">Hela avstämningen →</button></div>
+    ${n.example ? `<p class="status-line">Från exemplet ovan, inte verklig data.</p>` : ""}
+    <div class="now-grid">${ups.map(u => `<div class="now-card" style="--ic:var(--i-${esc(u.initiative)})">
+      <div class="card-init">${initDot(u.initiative)}${esc(IMAP[u.initiative]?.name || u.initiative)}</div>
+      <p>${esc(u.summary)}</p>
+      ${(u.items || []).length ? `<ul>${u.items.map(i => `<li>${esc(i)}</li>`).join("")}</ul>` : ""}
+      <div class="card-top">${(u.themes || []).map(t => `<span class="theme-tag">${esc(t)}</span>`).join("")}</div>
+    </div>`).join("")}</div>
+  </div>`;
+}
+function featuredNote() {
+  const n = [...S.notes].sort((x, y) => (y.meetingDate || "").localeCompare(x.meetingDate || ""))[0];
+  if (!n) return `<div class="feature empty-feature"><div class="label">Nyhet · Månadens avstämning</div><p>Ingen avstämning uppladdad än.</p><button class="btn" data-go="avstamningar">Ladda upp anteckningar</button></div>`;
+  const p = n.parsed || {};
+  const d = n.meetingDate ? parseYmd(n.meetingDate) : null;
+  return `<article class="feature">
+    ${n.example ? `<div class="example-banner"><strong>Exempel</strong> Påhittade mötesanteckningar som visar hur funktionen fungerar. Inte verklig data.</div>` : ""}
+    <div class="feature-head">
+      <div><div class="label feature-label">Nyhet · Månadens avstämning${n.example ? " · exempel" : ""}</div><h2 class="feature-title">${esc(n.title)}</h2>${d ? `<div class="mono muted" style="font-size:0.82rem;margin-top:4px">${d.getDate()} ${MONTHS_LONG[d.getMonth()]} ${d.getFullYear()}</div>` : ""}</div>
+      <button class="btn primary" data-open-note="${esc(n.id)}">Läs hela sammanfattningen</button>
+    </div>
+    ${(p.synergies || []).length ? `<div class="feature-syn">${p.synergies.slice(0, 2).map(s => `<div><div class="label feature-label">Koppling · ${esc(s.theme)}</div><p>${esc(s.text)}</p></div>`).join("")}</div>` : ""}
+  </article>`;
+}
+
+function networkBlock() {
+  const rows = INIT.map(i => ({ i, n: S.network.find(x => x.id === i.key) || {} }));
+  const known = rows.filter(r => Number(r.n.members) > 0);
+  const total = known.reduce((a, r) => a + Number(r.n.members), 0);
+  const max = Math.max(1, ...known.map(r => Number(r.n.members)));
+  const anyApprox = known.some(r => r.n.approx);
+  const upcoming = S.events.filter(e => e.date >= ymd(today())).sort(sortEvents);
+  const news = [...S.news].sort((a, b) => (b.date || "").localeCompare(a.date || ""));
+  return `<div class="network">
+    <div class="net-total">
+      <div class="label">Vårt nätverk</div>
+      <div class="net-num mono">${anyApprox ? "≈ " : ""}${total.toLocaleString("sv-SE")}</div>
+      <p>organisationer anslutna till klimatinitiativen i hela landet</p>
+      <p class="status-line">Baserat på ${known.length} av ${INIT.length} initiativ. ${known.length < INIT.length ? "Kanslierna fyller i sina egna siffror." : ""}</p>
+    </div>
+    <div class="net-rows">${rows.map(({ i, n }) => {
+      const m = Number(n.members) || 0;
+      const ev = upcoming.find(e => e.initiative === i.key);
+      const nw = news.find(x => x.initiative === i.key);
+      return `<div class="net-row">
+        <div class="net-line">
+          <a class="init-name" href="${esc(i.site)}" target="_blank" rel="noopener">${initDot(i.key)} ${esc(i.name)}</a>
+          <button class="net-count" data-edit-net="${i.key}" title="Ändra antal anslutna">${m ? `<span class="mono">${n.approx ? "≈ " : ""}${m}</span>` : `<span class="muted">Ange antal</span>`}</button>
+        </div>
+        <div class="bar"><span style="width:${m ? Math.max(2, m / max * 100) : 0}%;background:var(--i-${i.key})"></span></div>
+        <div class="net-meta">
+          <span>${esc(i.region)}</span>
+          ${ev ? `<a href="${esc(ev.url || i.site)}" target="_blank" rel="noopener">Nästa: ${esc(fmtDate(ev.date))} · ${esc(ev.title)}</a>` : ""}
+          ${nw ? `<a href="${esc(nw.url)}" target="_blank" rel="noopener">Nytt: ${esc(nw.title)}</a>` : ""}
+        </div>
+      </div>`;
+    }).join("")}</div>
+  </div>`;
+}
+
+function viewOverview() {
+  const t = today(); const tY = ymd(t);
+  const upcoming = S.events.filter(e => e.date >= tY).sort(sortEvents);
+  const news = [...S.news].sort((a, b) => (b.date || "").localeCompare(a.date || ""));
+  return `<div class="page-head">
+    <div><div class="label">Översikt · vecka ${isoWeek(t)} · ${t.getDate()} ${MONTHS_LONG[t.getMonth()]} ${t.getFullYear()}</div><h1 style="margin-top:6px">Det här händer i initiativen</h1></div>
+  </div>
+  <div style="margin-bottom:24px">${featuredNote()}</div>
+  ${nowBlock()}
+
+  <div class="section" style="margin-bottom:36px">
+    <div class="section-head"><h2>På gång</h2><button class="btn ghost" data-go="pagang">Alla nyheter →</button></div>
+    ${news.length ? `<div class="news-grid">${news.slice(0, 6).map(newsCard).join("")}</div>` : `<div class="empty">Inga nyheter hämtade än.</div>`}
+  </div>
+
+
+  <div class="grid-2">
+    <div class="section">
+      <div class="section-head"><h2>Kommande träffar</h2><button class="btn ghost" data-go="kalendarium">Kalendariet →</button></div>
+      ${upcoming.length ? `<div class="ev-list">${upcoming.slice(0, 7).map(e => evRow(e)).join("")}</div>` : `<div class="empty">Inga kommande träffar.</div>`}
+    </div>
+    <div class="section">
+      <div class="section-head"><h2>Gemensamt och unikt</h2><button class="btn ghost" data-go="arbetsgrupper">Arbetsgrupper och projekt →</button></div>
+      <p class="muted" style="font-size:0.88rem">Arbetsgrupper per tema och initiativ. Teman där tre eller fler initiativ arbetar är kandidater för samordning.</p>
+      ${matrix()}
+    </div>
+  </div>`;
+}
+
+
+function newsCard(n) {
+  const i = IMAP[n.initiative] || { short: n.initiative, name: n.initiative };
+  let host = ""; try { host = new URL(n.url).hostname.replace(/^www\./, ""); } catch (e) {}
+  return `<a class="news" style="--c:var(--i-${esc(n.initiative)})" href="${esc(n.url)}" target="_blank" rel="noopener">
+    <div class="news-img${n.img ? " has-img" : ""}" style="--c:var(--i-${esc(n.initiative)})">${n.img ? `<img src="${esc(n.img)}" alt="" loading="lazy">` : ""}<span class="news-badge">${esc(i.short)}</span>${n.theme ? `<em>${esc(n.theme)}</em>` : ""}</div>
+    <div class="news-body">
+      <h3>${esc(n.title)}</h3>
+      <div class="news-meta"><span class="mono">${n.date ? esc(fmtDate(n.date) + " " + n.date.slice(0, 4)) : ""}</span><span>${esc(host)} ↗</span></div>
+    </div>
+  </a>`;
+}
+
+// ---------- Anslagstavla ----------
+const NTYPES = [
+  { key: "soker", label: "Söker samarbete" },
+  { key: "erbjuder", label: "Erbjuder" },
+  { key: "fraga", label: "Fråga till nätverket" },
+  { key: "ide", label: "Idé" },
+  { key: "tips", label: "Tips" },
+];
+const NMAP = Object.fromEntries(NTYPES.map(t => [t.key, t.label]));
+const BW = 1800, BH = 1100;
+function viewBoard() {
+  const list = S.board.filter(n => !S.boardInit.size || S.boardInit.has(n.initiative));
+  return `<div class="page-head">
+    <div><h1>Anslagstavla</h1><p class="sub">En gemensam tavla för kanslierna. Sätt upp en lapp när ni söker samarbete, har något att erbjuda eller vill ställa en fråga till nätverket. Dra lapparna dit de passar och tryck "Vi också" när ni känner igen er.</p></div>
+    <button class="btn primary" id="add-note">+ Ny lapp</button>
+  </div>
+  <div class="filters">
+    <div class="chips" role="group" aria-label="Filtrera på initiativ">
+      ${INIT.map(i => `<button class="chip" data-f="bd-init" data-k="${i.key}" aria-pressed="${S.boardInit.has(i.key)}">${initDot(i.key)}${esc(i.short)}</button>`).join("")}
+    </div>
+    <span class="status-line">${list.length} lappar</span>
+  </div>
+  <div class="board-wrap" id="board-wrap">
+    <div class="pinboard" id="pinboard" style="width:${BW}px;height:${BH}px">
+      ${list.length ? "" : `<div class="board-empty"><b>Tavlan är tom</b><span>Tryck på "Ny lapp" för att sätta upp den första. Alla som har tillgång till sidan ser lappen direkt.</span></div>`}
+      ${list.sort((a, b) => (a.createdAt || "").localeCompare(b.createdAt || "")).map(noteHtml).join("")}
+    </div>
+  </div>`;
+}
+function noteHtml(n) {
+  const i = IMAP[n.initiative] || {};
+  const plus = Array.isArray(n.plus) ? n.plus : [];
+  const mine = S.uid && plus.includes(S.uid);
+  const plusInits = [...new Set(Array.isArray(n.plusInits) ? n.plusInits : [])];
+  return `<div class="pnote" data-note-id="${esc(n.id)}" style="left:${Math.max(0, Math.min(BW - 230, Number(n.x) || 40))}px;top:${Math.max(0, Math.min(BH - 160, Number(n.y) || 40))}px;--ic:var(--i-${esc(n.initiative)});transform:rotate(${((n.id.charCodeAt(0) + n.id.charCodeAt(n.id.length - 1)) % 5 - 2) * 0.6}deg)">
+    <div class="pnote-head"><span class="pnote-type">${esc(NMAP[n.type] || "Lapp")}</span><button class="pnote-x" data-del-note="${esc(n.id)}" aria-label="Ta bort lappen" title="Ta bort">×</button></div>
+    <p class="pnote-text">${esc(n.text)}</p>
+    <div class="pnote-foot">
+      <span class="pnote-init">${esc(i.name || n.initiative)}</span>
+      <button class="pnote-plus" data-plus="${esc(n.id)}" aria-pressed="${mine ? "true" : "false"}" title="${plusInits.map(k => IMAP[k]?.name || k).join(", ")}">Vi också${plus.length ? ` · ${plus.length}` : ""}</button>
+    </div>
+    ${plusInits.length ? `<div class="pnote-also">${plusInits.map(k => `<span class="dot" style="background:var(--i-${esc(k)})" title="${esc(IMAP[k]?.name || k)}"></span>`).join("")}</div>` : ""}
+  </div>`;
+}
+function addBoardNoteDialog() {
+  openDialog(`<h2>Ny lapp på anslagstavlan</h2>
+    <div class="form-grid">
+      <div class="field"><label for="bn-type">Typ</label><select id="bn-type" name="type">${NTYPES.map(t => `<option value="${t.key}">${t.label}</option>`).join("")}</select></div>
+      <div class="field"><label for="bn-init">Från initiativ</label><select id="bn-init" name="initiative">${initOptions(load("kp-myinit"))}</select></div>
+      <div class="field full"><label for="bn-text">Text</label><textarea id="bn-text" name="text" rows="4" maxlength="280" required style="min-height:100px" placeholder="T.ex. Vi planerar en återbruksmässa våren 2027 och söker fler initiativ att göra den med."></textarea></div>
+    </div>
+    <div class="row" style="justify-content:flex-end"><button class="btn" value="cancel" formnovalidate>Avbryt</button><button class="btn primary" value="ok">Sätt upp lappen</button></div>`,
+  async fd => {
+    if (needDb()) return false;
+    const d = Object.fromEntries(fd.entries());
+    store("kp-myinit", d.initiative);
+    const wrap = document.getElementById("board-wrap");
+    const x = (wrap ? wrap.scrollLeft : 0) + 40 + Math.round(Math.random() * 260);
+    const y = (wrap ? wrap.scrollTop : 0) + 40 + Math.round(Math.random() * 140);
+    try { await S.db.collection("board").add({ text: d.text.trim(), type: d.type, initiative: d.initiative, x, y, plus: [], plusInits: [], createdAt: new Date().toISOString() }); toast("Lappen sitter uppe"); }
+    catch (e) { toast(e.code === "invalid_argument" ? "Du har inte behörighet att sätta upp lappar." : "Kunde inte spara. Försök igen."); return false; }
+  });
+}
+function plusDialog(id) {
+  const n = S.board.find(x => x.id === id); if (!n) return;
+  if (!S.uid) { toast("Logga in på claude.ai för att markera lappar."); return; }
+  const plus = Array.isArray(n.plus) ? [...n.plus] : [];
+  if (plus.includes(S.uid)) {
+    const idx = plus.indexOf(S.uid); plus.splice(idx, 1);
+    const inits = Array.isArray(n.plusInits) ? [...n.plusInits] : []; inits.splice(idx, 1);
+    S.db.doc("board/" + id).update({ plus, plusInits: inits }).catch(() => toast("Kunde inte spara."));
+    return;
+  }
+  openDialog(`<h2>Vi också</h2><p class="muted">${esc(n.text)}</p>
+    <div class="field"><label for="pl-init">Vilket initiativ?</label><select id="pl-init" name="initiative">${initOptions(load("kp-myinit"))}</select></div>
+    <div class="row" style="justify-content:flex-end"><button class="btn" value="cancel" formnovalidate>Avbryt</button><button class="btn primary" value="ok">Markera</button></div>`,
+  async fd => {
+    const k = fd.get("initiative"); store("kp-myinit", k);
+    try { await S.db.doc("board/" + id).update({ plus: [...plus, S.uid], plusInits: [...(Array.isArray(n.plusInits) ? n.plusInits : []), k] }); toast("Markerat"); }
+    catch (e) { toast("Kunde inte spara."); return false; }
+  });
+}
+// dra lappar
+document.addEventListener("pointerdown", e => {
+  const el = e.target.closest(".pnote"); if (!el || e.target.closest("button") || e.button !== 0) return;
+  if (matchMedia("(max-width: 560px)").matches) return;
+  const board = document.getElementById("pinboard"); if (!board) return;
+  e.preventDefault();
+  const br = board.getBoundingClientRect(); const nr = el.getBoundingClientRect();
+  const offX = e.clientX - nr.left, offY = e.clientY - nr.top;
+  S.dragging = { el, id: el.dataset.noteId, moved: false };
+  el.classList.add("dragging"); el.setPointerCapture(e.pointerId);
+  const move = ev => {
+    const x = Math.max(0, Math.min(BW - el.offsetWidth, ev.clientX - br.left - offX));
+    const y = Math.max(0, Math.min(BH - el.offsetHeight, ev.clientY - br.top - offY));
+    el.style.left = x + "px"; el.style.top = y + "px"; S.dragging.moved = true; S.dragging.x = x; S.dragging.y = y;
+  };
+  const up = async () => {
+    el.removeEventListener("pointermove", move); el.removeEventListener("pointerup", up); el.removeEventListener("pointercancel", up);
+    el.classList.remove("dragging");
+    const d = S.dragging; S.dragging = null;
+    if (d && d.moved && S.db) { try { await S.db.doc("board/" + d.id).update({ x: Math.round(d.x), y: Math.round(d.y) }); } catch (err) { toast("Kunde inte flytta lappen."); } }
+    if (S.renderPending) { S.renderPending = false; $("#main")._html = null; render(); }
+  };
+  el.addEventListener("pointermove", move); el.addEventListener("pointerup", up); el.addEventListener("pointercancel", up);
+});
+
+const RTYPES = ["Guide", "Vägledning", "Metod", "Verktyg", "Mall", "Rapport", "Handbok", "Webbinarium", "Upprop"];
+function viewResources() {
+  const q = S.rsQ.toLowerCase();
+  const list = S.resources.filter(r =>
+    (!S.rsInit.size || S.rsInit.has(r.initiative) || (r.partners || []).some(k => S.rsInit.has(k))) &&
+    (!S.rsTheme || r.theme === S.rsTheme) && (!S.rsType || r.type === S.rsType) &&
+    (!q || [r.title, r.description, r.type, r.theme, IMAP[r.initiative]?.name].join(" ").toLowerCase().includes(q))
+  ).sort((a, b) => (b.year || "").localeCompare(a.year || "") || (a.title || "").localeCompare(b.title || "", "sv"));
+  const types = RTYPES.filter(t => S.resources.some(r => r.type === t));
+  return `<div class="page-head">
+    <div><h1>Material &amp; verktyg</h1><p class="sub">Guider, metoder, mallar och rapporter som initiativen tagit fram. Allt hämtas från initiativens egna sidor, så länkarna går alltid till senaste versionen.</p></div>
+    <button class="btn primary" id="add-rs">+ Lägg till material</button>
+  </div>
+  ${filterBar("rs", S.rsInit, S.rsTheme, S.rsQ, `<span class="status-line">${list.length} av ${S.resources.length}</span>`)}
+  <div class="chips" role="group" aria-label="Typ" style="margin:-8px 0 20px">
+    <button class="chip" data-rtype="" aria-pressed="${!S.rsType}">Alla typer</button>
+    ${types.map(t => `<button class="chip" data-rtype="${esc(t)}" aria-pressed="${S.rsType === t}">${esc(t)}</button>`).join("")}
+  </div>
+  ${list.length ? `<div class="res-grid">${list.map(resCard).join("")}</div>` : `<div class="empty">Inget material matchar filtret.</div>`}`;
+}
+function resCard(r) {
+  let host = ""; try { host = new URL(r.url).hostname.replace(/^www\./, ""); } catch (e) {}
+  const partners = (r.partners || []).map(k => IMAP[k]?.name).filter(Boolean);
+  return `<a class="res" style="--ic:var(--i-${esc(r.initiative)})" href="${esc(r.url)}" target="_blank" rel="noopener">
+    <div class="res-top"><span class="res-type">${esc(r.type || "Material")}</span>${r.year ? `<span class="mono muted" style="font-size:0.78rem">${esc(r.year)}</span>` : ""}</div>
+    <h3>${esc(r.title)}</h3>
+    ${r.description ? `<p>${esc(r.description)}</p>` : ""}
+    <div class="res-foot">
+      <span class="init-tag">${initDot(r.initiative)}${esc(IMAP[r.initiative]?.name || r.initiative)}${partners.length ? `<span class="muted" style="font-weight:500">&nbsp;med ${esc(partners.join(", "))}</span>` : ""}</span>
+      ${r.theme ? `<span class="theme-tag">${esc(r.theme)}</span>` : ""}
+    </div>
+    <span class="res-get">Hämta från ${esc(host)} ↗</span>
+  </a>`;
+}
+function addResourceDialog() {
+  openDialog(`<h2>Lägg till material</h2>
+    <div class="form-grid">
+      <div class="field full"><label for="r-title">Titel</label><input type="text" id="r-title" name="title" required></div>
+      <div class="field"><label for="r-init">Initiativ</label><select id="r-init" name="initiative">${initOptions()}</select></div>
+      <div class="field"><label for="r-type">Typ</label><select id="r-type" name="type">${RTYPES.map(t => `<option>${t}</option>`).join("")}</select></div>
+      <div class="field"><label for="r-theme">Tema</label><select id="r-theme" name="theme">${themeOptions("", true)}</select></div>
+      <div class="field"><label for="r-year">År</label><input type="text" id="r-year" name="year" inputmode="numeric" value="${today().getFullYear()}"></div>
+      <div class="field full"><label for="r-desc">Kort beskrivning</label><input type="text" id="r-desc" name="description"></div>
+      <div class="field full"><label for="r-url">Länk till materialet</label><input type="url" id="r-url" name="url" required placeholder="https://"></div>
+    </div>
+    <div class="row" style="justify-content:flex-end"><button class="btn" value="cancel" formnovalidate>Avbryt</button><button class="btn primary" value="ok">Lägg till</button></div>`,
+  async fd => {
+    if (needDb()) return false;
+    const d = Object.fromEntries(fd.entries());
+    try { await S.db.collection("resources").add({ ...d, source: "manuell", createdAt: new Date().toISOString() }); toast("Materialet är tillagt"); }
+    catch (e) { toast(e.code === "invalid_argument" ? "Du har inte behörighet att lägga till." : "Kunde inte spara. Försök igen."); return false; }
+  });
+}
+const NEWS_DAYS = 90;
+function viewNews() {
+  const q = S.nwQ.toLowerCase();
+  const cut = ymd(addDays(today(), -NEWS_DAYS));
+  const arch = S.nwMode === "arkiv";
+  const list = S.news.filter(n =>
+    (!S.nwInit.size || S.nwInit.has(n.initiative)) &&
+    (!S.nwTheme || n.theme === S.nwTheme) &&
+    (!q || [n.title, n.theme, IMAP[n.initiative]?.name].join(" ").toLowerCase().includes(q)) &&
+    (arch ? (n.date || "") < cut : (n.date || "") >= cut)
+  ).sort((a, b) => (b.date || "").localeCompare(a.date || ""));
+  const total = S.news.filter(n => arch ? (n.date || "") < cut : (n.date || "") >= cut).length;
+  return `<div class="page-head">
+    <div><h1>På gång</h1><p class="sub">Senaste nytt från initiativen. Korten länkar vidare till respektive initiativs egen sida. Nyheter äldre än ${NEWS_DAYS} dagar flyttar automatiskt till arkivet.</p></div>
+    <div class="row"><button class="btn" data-go="initiativ">Synka från webbplatser</button><button class="btn primary" id="add-nw">+ Lägg till länk</button></div>
+  </div>
+  ${arch ? "" : `<div style="margin-bottom:24px">${featuredNote()}</div>`}
+  ${filterBar("nw", S.nwInit, S.nwTheme, S.nwQ, `
+    <div class="chips" role="group" aria-label="Visning">
+      <button class="chip" data-nwmode="aktuellt" aria-pressed="${!arch}">Aktuellt</button>
+      <button class="chip" data-nwmode="arkiv" aria-pressed="${arch}">Arkiv</button>
+    </div>
+    <span class="status-line">${list.length} av ${total}</span>`)}
+  ${!list.length ? `<div class="empty">${arch ? "Inga äldre nyheter matchar filtret." : "Inga nyheter de senaste " + NEWS_DAYS + " dagarna matchar filtret."}</div>` : arch ? newsArchive(list) : `<div class="news-grid">${list.map(newsCard).join("")}</div>`}`;
+}
+function newsArchive(list) {
+  let h = `<p class="status-line" style="margin-bottom:8px">${list.length} äldre nyheter från ${new Set(list.map(n => n.initiative)).size} initiativ. Länkarna går till initiativens egna sidor.</p><div class="archive">`;
+  let cur = null;
+  for (const n of list) {
+    const d = parseYmd(n.date); const k = d.getFullYear() + "-" + d.getMonth();
+    if (k !== cur) { if (cur) h += `</div>`; cur = k; h += `<h2 class="arch-month">${MONTHS_LONG[d.getMonth()].replace(/^./, c => c.toUpperCase())} ${d.getFullYear()}</h2><div class="arch-list">`; }
+    h += `<div class="arch-row">
+      <span class="arch-date">${d.getDate()} ${MONTHS[d.getMonth()]}</span>
+      <div style="min-width:0"><a class="out arch-title" href="${esc(n.url)}" target="_blank" rel="noopener">${esc(n.title)}</a><div class="ev-meta">${n.theme ? `<span>${esc(n.theme)}</span>` : ""}</div></div>
+      ${initTag(n.initiative)}
+    </div>`;
+  }
+  return h + `</div></div>`;
+}
+
+function latestNoteBlock(n) {
+  const p = n.parsed || {};
+  const ups = (p.updates || []).slice(0, 4);
+  return `<div class="panel">
+    <div class="row" style="justify-content:space-between"><h3>${esc(n.title)}</h3>${n.example ? `<span class="example-flag">Exempel</span>` : ""}</div>
+    <div class="status-line mono">${n.meetingDate ? fmtDate(n.meetingDate) + " " + n.meetingDate.slice(0, 4) : ""}</div>
+    ${(p.synergies || []).slice(0, 2).map(s => `<div class="syn"><div class="label" style="color:var(--accent)">Koppling · ${esc(s.theme)}</div><div style="font-size:0.9rem">${esc(s.text)}</div></div>`).join("")}
+    <div style="display:grid;gap:8px">${ups.map(u => `<div style="display:grid;gap:2px">${initTag(u.initiative)}<span class="muted" style="font-size:0.88rem">${esc(u.summary)}</span></div>`).join("")}</div>
+    <button class="btn" data-open-note="${esc(n.id)}" style="justify-self:start">Läs hela sammanfattningen</button>
+  </div>`;
+}
+
+function focusThemes(key) { const p = S.profiles.find(x => x.id === key); return (p?.focus || []).map(f => f.theme).filter(Boolean); }
+function matrix() {
+  const active = S.groups.filter(g => g.status !== "avslutas");
+  if (!active.length && !S.profiles.length) return `<div class="empty">Inga arbetsgrupper ännu.</div>`;
+  const anyFocus = S.profiles.some(p => (p.focus || []).length);
+  const rows = THEMES.map(th => {
+    const per = INIT.map(i => active.filter(g => g.initiative === i.key && (g.themes || []).includes(th)).length);
+    const foc = INIT.map(i => focusThemes(i.key).includes(th));
+    const n = INIT.filter((i, k) => per[k] > 0 || foc[k]).length;
+    return { th, per, foc, n };
+  }).filter(r => r.n > 0).sort((a, b) => b.n - a.n);
+  return `<div class="matrix-wrap"><table class="matrix">
+    <thead><tr><th>Tema</th>${INIT.map(i => `<th title="${esc(i.name)}">${esc(i.short)}</th>`).join("")}</tr></thead>
+    <tbody>${rows.map(r => `<tr><td><button class="btn ghost" style="padding:0;color:var(--ink)" data-theme-jump="${esc(r.th)}">${esc(r.th)}</button>${r.n >= 3 ? `<span class="mx-flag shared">${r.n} initiativ</span>` : r.n === 1 ? `<span class="mx-flag unique">unikt</span>` : ""}</td>${r.per.map((x, k) => `<td>${x ? `<span class="cell-n${r.foc[k] ? " focus" : ""}" style="background:var(--i-${INIT[k].key})">${x}</span>` : r.foc[k] ? `<span class="cell-star" style="color:var(--i-${INIT[k].key})" title="Fokusområde">★</span>` : `<span class="muted">·</span>`}</td>`).join("")}</tr>`).join("")}</tbody>
+  </table></div>
+  <p class="status-line" style="font-size:0.8rem">Siffran är antal arbetsgrupper. ${anyFocus ? "Ring eller ★ betyder att temat är ett av initiativets tre viktigaste fokusområden enligt enkäten." : "När enkätsvaren kommer in markeras initiativens tre viktigaste fokusområden med ring eller ★."}</p>`;
+}
+
+// ---------- Kalendarium ----------
+function filterBar(prefix, initSet, theme, q, extra = "") {
+  return `<div class="filters">
+    <div class="chips" role="group" aria-label="Filtrera på initiativ">
+      ${INIT.map(i => `<button class="chip" data-f="${prefix}-init" data-k="${i.key}" aria-pressed="${initSet.has(i.key)}">${initDot(i.key)}${esc(i.short)}</button>`).join("")}
+    </div>
+    <select id="${prefix}-theme" aria-label="Tema"><option value="">Alla teman</option>${THEMES.map(t => `<option ${t === theme ? "selected" : ""}>${esc(t)}</option>`).join("")}</select>
+    <input type="search" id="${prefix}-q" placeholder="Sök…" value="${esc(q)}" aria-label="Sök">
+    ${extra}
+  </div>`;
+}
+function filteredEvents() {
+  const q = S.evQ.toLowerCase(); const t = ymd(today());
+  return S.events.filter(e =>
+    (!S.evInit.size || S.evInit.has(e.initiative)) &&
+    (!S.evTheme || e.theme === S.evTheme) &&
+    (!q || [e.title, e.place, e.theme, IMAP[e.initiative]?.name].join(" ").toLowerCase().includes(q)) &&
+    (S.evMode === "manad" || (S.evMode === "arkiv" ? e.date < t : e.date >= t))
+  ).sort(S.evMode === "arkiv" ? (a, b) => sortEvents(b, a) : sortEvents);
+}
+function viewCalendar() {
+  const list = filteredEvents();
+  let h = `<div class="page-head">
+    <div><h1>Kalendarium</h1><p class="sub">Alla initiativens träffar på ett ställe. Hämtas från respektive webbplats när Claude uppdaterar kalendariet, och kan kompletteras manuellt.</p></div>
+    <div class="row"><button class="btn" data-go="initiativ">Uppdatera från webbplatser</button><button class="btn primary" id="add-ev">+ Lägg till träff</button></div>
+  </div>
+  ${filterBar("ev", S.evInit, S.evTheme, S.evQ, `
+    <div class="chips" role="group" aria-label="Visning">
+      <button class="chip" data-mode="lista" aria-pressed="${S.evMode === "lista"}">Kommande</button>
+      <button class="chip" data-mode="manad" aria-pressed="${S.evMode === "manad"}">Månad</button>
+      <button class="chip" data-mode="arkiv" aria-pressed="${S.evMode === "arkiv"}">Arkiv</button>
+    </div>`)}`;
+  if (S.evMode === "manad") return h + monthGrid(list);
+  if (S.evMode === "arkiv") return h + archiveList(list);
+  if (!list.length) return h + `<div class="empty">Inga träffar matchar filtret.</div>`;
+  let curW = null; const nowW = isoWeek(today()) + "-" + today().getFullYear();
+  h += `<div class="ev-list">`;
+  for (const e of list) {
+    const d = parseYmd(e.date); const w = isoWeek(d) + "-" + d.getFullYear();
+    if (w !== curW) { curW = w; const mon = mondayOf(d); h += `<div class="week-label ${w === nowW ? "current" : ""}">VECKA ${isoWeek(d)} · ${mon.getDate()} ${MONTHS[mon.getMonth()]} – ${addDays(mon, 6).getDate()} ${MONTHS[addDays(mon, 6).getMonth()]}${w === nowW ? " · DENNA VECKA" : ""}</div>`; }
+    h += evRow(e, { del: true });
+  }
+  return h + `</div>`;
+}
+function archiveList(list) {
+  if (!list.length) return `<div class="empty">Inga tidigare träffar matchar filtret.</div>`;
+  const inits = new Set(list.map(e => e.initiative)).size;
+  let h = `<p class="status-line" style="margin-bottom:8px">${list.length} genomförda träffar från ${inits} initiativ. Länkarna går till initiativens egna sidor, där presentationer och dokumentation ofta finns.</p><div class="archive">`;
+  let cur = null;
+  for (const e of list) {
+    const d = parseYmd(e.date); const k = d.getFullYear() + "-" + d.getMonth();
+    if (k !== cur) { if (cur) h += `</div>`; cur = k; h += `<h2 class="arch-month">${MONTHS_LONG[d.getMonth()].replace(/^./, c => c.toUpperCase())} ${d.getFullYear()}</h2><div class="arch-list">`; }
+    h += `<div class="arch-row">
+      <span class="arch-date">${d.getDate()} ${MONTHS[d.getMonth()]}</span>
+      <div style="min-width:0">${e.url ? `<a class="out arch-title" href="${esc(e.url)}" target="_blank" rel="noopener">${esc(e.title)}</a>` : `<span class="arch-title">${esc(e.title)}</span>`}<div class="ev-meta">${e.place ? `<span>${esc(e.place)}</span>` : ""}${e.theme ? `<span>${esc(e.theme)}</span>` : ""}</div></div>
+      ${initTag(e.initiative)}
+    </div>`;
+  }
+  return h + `</div></div>`;
+}
+function monthGrid(list) {
+  const base = today(); const first = new Date(base.getFullYear(), base.getMonth() + S.monthOffset, 1);
+  const start = mondayOf(first); const tY = ymd(today());
+  let cells = "";
+  for (let i = 0; i < 42; i++) {
+    const d = addDays(start, i); const k = ymd(d);
+    if (i >= 35 && d.getMonth() !== first.getMonth()) break;
+    const evs = list.filter(e => e.date === k);
+    cells += `<div class="day ${d.getMonth() !== first.getMonth() ? "out" : ""} ${k === tY ? "today" : ""}"><span class="n">${d.getDate()}</span>${evs.map(e => `<button class="mev" style="border-left-color:var(--i-${esc(e.initiative)})" title="${esc(e.title + " · " + (IMAP[e.initiative]?.name || ""))}" data-ev-detail="${esc(e.id)}">${esc(e.title)}</button>`).join("")}</div>`;
+  }
+  return `<div class="month-nav"><button class="btn" data-month="-1" aria-label="Föregående månad">←</button><h2 style="min-width:10ch;text-align:center">${MONTHS_LONG[first.getMonth()]} ${first.getFullYear()}</h2><button class="btn" data-month="1" aria-label="Nästa månad">→</button></div>
+  <div style="overflow-x:auto"><div class="month">${DAYS.map(d => `<div class="dh">${d}</div>`).join("")}${cells}</div></div>`;
+}
+
+// ---------- Arbetsgrupper ----------
+function viewGroups() {
+  const q = S.grQ.toLowerCase();
+  const list = S.groups.filter(g =>
+    (!S.grInit.size || S.grInit.has(g.initiative)) &&
+    (!S.grTheme || (g.themes || []).includes(S.grTheme)) &&
+    (!q || [g.name, g.description, (g.themes || []).join(" "), IMAP[g.initiative]?.name].join(" ").toLowerCase().includes(q)));
+  let h = `<div class="page-head">
+    <div><h1>Arbetsgrupper och projekt</h1><p class="sub">Arbetsgrupper, fokusgrupper och projekt i alla initiativ. Filtrera på initiativ eller tema, eller klicka på en tematagg, för att se vem mer som jobbar med samma fråga.</p></div>
+    <button class="btn primary" id="add-gr">+ Lägg till arbetsgrupp eller projekt</button>
+  </div>
+  ${filterBar("gr", S.grInit, S.grTheme, S.grQ, `<span class="status-line">${list.length} av ${S.groups.length}</span>`)}`;
+  if (S.grTheme) {
+    const inits = new Set(list.map(g => g.initiative));
+    h += `<div class="syn" style="margin-bottom:20px"><div class="label" style="color:var(--accent)">${esc(S.grTheme)}</div><div style="font-size:0.92rem">${inits.size} initiativ arbetar med detta tema: ${[...inits].map(k => esc(IMAP[k]?.name || k)).join(", ") || "inga"}.</div></div>`;
+  }
+  const sorted = [...list].sort((a, b) => INIT.findIndex(i => i.key === a.initiative) - INIT.findIndex(i => i.key === b.initiative) || (a.name || "").localeCompare(b.name || "", "sv"));
+  h += sorted.length ? `<div class="board">${sorted.map(cardHtml).join("")}</div>` : `<div class="empty">Inga arbetsgrupper matchar filtret.</div>`;
+  return h;
+}
+function cardHtml(g) {
+  const i = IMAP[g.initiative] || {};
+  return `<article class="card" style="--ic:var(--i-${esc(g.initiative)})">
+    <div class="card-init">${initDot(g.initiative)}${esc(i.name || g.initiative)}</div>
+    <h3>${g.url ? `<a class="out" href="${esc(g.url)}" target="_blank" rel="noopener">${esc(g.name)}</a>` : `<a class="out" href="${esc(i.site || "#")}" target="_blank" rel="noopener">${esc(g.name)}</a>`}</h3>
+    ${g.description ? `<p>${esc(g.description)}</p>` : ""}
+    <div class="card-top">${(g.themes || []).map(t => `<button class="theme-tag" data-gr-theme="${esc(t)}" title="Filtrera på ${esc(t)}">${esc(t)}</button>`).join("")}</div>
+  </article>`;
+}
+
+// ---------- Avstämningar ----------
+function viewNotes() {
+  const notes = [...S.notes].sort((a, b) => (b.meetingDate || "").localeCompare(a.meetingDate || ""));
+  if (!S.noteSel && notes[0]) S.noteSel = notes[0].id;
+  const sel = notes.find(n => n.id === S.noteSel);
+  let h = `<div class="page-head">
+    <div><h1>Avstämningar</h1><p class="sub">Anteckningar från de månatliga avstämningarna där varje initiativ delar vad som händer just nu. Ladda upp anteckningarna så sammanfattar Claude dem per initiativ och letar kopplingar.</p></div>
+    <button class="btn primary" id="new-note">+ Ladda upp anteckningar</button>
+  </div>
+  <div class="notes-layout">
+    <div class="note-list">${notes.map(n => `<button data-note="${esc(n.id)}" aria-current="${n.id === S.noteSel}"><span style="font-weight:600">${esc(n.title)}</span><span class="mono muted" style="font-size:0.78rem">${n.meetingDate ? esc(n.meetingDate) : ""}${n.example ? " · exempel" : ""}</span></button>`).join("") || `<div class="empty">Inga avstämningar än.</div>`}</div>
+    <div>${S.view === "avstamningar" && S._uploading ? uploadPanel() : sel ? noteDetail(sel) : `<div class="empty">Välj en avstämning eller ladda upp en ny.</div>`}</div>
+  </div>`;
+  return h;
+}
+function uploadPanel() {
+  const canAI = !!S.sample;
+  return `<div class="panel">
+    <h2>Ny avstämning</h2>
+    <div class="form-grid">
+      <div class="field"><label for="nt-title">Rubrik</label><input type="text" id="nt-title" value="${esc(S._draftTitle || "Avstämning " + MONTHS_LONG[today().getMonth()] + " " + today().getFullYear())}"></div>
+      <div class="field"><label for="nt-date">Mötesdatum</label><input type="date" id="nt-date" value="${esc(S._draftDate || ymd(today()))}"></div>
+      <div class="field full"><label for="nt-file">Fil (.docx, .txt eller .md)</label><input type="file" id="nt-file" accept=".docx,.txt,.md,text/plain"></div>
+      <div class="field full"><label for="nt-text">…eller klistra in anteckningarna</label><textarea id="nt-text" rows="12" placeholder="Uppsala: Fokusgruppen för byggnation har…&#10;LFM30: …">${esc(S._draftText || "")}</textarea></div>
+    </div>
+    ${canAI ? "" : `<p class="status-line">Claude kan inte nås i den här vyn. Anteckningarna sparas som text utan sammanfattning.</p>`}
+    <p class="status-line" id="parse-msg" role="status">${esc(S.parseMsg)}</p>
+    <div class="row">
+      <button class="btn primary" id="nt-save" ${S.parsing ? "disabled" : ""}>${canAI ? (S.parsing ? "Claude läser…" : "Spara och sammanfatta") : "Spara"}</button>
+      ${S.parsing ? `<button class="btn" id="nt-stop">Avbryt</button>` : `<button class="btn" id="nt-cancel">Avbryt</button>`}
+    </div>
+  </div>`;
+}
+function noteDetail(n) {
+  const p = n.parsed;
+  let h = `<div class="section">
+    <div class="row" style="justify-content:space-between"><div><h2 style="font-size:1.4rem">${esc(n.title)}</h2><div class="mono muted" style="font-size:0.85rem;margin-top:4px">${esc(n.meetingDate || "")}</div></div></div>
+    ${n.example ? `<div class="example-banner"><strong>Exempel</strong> Påhittade mötesanteckningar som visar hur funktionen fungerar. Inte verklig data. Ladda upp riktiga anteckningar för att ersätta exemplet.</div>` : ""}`;
+  if (!p) {
+    h += `<p class="muted">Ingen sammanfattning finns för den här avstämningen.</p>${S.sample ? `<button class="btn" data-reparse="${esc(n.id)}" style="justify-self:start" ${S.parsing ? "disabled" : ""}>${S.parsing ? "Claude läser…" : "Sammanfatta med Claude"}</button>` : ""}<p class="status-line">${esc(S.parseMsg)}</p>`;
+  } else {
+    if ((p.synergies || []).length) h += `<div class="section-head" style="margin-top:12px"><h3>Kopplingar mellan initiativ</h3></div><div style="display:grid;gap:8px">${p.synergies.map(s => `<div class="syn"><div class="label" style="color:var(--accent)">${esc(s.theme)}</div><div style="font-size:0.92rem">${esc(s.text)}</div><div class="row" style="gap:4px 12px;margin-top:4px">${(s.initiatives || []).map(initTag).join("")}</div></div>`).join("")}</div>`;
+    h += `<div class="section-head" style="margin-top:12px"><h3>Vad händer just nu</h3></div><div>${(p.updates || []).map(u => `<div class="upd"><div>${initTag(u.initiative)}</div><div><p>${esc(u.summary)}</p>${(u.items || []).length ? `<ul>${u.items.map(i => `<li>${esc(i)}</li>`).join("")}</ul>` : ""}<div class="row" style="gap:4px;margin-top:6px">${(u.themes || []).map(t => `<span class="theme-tag">${esc(t)}</span>`).join("")}</div></div></div>`).join("")}</div>`;
+    const sg = p.suggestedGroups || [], se = p.suggestedEvents || [];
+    if (sg.length || se.length) {
+      h += `<div class="section-head" style="margin-top:12px"><h3>Förslag att lägga in</h3></div><div>`;
+      sg.forEach((g, i) => { const done = S.groups.some(x => x.name === g.name && x.initiative === g.initiative); h += `<div class="sugg"><div><div class="label">Arbetsgrupp</div><b>${esc(g.name)}</b> <span class="muted">· ${esc(IMAP[g.initiative]?.short || g.initiative)}</span></div>${done ? `<span class="status-line">Finns på tavlan</span>` : `<button class="btn" data-sugg-gr="${i}">Lägg till på tavlan</button>`}</div>`; });
+      se.forEach((e, i) => { const done = S.events.some(x => x.title === e.title && x.date === e.date); h += `<div class="sugg"><div><div class="label">Träff</div><b>${esc(e.title)}</b> <span class="muted mono">· ${esc(e.date || "datum saknas")}</span></div>${done ? `<span class="status-line">Finns i kalendariet</span>` : e.date ? `<button class="btn" data-sugg-ev="${i}">Lägg i kalendariet</button>` : ""}</div>`; });
+      h += `</div>`;
+    }
+  }
+  if (n.raw) h += `<details style="margin-top:16px"><summary class="btn ghost" style="padding:0">Visa originalanteckningar</summary><pre style="white-space:pre-wrap;font-family:var(--font-body);font-size:0.88rem;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px;margin-top:8px">${esc(n.raw)}</pre></details>`;
+  return h + `</div>`;
+}
+
+// ---------- Initiativ & källor ----------
+function profileOf(k) { return S.profiles.find(x => x.id === k) || {}; }
+function contactOf(k) { return S.contacts.find(x => x.id === k) || null; }
+function profileCard(i) {
+  const p = profileOf(i.key), c = contactOf(i.key);
+  const tY = ymd(today());
+  const nG = S.groups.filter(g => g.initiative === i.key).length;
+  const nE = S.events.filter(e => e.initiative === i.key && e.date >= tY).length;
+  const nR = S.resources.filter(r => r.initiative === i.key).length;
+  const seek = S.board.filter(b => b.initiative === i.key && b.type === "soker");
+  const focus = p.focus || [];
+  return `<article class="prof" style="--ic:var(--i-${i.key})">
+    <div class="prof-head">
+      <div><h3><a class="out" href="${esc(i.site)}" target="_blank" rel="noopener">${esc(i.name)}</a></h3><div class="status-line">${esc(i.region)}</div></div>
+      ${p.surveyAt ? `<span class="pill ok">Enkät besvarad</span>` : `<span class="pill wait">Inväntar enkät</span>`}
+    </div>
+    <div class="prof-sec"><div class="label">Kontaktperson</div>${c && (c.name || c.email) ? `<div>${esc(c.name || "")}${c.org ? `<span class="muted"> · ${esc(c.org)}</span>` : ""}</div>${c.email ? `<div class="contact-mail">${esc(c.email)}</div>` : ""}` : `<div class="muted">Läggs in från kontaktlistan</div>`}</div>
+    <div class="prof-sec"><div class="label">Tre viktigaste fokusområden, 12 månader</div>${focus.length ? `<ol class="focus-list">${focus.map(f => `<li>${esc(f.text)}${f.theme ? ` <span class="theme-tag">${esc(f.theme)}</span>` : ""}</li>`).join("")}</ol>` : `<div class="muted">Fylls i från enkäten</div>`}</div>
+    ${p.seeking ? `<div class="prof-sec"><div class="label">Söker samarbetspartner</div><p>${esc(p.seeking)}</p></div>` : ""}
+    ${p.collab ? `<div class="prof-sec"><div class="label">Störst nytta att göra tillsammans</div><p>${esc(p.collab)}</p></div>` : ""}
+    <div class="prof-stats">
+      <button class="btn ghost" data-jump-init="arbetsgrupper:${i.key}">${nG} projekt</button>
+      <button class="btn ghost" data-jump-init="kalendarium:${i.key}">${nE} kommande träffar</button>
+      <button class="btn ghost" data-jump-init="resurser:${i.key}">${nR} material</button>
+      ${seek.length ? `<button class="btn ghost" data-jump-init="tavla:${i.key}">${seek.length} söker samarbete</button>` : ""}
+    </div>
+    <button class="btn" data-edit-prof="${i.key}" style="justify-self:start">Redigera profil</button>
+  </article>`;
+}
+function viewSources() {
+  const answered = INIT.filter(i => profileOf(i.key).surveyAt).length;
+  const cmd = "Synka kalendariet och På gång i Initiativtavlan från initiativens webbplatser";
+  return `<div class="page-head"><div><h1>Initiativ</h1><p class="sub">En profil per initiativ med kontaktperson, fokusområden och vad de söker samarbete kring. Profilerna fylls på med svaren från enkäten inför Klimattinget.</p></div>
+    <div class="survey-meter"><b class="mono">${answered}/${INIT.length}</b><span>har svarat på enkäten</span></div></div>
+  <div class="prof-grid">${INIT.map(profileCard).join("")}</div>
+  <div class="grid-2" style="margin-top:40px">
+    <div class="section">
+      <div class="section-head"><h2>Källor</h2></div>
+      <div class="sources">${INIT.map(i => {
+        const s = S.sources.find(x => x.id === i.key) || {};
+        const n = S.events.filter(e => e.initiative === i.key && e.source !== "manuell" && e.date >= ymd(today())).length;
+        const g = S.groups.filter(x => x.initiative === i.key).length;
+        const nn = S.news.filter(x => x.initiative === i.key).length;
+        return `<div class="source"><div style="display:grid;gap:2px;min-width:0">${initTag(i.key)}<a href="${esc(i.url)}" target="_blank" rel="noopener" style="font-size:0.82rem;overflow-wrap:anywhere">${esc(i.url.replace(/^https?:\/\/(www\.)?/, ""))}</a>${s.note ? `<span class="status-line" style="font-size:0.82rem">Kalender: ${esc(s.note)}</span>` : ""}${s.newsNote ? `<span class="status-line" style="font-size:0.82rem">Nyheter: ${esc(s.newsNote)}</span>` : ""}</div>
+        <div style="display:grid;gap:4px;justify-items:end;text-align:right">${s.status ? `<span class="pill ${s.status === "ok" ? "ok" : "fel"}">${s.status === "ok" ? "Läst" : "Kunde inte läsas"}</span>` : `<span class="pill fel">Ej synkad</span>`}<span class="mono muted" style="font-size:0.75rem">${n} träffar · ${nn} nyheter · ${g} grupper${s.lastSync ? " · " + esc(fmtDate(s.lastSync.slice(0, 10))) : ""}</span></div></div>`;
+      }).join("")}</div>
+    </div>
+    <div class="section">
+      <div class="section-head"><h2>Synka från webbplatserna</h2></div>
+      <p>Claude läser initiativens kalender- och nyhetssidor och lägger till nya träffar och nyheter. Allt länkar tillbaka till initiativens egna sidor. Manuellt tillagt innehåll rörs inte.</p>
+      <div class="cmd"><code>${esc(cmd)}</code><button class="btn" data-copy="${esc(cmd)}">Kopiera</button></div>
+      <div class="section-head" style="margin-top:16px"><h2>Så används enkätsvaren</h2></div>
+      <ul class="map-list">
+        <li><b>1–3</b> Initiativ, kontaktperson och e-post → profilen ovan. E-post syns bara för inloggade i er organisation.</li>
+        <li><b>4</b> Tre fokusområden → profilen och matrisen "Gemensamt och unikt".</li>
+        <li><b>5</b> Satsningar och projekt → Arbetsgrupper och projekt.</li>
+        <li><b>6</b> Rapporter och verktyg → Material &amp; verktyg.</li>
+        <li><b>7–9</b> Aktiviteter, öppenhet och spridning → Kalendariet, med märkning.</li>
+        <li><b>10</b> Söker samarbete → profilen och Anslagstavlan.</li>
+        <li><b>11</b> Samverkansmöjligheter → Klimattinget, där idéerna röstas fram.</li>
+      </ul>
+    </div>
+  </div>`;
+}
+
+
+// ---------- Klimattinget ----------
+function viewConference() {
+  const tY = ymd(today());
+  const answered = INIT.filter(i => profileOf(i.key).surveyAt).length;
+  const counts = {};
+  INIT.forEach(i => [...new Set(focusThemes(i.key))].forEach(t => { (counts[t] = counts[t] || []).push(i.key); }));
+  const ranked = Object.entries(counts).sort((a, b) => b[1].length - a[1].length);
+  const ideas = [...S.ideas].sort((a, b) => (b.votes || []).length - (a.votes || []).length || String(a.createdAt).localeCompare(String(b.createdAt)));
+  const seekNotes = S.board.filter(b => b.type === "soker");
+  const seekProf = INIT.filter(i => profileOf(i.key).seeking);
+  const openEv = S.events.filter(e => e.date >= tY && (e.open || e.share === "ja" || e.share === "kontakt")).sort((a, b) => a.date.localeCompare(b.date)).slice(0, 12);
+  return `<div class="page-head"><div><h1>Klimattinget</h1><p class="sub">Underlag inför och under Klimattinget den 21 oktober. Fylls på automatiskt när enkätsvaren läggs in.</p></div>
+    <div class="survey-meter"><b class="mono">${answered}/${INIT.length}</b><span>har svarat på enkäten</span></div></div>
+  ${answered ? "" : `<div class="example-banner" style="margin-bottom:24px"><strong>Väntar på svar</strong> Ingen har svarat på enkäten än. Tabellerna nedan fylls i när svaren läggs in.</div>`}
+  <div class="section">
+    <div class="section-head"><h2>Tre fokusområden per initiativ</h2></div>
+    <div class="conf-table-wrap"><table class="conf-table"><thead><tr><th>Initiativ</th><th>1</th><th>2</th><th>3</th></tr></thead><tbody>
+    ${INIT.map(i => { const f = profileOf(i.key).focus || []; return `<tr style="--ic:var(--i-${i.key})"><td>${initTag(i.key)}</td>${[0, 1, 2].map(n => `<td>${f[n] ? `${esc(f[n].text)}${f[n].theme ? `<div><span class="theme-tag">${esc(f[n].theme)}</span></div>` : ""}` : `<span class="muted">–</span>`}</td>`).join("")}</tr>`; }).join("")}
+    </tbody></table></div>
+  </div>
+  <div class="grid-2" style="margin-top:32px">
+    <div class="section">
+      <div class="section-head"><h2>Där flest initiativ överlappar</h2></div>
+      ${ranked.length ? `<div class="overlap">${ranked.map(([t, ks]) => `<button class="ov-row" data-theme-jump="${esc(t)}"><span class="ov-name">${esc(t)}</span><span class="ov-bar"><span style="width:${Math.round(ks.length / INIT.length * 100)}%"></span></span><span class="mono">${ks.length}</span><span class="ov-dots">${ks.map(k => `<span class="dot" style="background:var(--i-${k})" title="${esc(IMAP[k].name)}"></span>`).join("")}</span></button>`).join("")}</div>` : `<p class="muted">Visas när fokusområdena är inlagda. Teman som flera initiativ prioriterar hamnar överst och blir förslag på gemensamma spår.</p>`}
+    </div>
+    <div class="section">
+      <div class="section-head"><h2>Söker samarbete</h2></div>
+      ${seekProf.length || seekNotes.length ? `<div style="display:grid;gap:8px">${seekProf.map(i => `<div class="seek" style="--ic:var(--i-${i.key})">${initTag(i.key)}<p>${esc(profileOf(i.key).seeking)}</p></div>`).join("")}${seekNotes.map(n => `<div class="seek" style="--ic:var(--i-${esc(n.initiative)})">${initTag(n.initiative)}<p>${esc(n.text)}</p><span class="status-line">Från anslagstavlan</span></div>`).join("")}</div>` : `<p class="muted">Fylls i från enkätens fråga 10 och från lappar av typen "Söker" på anslagstavlan.</p>`}
+    </div>
+  </div>
+  <div class="section" style="margin-top:32px">
+    <div class="section-head"><h2>Samverkansidéer</h2><button class="btn primary" id="add-idea">Lägg till idé</button></div>
+    <p class="muted" style="margin:0 0 12px">Idéer från enkätens fråga 11 och från konferensen. Rösta på de som ni vill driva vidare. En röst per person och idé.</p>
+    ${ideas.length ? `<div class="ideas">${ideas.map(d => { const v = Array.isArray(d.votes) ? d.votes : []; const mine = S.uid && v.includes(S.uid); return `<div class="idea"><div class="idea-vote"><button class="btn ${mine ? "primary" : ""}" data-vote="${esc(d.id)}" aria-pressed="${mine ? "true" : "false"}">▲ ${v.length}</button></div><div><b>${esc(d.title)}</b>${d.text ? `<p>${esc(d.text)}</p>` : ""}<div class="row" style="gap:4px 12px;margin-top:4px">${(d.initiatives || []).map(initTag).join("")}${d.theme ? `<span class="theme-tag">${esc(d.theme)}</span>` : ""}</div></div></div>`; }).join("")}</div>` : `<p class="muted">Inga idéer ännu.</p>`}
+  </div>
+  <div class="section" style="margin-top:32px">
+    <div class="section-head"><h2>Öppna och spridningsbara aktiviteter</h2><button class="btn ghost" data-go="kalendarium">Hela kalendariet</button></div>
+    ${openEv.length ? `<div class="ev-list">${openEv.map(e => evRow(e)).join("")}</div>` : `<p class="muted">Träffar som är öppna för externa eller får spridas visas här när de är märkta i kalendariet.</p>`}
+  </div>`;
+}
+function editProfileDialog(key) {
+  const i = IMAP[key]; const p = profileOf(key); const c = contactOf(key) || {}; const f = p.focus || [];
+  openDialog(`<h2>${esc(i.name)}</h2>
+    <div class="form-grid">
+      <div class="field"><label for="p-cn">Kontaktperson</label><input type="text" id="p-cn" name="cname" value="${esc(c.name || "")}"></div>
+      <div class="field"><label for="p-co">Organisation</label><input type="text" id="p-co" name="corg" value="${esc(c.org || "")}"></div>
+      <div class="field full"><label for="p-ce">E-post</label><input type="email" id="p-ce" name="cemail" value="${esc(c.email || "")}"></div>
+      ${[0, 1, 2].map(n => `<div class="field"><label for="p-f${n}">Fokusområde ${n + 1}</label><input type="text" id="p-f${n}" name="f${n}" value="${esc(f[n]?.text || "")}"></div><div class="field"><label for="p-t${n}">Tema</label><select id="p-t${n}" name="t${n}">${themeOptions(f[n]?.theme || "", true)}</select></div>`).join("")}
+      <div class="field full"><label for="p-seek">Söker samarbetspartner kring</label><textarea id="p-seek" name="seeking" rows="2" style="min-height:60px">${esc(p.seeking || "")}</textarea></div>
+      <div class="field full"><label for="p-col">Störst nytta att göra tillsammans</label><textarea id="p-col" name="collab" rows="2" style="min-height:60px">${esc(p.collab || "")}</textarea></div>
+      <label class="full row" style="gap:8px;font-size:0.9rem"><input type="checkbox" name="answered" ${p.surveyAt ? "checked" : ""}> Enkäten är besvarad</label>
+    </div>
+    <div class="row" style="justify-content:flex-end"><button class="btn" value="cancel" formnovalidate>Avbryt</button><button class="btn primary" value="ok">Spara</button></div>`,
+  async fd => {
+    if (needDb()) return false;
+    const focus = [0, 1, 2].map(n => ({ text: String(fd.get("f" + n) || "").trim(), theme: fd.get("t" + n) || "" })).filter(x => x.text);
+    const prof = { focus, seeking: String(fd.get("seeking") || "").trim(), collab: String(fd.get("collab") || "").trim(), surveyAt: fd.get("answered") === "on" ? (p.surveyAt || new Date().toISOString()) : null, updatedAt: new Date().toISOString() };
+    try {
+      await S.db.doc("profiles/" + key).set(prof);
+      const cn = { name: String(fd.get("cname") || "").trim(), org: String(fd.get("corg") || "").trim(), email: String(fd.get("cemail") || "").trim() };
+      if (cn.name || cn.org || cn.email || contactOf(key)) await S.db.doc("contacts/" + key).set(cn);
+      toast("Profilen är sparad");
+    } catch (e) { toast(e.code === "invalid_argument" ? "Du har inte behörighet att spara." : "Kunde inte spara. Försök igen."); return false; }
+  });
+}
+function addIdeaDialog() {
+  openDialog(`<h2>Ny samverkansidé</h2>
+    <div class="form-grid">
+      <div class="field full"><label for="i-t">Idé</label><input type="text" id="i-t" name="title" required></div>
+      <div class="field full"><label for="i-d">Beskrivning (valfritt)</label><textarea id="i-d" name="text" rows="3" style="min-height:70px"></textarea></div>
+      <div class="field"><label for="i-th">Tema</label><select id="i-th" name="theme">${themeOptions("", true)}</select></div>
+      <div class="field full"><span class="label">Initiativ som vill vara med</span><div class="chk-grid">${INIT.map(i => `<label class="row" style="gap:6px;font-size:0.88rem"><input type="checkbox" name="ini" value="${i.key}"> ${esc(i.short)}</label>`).join("")}</div></div>
+    </div>
+    <div class="row" style="justify-content:flex-end"><button class="btn" value="cancel" formnovalidate>Avbryt</button><button class="btn primary" value="ok">Lägg till</button></div>`,
+  async fd => {
+    if (needDb()) return false;
+    try { await S.db.collection("ideas").add({ title: fd.get("title"), text: fd.get("text") || "", theme: fd.get("theme") || "", initiatives: fd.getAll("ini"), votes: [], createdAt: new Date().toISOString() }); toast("Idén är tillagd"); }
+    catch (e) { toast("Kunde inte spara. Försök igen."); return false; }
+  });
+}
+async function voteIdea(id) {
+  if (needDb()) return;
+  if (!S.uid) { toast("Logga in på claude.ai för att rösta."); return; }
+  const d = S.ideas.find(x => x.id === id); if (!d) return;
+  const v = Array.isArray(d.votes) ? [...d.votes] : [];
+  const next = v.includes(S.uid) ? v.filter(x => x !== S.uid) : [...v, S.uid];
+  try { await S.db.doc("ideas/" + id).update({ votes: next }); } catch (e) { toast("Kunde inte rösta."); }
+}
+
+// ---------- dialoger ----------
+function openDialog(html, onSubmit) {
+  const dlg = $("#dlg"); const f = $("#dlg-form");
+  f.innerHTML = html;
+  f.onsubmit = async e => { e.preventDefault(); if (e.submitter && e.submitter.value === "cancel") { dlg.close(); return; } const ok = await onSubmit(new FormData(f)); if (ok !== false) dlg.close(); };
+  dlg.showModal();
+}
+function initOptions(sel) { return INIT.map(i => `<option value="${i.key}" ${i.key === sel ? "selected" : ""}>${esc(i.name)}</option>`).join(""); }
+function themeOptions(sel, blank) { return (blank ? `<option value="">Inget tema</option>` : "") + THEMES.map(t => `<option ${t === sel ? "selected" : ""}>${esc(t)}</option>`).join(""); }
+
+function needDb() { if (!S.db) { toast("Delad data är inte tillgänglig i den här vyn."); return true; } return false; }
+
+function addEventDialog(pre = {}) {
+  openDialog(`<h2>Lägg till träff</h2>
+    <div class="form-grid">
+      <div class="field full"><label for="f-title">Rubrik</label><input type="text" id="f-title" name="title" required value="${esc(pre.title || "")}"></div>
+      <div class="field"><label for="f-init">Initiativ</label><select id="f-init" name="initiative">${initOptions(pre.initiative)}</select></div>
+      <div class="field"><label for="f-theme">Tema</label><select id="f-theme" name="theme">${themeOptions(pre.theme, true)}</select></div>
+      <div class="field"><label for="f-date">Datum</label><input type="date" id="f-date" name="date" required value="${esc(pre.date || "")}"></div>
+      <div class="field"><label for="f-time">Tid</label><input type="text" id="f-time" name="time" placeholder="09.00–11.00" value="${esc(pre.time || "")}"></div>
+      <div class="field full"><label for="f-place">Plats</label><input type="text" id="f-place" name="place" placeholder="Digitalt / adress" value="${esc(pre.place || "")}"></div>
+      <div class="field full"><label for="f-url">Länk till evenemanget</label><input type="url" id="f-url" name="url" placeholder="https://" value="${esc(pre.url || "")}"></div>
+      <label class="row" style="gap:8px;font-size:0.9rem"><input type="checkbox" name="open" ${pre.open ? "checked" : ""}> Öppen för externa deltagare</label>
+      <div class="field"><label for="f-share">Får spridas via gemensamma kanaler?</label><select id="f-share" name="share"><option value="">Inte angivet</option>${Object.entries(SHARE).map(([k, v]) => `<option value="${k}" ${pre.share === k ? "selected" : ""}>${v}</option>`).join("")}</select></div>
+    </div>
+    <div class="row" style="justify-content:flex-end"><button class="btn" value="cancel" formnovalidate>Avbryt</button><button class="btn primary" value="ok">Lägg till</button></div>`,
+  async fd => {
+    if (needDb()) return false;
+    const d = Object.fromEntries(fd.entries()); d.open = fd.get("open") === "on";
+    try { await S.db.collection("events").add({ ...d, source: "manuell", createdAt: new Date().toISOString() }); toast("Träffen är tillagd"); }
+    catch (e) { toast(e.code === "invalid_argument" ? "Du har inte behörighet att lägga till." : "Kunde inte spara. Försök igen."); return false; }
+  });
+}
+function addGroupDialog(pre = {}) {
+  openDialog(`<h2>Lägg till arbetsgrupp eller projekt</h2>
+    <div class="form-grid">
+      <div class="field full"><label for="g-name">Namn</label><input type="text" id="g-name" name="name" required value="${esc(pre.name || "")}"></div>
+      <div class="field"><label for="g-init">Initiativ</label><select id="g-init" name="initiative">${initOptions(pre.initiative)}</select></div>
+      <div class="field"><label for="g-theme">Tema</label><select id="g-theme" name="theme">${themeOptions((pre.themes || [])[0])}</select></div>
+      <div class="field"><label for="g-theme2">Andra tema (valfritt)</label><select id="g-theme2" name="theme2">${themeOptions((pre.themes || [])[1], true)}</select></div>
+      <div class="field full"><label for="g-desc">Kort beskrivning</label><textarea id="g-desc" name="description" rows="3" style="min-height:80px">${esc(pre.description || "")}</textarea></div>
+      <div class="field full"><label for="g-url">Länk (valfritt)</label><input type="url" id="g-url" name="url" placeholder="https://" value="${esc(pre.url || "")}"></div>
+    </div>
+    <div class="row" style="justify-content:flex-end"><button class="btn" value="cancel" formnovalidate>Avbryt</button><button class="btn primary" value="ok">Lägg till</button></div>`,
+  async fd => {
+    if (needDb()) return false;
+    const d = Object.fromEntries(fd.entries());
+    const themes = [d.theme, d.theme2].filter(Boolean).filter((t, i, a) => a.indexOf(t) === i);
+    try { await S.db.collection("groups").add({ name: d.name, initiative: d.initiative, status: "pagar", themes, description: d.description, url: d.url, updatedAt: new Date().toISOString() }); toast("Arbetsgruppen är tillagd"); }
+    catch (e) { toast(e.code === "invalid_argument" ? "Du har inte behörighet att lägga till." : "Kunde inte spara. Försök igen."); return false; }
+  });
+}
+function addNewsDialog() {
+  openDialog(`<h2>Lägg till länk i På gång</h2>
+    <div class="form-grid">
+      <div class="field full"><label for="n-title">Rubrik</label><input type="text" id="n-title" name="title" required></div>
+      <div class="field"><label for="n-init">Initiativ</label><select id="n-init" name="initiative">${initOptions()}</select></div>
+      <div class="field"><label for="n-theme">Tema</label><select id="n-theme" name="theme">${themeOptions("", true)}</select></div>
+      <div class="field"><label for="n-date">Publicerad</label><input type="date" id="n-date" name="date" required value="${ymd(today())}"></div>
+      <div class="field full"><label for="n-url">Länk till nyheten</label><input type="url" id="n-url" name="url" required placeholder="https://"></div>
+    </div>
+    <div class="row" style="justify-content:flex-end"><button class="btn" value="cancel" formnovalidate>Avbryt</button><button class="btn primary" value="ok">Lägg till</button></div>`,
+  async fd => {
+    if (needDb()) return false;
+    const d = Object.fromEntries(fd.entries());
+    try { await S.db.collection("news").add({ ...d, source: "manuell", createdAt: new Date().toISOString() }); toast("Länken är tillagd"); }
+    catch (e) { toast(e.code === "invalid_argument" ? "Du har inte behörighet att lägga till." : "Kunde inte spara. Försök igen."); return false; }
+  });
+}
+function editNetworkDialog(key) {
+  const i = IMAP[key]; const n = S.network.find(x => x.id === key) || {};
+  openDialog(`<h2>Anslutna organisationer</h2>
+    <p class="muted">${esc(i.name)}</p>
+    <div class="form-grid">
+      <div class="field"><label for="nm-n">Antal</label><input type="text" inputmode="numeric" id="nm-n" name="members" value="${esc(n.members || "")}" required></div>
+      <div class="field"><label for="nm-d">Gäller per</label><input type="date" id="nm-d" name="asOf" value="${esc(n.asOf || ymd(today()))}"></div>
+      <label class="full row" style="gap:8px;font-size:0.9rem"><input type="checkbox" name="approx" ${n.approx ? "checked" : ""}> Ungefärligt antal</label>
+      <div class="field full"><label for="nm-note">Källa eller kommentar</label><input type="text" id="nm-note" name="note" value="${esc(n.note || "")}"></div>
+    </div>
+    <div class="row" style="justify-content:flex-end"><button class="btn" value="cancel" formnovalidate>Avbryt</button><button class="btn primary" value="ok">Spara</button></div>`,
+  async fd => {
+    if (needDb()) return false;
+    const members = parseInt(String(fd.get("members")).replace(/\D/g, ""), 10);
+    if (!members) { toast("Ange ett antal."); return false; }
+    try { await S.db.doc("network/" + key).set({ members, approx: fd.get("approx") === "on", asOf: fd.get("asOf"), note: fd.get("note") || "" }); toast("Antalet är sparat"); }
+    catch (e) { toast("Kunde inte spara."); return false; }
+  });
+}
+function eventDetail(id) {
+  const e = S.events.find(x => x.id === id); if (!e) return;
+  openDialog(`<div class="ev-list">${evRow(e)}</div><div class="row" style="justify-content:flex-end"><button class="btn" value="cancel">Stäng</button></div>`, async () => {});
+}
+
+// ---------- tolka anteckningar ----------
+function buildPrompt(raw, title, date) {
+  return `Du hjälper kanslierna i svenska klimatinitiativ inom bygg- och anläggningsbranschen. Nedan finns anteckningar från en månatlig avstämning där varje initiativ kort berättat vad som händer just nu.
+
+Initiativ (använd nyckeln i fältet "initiative"):
+${INIT.map(i => `- ${i.key}: ${i.name} (${i.region})`).join("\n")}
+
+Teman (använd exakt dessa strängar):
+${THEMES.join(" | ")}
+
+Svara ENBART med ett JSON-objekt på svenska med denna form:
+{"updates":[{"initiative":"nyckel","summary":"2–3 meningar om läget","items":["kort konkret punkt"],"themes":["tema"]}],
+ "synergies":[{"theme":"tema","initiatives":["nyckel","nyckel"],"text":"1–2 meningar om vad som överlappar och hur initiativen kan samordna sig"}],
+ "suggestedGroups":[{"initiative":"nyckel","name":"namn på ny arbetsgrupp eller projekt som nämns","description":"en mening","themes":["tema"],"status":"planeras|pagar"}],
+ "suggestedEvents":[{"initiative":"nyckel","title":"träff som nämns med datum","date":"YYYY-MM-DD","time":"","place":"","theme":"tema"}]}
+
+Regler: ta bara med det som står i anteckningarna. Hitta inte på datum. Utelämna initiativ som inte nämns. Om ett initiativ i texten inte finns i listan, hoppa över det.
+
+Mötet: ${title} (${date})
+
+Anteckningar:
+"""
+${raw.slice(0, 60000)}
+"""`;
+}
+async function parseAndSave(raw, title, date, existingId) {
+  S.parsing = true; S.parseMsg = "Claude läser anteckningarna. Det tar oftast under en minut."; render();
+  S._ctl = new AbortController();
+  let parsed = null;
+  try {
+    parsed = await S.sample.json(buildPrompt(raw, title, date), { signal: S._ctl.signal });
+    if (!parsed || !Array.isArray(parsed.updates)) throw { code: "invalid_json" };
+    S.parseMsg = "";
+  } catch (e) {
+    const msgs = { cancelled: "Avbrutet.", not_granted: "Claude fick inte användas. Anteckningarna sparas utan sammanfattning.", rate_limited: "För många förfrågningar just nu. Försök igen om en stund.", invalid_json: "Sammanfattningen gick inte att läsa. Försök igen." };
+    S.parseMsg = msgs[e.code] || "Något gick fel med sammanfattningen. Försök igen.";
+    parsed = null;
+  }
+  S.parsing = false;
+  try {
+    if (existingId) { if (parsed) await S.db.doc("notes/" + existingId).update({ parsed }); }
+    else {
+      const ref = await S.db.collection("notes").add({ title, meetingDate: date, raw: raw.slice(0, 120000), parsed, createdAt: new Date().toISOString() });
+      S.noteSel = ref.id; S._uploading = false; S._draftText = ""; S._draftTitle = ""; S._draftDate = "";
+    }
+    if (parsed) toast("Avstämningen är sammanfattad");
+  } catch (e) { S.parseMsg = "Kunde inte spara avstämningen."; }
+  render();
+}
+
+// ---------- händelser ----------
+document.addEventListener("click", async e => {
+  const t = e.target.closest("button, [data-go]"); if (!t) return;
+  const ds = t.dataset;
+  if (ds.go) { go(ds.go); return; }
+  if (ds.f) {
+    const set = ds.f === "ev-init" ? S.evInit : ds.f === "nw-init" ? S.nwInit : ds.f === "rs-init" ? S.rsInit : ds.f === "bd-init" ? S.boardInit : S.grInit;
+    set.has(ds.k) ? set.delete(ds.k) : set.add(ds.k); render(); return;
+  }
+  if (ds.mode) { S.evMode = ds.mode; S.monthOffset = 0; render(); return; }
+  if (ds.month) { S.monthOffset += Number(ds.month); render(); return; }
+  if (ds.grTheme) { S.grTheme = ds.grTheme; render(); return; }
+  if (ds.themeJump) { S.grTheme = ds.themeJump; S.grInit.clear(); go("arbetsgrupper"); return; }
+  if (ds.evDetail) { eventDetail(ds.evDetail); return; }
+  if (ds.jumpInit) {
+    const [v, k] = ds.jumpInit.split(":");
+    const set = v === "kalendarium" ? S.evInit : v === "resurser" ? S.rsInit : v === "tavla" ? S.boardInit : S.grInit;
+    set.clear(); set.add(k); if (v === "arbetsgrupper") S.grTheme = ""; go(v); return;
+  }
+  if (ds.editProf) { editProfileDialog(ds.editProf); return; }
+  if (t.id === "add-idea") { addIdeaDialog(); return; }
+  if (ds.vote) { voteIdea(ds.vote); return; }
+  if (ds.openNote) { S.noteSel = ds.openNote; S._uploading = false; go("avstamningar"); return; }
+  if (ds.note) { S.noteSel = ds.note; S._uploading = false; S.parseMsg = ""; render(); return; }
+  if (t.id === "add-ev") { addEventDialog(); return; }
+  if (t.id === "add-gr") { addGroupDialog(); return; }
+  if (t.id === "add-nw") { addNewsDialog(); return; }
+  if (t.id === "add-rs") { addResourceDialog(); return; }
+  if (t.id === "add-note") { addBoardNoteDialog(); return; }
+  if (ds.plus) { if (!needDb()) plusDialog(ds.plus); return; }
+  if (ds.delNote) {
+    if (t.dataset.confirm !== "1") { t.dataset.confirm = "1"; t.textContent = "Ta bort?"; t.classList.add("confirm"); setTimeout(() => { if (t.isConnected) { t.dataset.confirm = ""; t.textContent = "×"; t.classList.remove("confirm"); } }, 3500); return; }
+    if (needDb()) return;
+    try { await S.db.doc("board/" + ds.delNote).delete(); toast("Lappen är borttagen"); } catch (err) { toast("Kunde inte ta bort."); }
+    return;
+  }
+  if (ds.nwmode) { S.nwMode = ds.nwmode; render(); return; }
+  if (ds.rtype != null) { S.rsType = ds.rtype; render(); return; }
+  if (ds.editNet) { editNetworkDialog(ds.editNet); return; }
+  if (t.id === "new-note") { S._uploading = true; S.parseMsg = ""; render(); return; }
+  if (t.id === "nt-cancel") { S._uploading = false; S.parseMsg = ""; render(); return; }
+  if (t.id === "nt-stop") { S._ctl && S._ctl.abort(); return; }
+  if (t.id === "nt-save") {
+    if (needDb()) return;
+    const raw = $("#nt-text").value.trim(); const title = $("#nt-title").value.trim() || "Avstämning"; const date = $("#nt-date").value;
+    S._draftText = raw; S._draftTitle = title; S._draftDate = date;
+    if (!raw) { S.parseMsg = "Klistra in text eller välj en fil först."; render(); return; }
+    if (S.sample) parseAndSave(raw, title, date);
+    else { try { const ref = await S.db.collection("notes").add({ title, meetingDate: date, raw, parsed: null, createdAt: new Date().toISOString() }); S.noteSel = ref.id; S._uploading = false; S._draftText = ""; toast("Avstämningen är sparad"); render(); } catch (err) { S.parseMsg = "Kunde inte spara avstämningen."; render(); } }
+    return;
+  }
+  if (ds.reparse) { const n = S.notes.find(x => x.id === ds.reparse); if (n && S.sample && !needDb()) parseAndSave(n.raw || "", n.title, n.meetingDate, n.id); return; }
+  if (ds.suggGr != null) { const n = S.notes.find(x => x.id === S.noteSel); const g = n?.parsed?.suggestedGroups?.[Number(ds.suggGr)]; if (g) addGroupDialog(g); return; }
+  if (ds.suggEv != null) { const n = S.notes.find(x => x.id === S.noteSel); const ev = n?.parsed?.suggestedEvents?.[Number(ds.suggEv)]; if (ev) addEventDialog(ev); return; }
+  if (ds.delEv) {
+    if (t.dataset.confirm !== "1") { t.dataset.confirm = "1"; t.textContent = "Bekräfta borttagning"; setTimeout(() => { if (t.isConnected) { t.dataset.confirm = ""; t.textContent = "Ta bort"; } }, 4000); return; }
+    if (needDb()) return;
+    try { await S.db.doc("events/" + ds.delEv).delete(); toast("Träffen är borttagen"); } catch (err) { toast("Kunde inte ta bort."); }
+    return;
+  }
+  if (ds.copy) {
+    try { await navigator.clipboard.writeText(ds.copy); toast("Kopierat"); }
+    catch (err) { const c = t.parentElement.querySelector("code"); const r = document.createRange(); r.selectNodeContents(c); const s = getSelection(); s.removeAllRanges(); s.addRange(r); toast("Markerat – kopiera med Ctrl/Cmd+C"); }
+    return;
+  }
+});
+document.addEventListener("input", e => {
+  const id = e.target.id;
+  if (id === "ev-q") { S.evQ = e.target.value; render(); }
+  if (id === "gr-q") { S.grQ = e.target.value; render(); }
+  if (id === "nw-q") { S.nwQ = e.target.value; render(); }
+  if (id === "rs-q") { S.rsQ = e.target.value; render(); }
+  if (id === "nt-text") S._draftText = e.target.value;
+  if (id === "nt-title") S._draftTitle = e.target.value;
+});
+document.addEventListener("change", async e => {
+  const el = e.target;
+  if (el.id === "ev-theme") { S.evTheme = el.value; render(); }
+  if (el.id === "gr-theme") { S.grTheme = el.value; render(); }
+  if (el.id === "nw-theme") { S.nwTheme = el.value; render(); }
+  if (el.id === "rs-theme") { S.rsTheme = el.value; render(); }
+  if (el.id === "nt-date") S._draftDate = el.value;
+  if (el.dataset.status) {
+    if (needDb()) return;
+    try { await S.db.doc("groups/" + el.dataset.status).update({ status: el.value, updatedAt: new Date().toISOString() }); toast("Status uppdaterad"); }
+    catch (err) { toast("Kunde inte uppdatera status."); render(); }
+  }
+  if (el.id === "nt-file" && el.files[0]) {
+    const f = el.files[0];
+    try {
+      let text = "";
+      if (/\.docx$/i.test(f.name)) {
+        if (!window.mammoth) throw new Error("no-mammoth");
+        const res = await mammoth.extractRawText({ arrayBuffer: await f.arrayBuffer() });
+        text = res.value;
+      } else text = await f.text();
+      S._draftText = text.trim();
+      if (!S._draftTitle) S._draftTitle = f.name.replace(/\.[^.]+$/, "");
+      S.parseMsg = "Filen är inläst. Granska texten och spara.";
+    } catch (err) { S.parseMsg = "Filen kunde inte läsas. Prova att klistra in texten i stället."; }
+    render();
+  }
+});
+
+// ---------- start ----------
+const saved = load("kp-view"); if (saved && VIEWS.some(v => v.key === saved)) S.view = saved;
+const hash = (location.hash || "").slice(1); if (VIEWS.some(v => v.key === hash)) S.view = hash;
+(window.IT ? IT.auth.ready : Promise.resolve()).then(() => { if (authed()) { enter(); connect(); } });
+</script>
+
+</body></html>

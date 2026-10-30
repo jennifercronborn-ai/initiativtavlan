@@ -1,0 +1,31 @@
+# Läser in nya synkfiler (data/sync/*.json) i Supabase när de hamnar på main.
+# Kräver två hemligheter i GitHub: Settings › Secrets and variables › Actions
+#   SUPABASE_URL och SUPABASE_SERVICE_ROLE_KEY
+name: Synka till Initiativtavlan
+on:
+  push:
+    branches: [main]
+    paths: ["data/sync/*.json"]
+  workflow_dispatch:
+    inputs:
+      file:
+        description: "Synkfil att läsa in (t.ex. data/sync/2026-11-02.json)"
+        required: true
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 2 }
+      - uses: actions/setup-node@v4
+        with: { node-version: 20 }
+      - run: npm install --omit=dev
+      - name: Läs in synkfiler
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          INPUT_FILE: ${{ github.event.inputs.file }}
+        run: |
+          if [ -n "$INPUT_FILE" ]; then FILES="$INPUT_FILE"
+          else FILES=$(git diff --name-only HEAD~1 HEAD -- 'data/sync/*.json'); fi
+          for f in $FILES; do [ -f "$f" ] && node scripts/import.mjs "$f"; done
