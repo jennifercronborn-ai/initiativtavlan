@@ -1,0 +1,789 @@
+{
+ "events": [
+  {
+   "title": "Fokusgrupp Energiomställning – Studiebesök, energieffektivisering 50%",
+   "date": "2026-11-05",
+   "time": "09.00–11.00",
+   "place": "Fresenius Kabi",
+   "initiative": "upk",
+   "theme": "Energi",
+   "url": "https://eu.invajo.com/l/Igd3j5v7ok",
+   "open": false,
+   "source": "auto"
+  },
+  {
+   "title": "Arbetsgrupp Plast i verksamhetsavfall",
+   "date": "2026-11-12",
+   "time": "13.00–15.00",
+   "place": "Pumphuset",
+   "initiative": "upk",
+   "theme": "Återbruk & cirkularitet",
+   "url": "https://klimatprotokollet.uppsala.se/kalendarium/",
+   "open": false,
+   "source": "auto"
+  },
+  {
+   "title": "Arbetsgrupp Mobilitet – Hyrcykelsystem, elsparkcyklar för företag och förmånscyklar",
+   "date": "2026-11-17",
+   "time": "11.00–12.00",
+   "place": "Digital",
+   "initiative": "upk",
+   "theme": "Transport & logistik",
+   "url": "https://klimatprotokollet.uppsala.se/kalendarium/",
+   "open": false,
+   "source": "auto"
+  },
+  {
+   "title": "Energigemenskaper med STUNS, möte 2",
+   "date": "2026-11-18",
+   "time": "08.30–11.00",
+   "place": "STUNS",
+   "initiative": "upk",
+   "theme": "Energi",
+   "url": "https://klimatprotokollet.uppsala.se/kalendarium/",
+   "open": false,
+   "source": "auto"
+  },
+  {
+   "title": "Arbetsgrupp Krontäckning",
+   "date": "2026-12-08",
+   "time": "13.00–15.00",
+   "place": "Stadshuset",
+   "initiative": "upk",
+   "theme": "Biologisk mångfald",
+   "url": "https://klimatprotokollet.uppsala.se/kalendarium/",
+   "open": false,
+   "source": "auto"
+  },
+  {
+   "title": "Öppen data, AI och ritmodeller – möjligheter till smidigare och smartare klimatarbete, materialval och återbruk",
+   "date": "2026-11-06",
+   "time": "09.00–12.00",
+   "place": "NCC, Herrjärva torg 4, Solna",
+   "initiative": "kas",
+   "theme": "Data & AI",
+   "url": "https://klimatarenastockholm.se/event/oppen-data-ai-och-ritmodeller/",
+   "open": false,
+   "source": "auto"
+  },
+  {
+   "title": "Från plan till plats: cirkulära perspektiv på Slakthusområdet",
+   "date": "2026-11-18",
+   "time": "13.00–16.00",
+   "place": "Slakthusområdet, Stockholm",
+   "initiative": "kas",
+   "theme": "Återbruk & cirkularitet",
+   "url": "https://klimatarenastockholm.se/event/fran-plan-till-plats-cirkulara-perspektiv-pa-slakthusomradet/",
+   "open": false,
+   "source": "auto"
+  },
+  {
+   "title": "Studiebesök – Hasopor",
+   "date": "2026-11-12",
+   "time": "08.30–14.00",
+   "place": "Hasopor, fabriken i Hammar (avfärd från Örebro)",
+   "initiative": "kio",
+   "theme": "Material (betong, trä)",
+   "url": "https://www.klimatinitiativ.se/kalender",
+   "open": false,
+   "source": "auto"
+  },
+  {
+   "title": "Lunchwebbinarium - hitta finansiering för er klimatomställning",
+   "date": "2026-11-03",
+   "time": "12.00",
+   "place": "Digitalt",
+   "initiative": "gka",
+   "theme": "",
+   "url": "https://www.gavle.se/evenemang/lunchwebbinarium-hitta-finansiering-for-er-klimatomstallning/",
+   "open": false,
+   "source": "auto"
+  },
+  {
+   "title": "Rundabordsmöte",
+   "date": "2026-11-11",
+   "time": "13.00",
+   "place": "",
+   "initiative": "gka",
+   "theme": "Nätverk & medlemmar",
+   "url": "https://www.gavle.se/evenemang/rundabordsmote-2/",
+   "open": false,
+   "source": "auto"
+  },
+  {
+   "title": "Gävle klimatavtals arbetsgrupp: Pendling och tjänsteresor",
+   "date": "2026-11-19",
+   "time": "13.00",
+   "place": "Förvaltningshuset",
+   "initiative": "gka",
+   "theme": "Transport & logistik",
+   "url": "https://www.gavle.se/evenemang/gavle-klimatavtals-arbetsgrupp-pendling-och-tjansteresor/",
+   "open": false,
+   "source": "auto"
+  },
+  {
+   "title": "Hållbar stadsbyggnad – vilket ledarskap krävs?",
+   "date": "2026-11-24",
+   "time": "13.00",
+   "place": "Kungsbäcksvägen 22",
+   "initiative": "gka",
+   "theme": "",
+   "url": "https://www.gavle.se/evenemang/hallbar-stadsbyggnad-vilket-ledarskap-kravs/",
+   "open": false,
+   "source": "auto"
+  },
+  {
+   "title": "Nätverksträff: hållbara leverantörskedjor",
+   "date": "2026-12-02",
+   "time": "08.30",
+   "place": "Dospace Gävle",
+   "initiative": "gka",
+   "theme": "Upphandling & krav",
+   "url": "https://www.gavle.se/evenemang/natverkstraff-hallbara-leverantorskedjor/",
+   "open": false,
+   "source": "auto"
+  },
+  {
+   "title": "Frukostseminarie om hållbara materialval",
+   "date": "2026-12-08",
+   "time": "08.30",
+   "place": "Byggkonstruktören",
+   "initiative": "gka",
+   "theme": "Material (betong, trä)",
+   "url": "https://www.gavle.se/evenemang/frukostseminarie-om-hallbara-materialval/",
+   "open": false,
+   "source": "auto"
+  },
+  {
+   "title": "Effekt! Sprint #2 (Träff 2): Intensivutbildning i praktiska resurseffektiva konstruktionslösningar",
+   "date": "2026-11-02",
+   "time": "08.15–12.00",
+   "place": "",
+   "initiative": "lfm30",
+   "theme": "Material (betong, trä)",
+   "url": "https://lfm30.se/event/effekt-sprint-2-traff-2-intensivutbildning-i-praktiska-resurseffektiva-konstruktionslosningar/",
+   "open": false,
+   "source": "auto"
+  },
+  {
+   "title": "Ansökningsmöte november",
+   "date": "2026-11-05",
+   "time": "10.00–11.00",
+   "place": "",
+   "initiative": "lfm30",
+   "theme": "",
+   "url": "https://lfm30.se/event/ansokningsmote-november-2026/",
+   "open": false,
+   "source": "auto"
+  },
+  {
+   "title": "Byggherreforum Träff 15 – Återbruk (del 3)",
+   "date": "2026-11-10",
+   "time": "12.00–16.00",
+   "place": "",
+   "initiative": "lfm30",
+   "theme": "Återbruk & cirkularitet",
+   "url": "https://lfm30.se/event/byggherreforum-traff-15-aterbruk-del-3/",
+   "open": false,
+   "source": "auto"
+  },
+  {
+   "title": "ROT-utskottet fas 2 (#2)",
+   "date": "2026-11-11",
+   "time": "10.00–11.00",
+   "place": "",
+   "initiative": "lfm30",
+   "theme": "Befintligt bestånd",
+   "url": "https://lfm30.se/event/rot-utskottet-fas-2-2/",
+   "open": false,
+   "source": "auto"
+  },
+  {
+   "title": "Effekt! Sprint #2 (Träff 3): Intensivutbildning i praktiska resurseffektiva konstruktionslösningar",
+   "date": "2026-11-16",
+   "time": "08.15–12.00",
+   "place": "",
+   "initiative": "lfm30",
+   "theme": "Material (betong, trä)",
+   "url": "https://lfm30.se/event/effekt-sprint-2-traff-3-intensivutbildning-i-praktiska-resurseffektiva-konstruktionslosningar/",
+   "open": false,
+   "source": "auto"
+  },
+  {
+   "title": "Klimatpåverkan av Installationer – Digital Fokusgrupp med Uppsala Klimatprotokoll",
+   "date": "2026-11-18",
+   "time": "13.00–15.00",
+   "place": "Digitalt",
+   "initiative": "lfm30",
+   "theme": "Klimatberäkningar",
+   "url": "https://lfm30.se/event/klimatpaverkan-av-installationer-digital-fokusgrupp-med-uppsala-klimatprotokoll/",
+   "open": false,
+   "source": "auto"
+  },
+  {
+   "title": "Områdesträff | Klimatsmart Byggnation #6",
+   "date": "2026-11-25",
+   "time": "10.00–12.00",
+   "place": "",
+   "initiative": "lfm30",
+   "theme": "",
+   "url": "https://lfm30.se/event/omradestraff-klimatsmart-byggnation-6-2026/",
+   "open": false,
+   "source": "auto"
+  },
+  {
+   "title": "Halvdagskonferens: Återbruk i Byggsektorn",
+   "date": "2026-11-04",
+   "time": "08.30–12.00",
+   "place": "Werket, Vallgatan 8, Jönköping",
+   "initiative": "ccc",
+   "theme": "Återbruk & cirkularitet",
+   "url": "https://www.cccjonkopingslan.com/event/aterbruk-i-bygg-och-fastighetssektorn/",
+   "open": false,
+   "source": "auto"
+  },
+  {
+   "title": "Beställarforum",
+   "date": "2026-11-25",
+   "time": "11.00–13.00",
+   "place": "",
+   "initiative": "ccc",
+   "theme": "Upphandling & krav",
+   "url": "https://www.cccjonkopingslan.com/event/bestallarforum-2/",
+   "open": false,
+   "source": "auto"
+  },
+  {
+   "title": "Julfrukost på Bryggan",
+   "date": "2026-12-10",
+   "time": "08.00–10.00",
+   "place": "Bryggan Café & Bistro",
+   "initiative": "ccc",
+   "theme": "Nätverk & medlemmar",
+   "url": "https://www.cccjonkopingslan.com/event/julfrukost-pa-bryggan/",
+   "open": false,
+   "source": "auto"
+  },
+  {
+   "title": "Save the Date: Lansering av Kommunernas krafttag",
+   "date": "2027-02-24",
+   "time": "",
+   "place": "",
+   "initiative": "k2030",
+   "theme": "Klimatfärdplaner",
+   "url": "https://klimat2030.se/save-the-date-lansering-av-kommunernas-krafttag/",
+   "open": false,
+   "source": "auto"
+  },
+  {
+   "title": "Arenamöte Energi",
+   "date": "2026-11-12",
+   "time": "13.00–16.00",
+   "place": "",
+   "initiative": "coaction",
+   "theme": "Energi",
+   "url": "https://lund.se/coaction-lund",
+   "open": true,
+   "source": "auto"
+  },
+  {
+   "title": "Arenamöte Bygg",
+   "date": "2027-01-21",
+   "time": "13.00–15.00",
+   "place": "",
+   "initiative": "coaction",
+   "theme": "",
+   "url": "https://lund.se/coaction-lund",
+   "open": true,
+   "source": "auto"
+  },
+  {
+   "title": "Samverkansmöte",
+   "date": "2027-02-04",
+   "time": "09.00–16.00",
+   "place": "",
+   "initiative": "coaction",
+   "theme": "Nätverk & medlemmar",
+   "url": "https://lund.se/coaction-lund",
+   "open": true,
+   "source": "auto"
+  },
+  {
+   "title": "Från hållbarhetsmål till hållbar fastighetsdrift",
+   "date": "2026-11-04",
+   "time": "",
+   "place": "Online",
+   "initiative": "gpkb",
+   "theme": "Befintligt bestånd",
+   "url": "https://www.businessregiongoteborg.se/naringslivsutveckling/hallbar-utveckling/goteborgs-plattform-klimatneutralt-byggande/goteborgs-byggkalender/fran-hallbarhetsmal-till-hallbar-fastighetsdrift",
+   "open": false,
+   "source": "auto"
+  },
+  {
+   "title": "Business Arena Väst",
+   "date": "2026-11-10",
+   "time": "",
+   "place": "Scandic Göteborg Central",
+   "initiative": "gpkb",
+   "theme": "Nätverk & medlemmar",
+   "url": "https://www.businessregiongoteborg.se/kalender/business-arena-vast",
+   "open": false,
+   "source": "auto"
+  },
+  {
+   "title": "Framtidens återbruk av fönster och glas",
+   "date": "2026-11-18",
+   "time": "08.00–13.00",
+   "place": "Hotell Draken",
+   "initiative": "gpkb",
+   "theme": "Återbruk & cirkularitet",
+   "url": "https://www.businessregiongoteborg.se/kalender/framtidens-aterbruk-av-fonster-och-glas",
+   "open": false,
+   "source": "auto"
+  },
+  {
+   "title": "Det optimerade fastighetsbeståndet – energi och hyresgästdeltagande",
+   "date": "2026-11-24",
+   "time": "",
+   "place": "Traktören, Göteborgs Stad",
+   "initiative": "gpkb",
+   "theme": "Energi",
+   "url": "https://www.businessregiongoteborg.se/naringslivsutveckling/hallbar-utveckling/goteborgs-plattform-klimatneutralt-byggande/goteborgs-byggkalender/det-optimerade-fastighetsbestandet-energi-och-hyresgastdeltagande",
+   "open": false,
+   "source": "auto"
+  },
+  {
+   "title": "Digital Matchmaking - för en klimatneutral framtid",
+   "date": "2027-01-25",
+   "time": "",
+   "place": "Online",
+   "initiative": "gpkb",
+   "theme": "Nätverk & medlemmar",
+   "url": "https://www.businessregiongoteborg.se/kalender/digital-matchmaking-en-klimatneutral-framtid",
+   "open": false,
+   "source": "auto"
+  },
+  {
+   "title": "Community Day på Parken",
+   "date": "2026-11-04",
+   "time": "08.30",
+   "place": "",
+   "initiative": "hbg",
+   "theme": "Nätverk & medlemmar",
+   "url": "https://innovation.helsingborg.se/event/community-day-pa-parken/?date=20261104083000",
+   "open": false,
+   "source": "auto"
+  },
+  {
+   "title": "Ökad social upphandling och social innovation",
+   "date": "2026-11-06",
+   "time": "08.45",
+   "place": "",
+   "initiative": "hbg",
+   "theme": "Upphandling & krav",
+   "url": "https://innovation.helsingborg.se/event/okad-social-upphandling-och-social-innovation/?date=20261106084500",
+   "open": false,
+   "source": "auto"
+  },
+  {
+   "title": "Dina arbetsuppgifter + AI = ? – arbeta smartare med assistenter i stadens nya plattformar",
+   "date": "2026-11-10",
+   "time": "08.30",
+   "place": "",
+   "initiative": "hbg",
+   "theme": "Data & AI",
+   "url": "https://innovation.helsingborg.se/event/dina-arbetsuppgifter-ai-arbeta-smartare-med-assistenter-i-stadens-nya-plattformar/?date=20261110083000",
+   "open": false,
+   "source": "auto"
+  },
+  {
+   "title": "Fördjupning: Smartare effekthemtagning med AI",
+   "date": "2026-11-19",
+   "time": "09.00",
+   "place": "",
+   "initiative": "hbg",
+   "theme": "Data & AI",
+   "url": "https://innovation.helsingborg.se/event/fordjupning-smartare-effekthemtagning-med-ai/?date=20261119090000",
+   "open": false,
+   "source": "auto"
+  },
+  {
+   "title": "Impact Innovation Talks",
+   "date": "2026-11-19",
+   "time": "11.30",
+   "place": "",
+   "initiative": "hbg",
+   "theme": "",
+   "url": "https://innovation.helsingborg.se/event/save-the-date-impact-innovation-talks/?date=20261119113000",
+   "open": false,
+   "source": "auto"
+  },
+  {
+   "title": "Workshop och föreläsning- Effekthemtagning på riktigt!",
+   "date": "2026-11-24",
+   "time": "09.00",
+   "place": "",
+   "initiative": "hbg",
+   "theme": "",
+   "url": "https://innovation.helsingborg.se/event/workshop-och-forelasning-effekthemtagning-pa-riktigt/?date=20261124090000",
+   "open": false,
+   "source": "auto"
+  },
+  {
+   "title": "Dina arbetsuppgifter + AI = ? – arbeta smartare med assistenter i stadens nya plattformar",
+   "date": "2026-12-09",
+   "time": "08.30",
+   "place": "",
+   "initiative": "hbg",
+   "theme": "Data & AI",
+   "url": "https://innovation.helsingborg.se/event/dina-arbetsuppgifter-ai-arbeta-smartare-med-assistenter-i-stadens-nya-plattformar-3/?date=20261209083000",
+   "open": false,
+   "source": "auto"
+  }
+ ],
+ "news": [
+  {
+   "title": "ByggPartner - vår nyaste medlem!",
+   "date": "2026-09-30",
+   "initiative": "upk",
+   "theme": "Nätverk & medlemmar",
+   "url": "https://klimatprotokollet.uppsala.se/nyheter/byggpartner---var-nyaste-medlem/",
+   "img": "https://klimatprotokollet.uppsala.se/contentassets/3f41b156051b425b9db46089e04e5d40/byggpartners.jpg",
+   "source": "auto"
+  },
+  {
+   "title": "Vi välkomnar medlem nr 50 – Advania!",
+   "date": "2026-09-16",
+   "initiative": "upk",
+   "theme": "Nätverk & medlemmar",
+   "url": "https://klimatprotokollet.uppsala.se/nyheter/vi-valkomnar-medlem-nr-50--advania/",
+   "img": "https://klimatprotokollet.uppsala.se/contentassets/75cac85bbdf048c1b57f6e1be8d829c8/gkgii1w9.png",
+   "source": "auto"
+  },
+  {
+   "title": "Resultatkonferensen 2026 - resultat, inspiration och gemensam kraft!",
+   "date": "2026-09-04",
+   "initiative": "upk",
+   "theme": "Klimatberäkningar",
+   "url": "https://klimatprotokollet.uppsala.se/nyheter/resultatkonferens-2026/",
+   "img": "https://klimatprotokollet.uppsala.se/contentassets/ba16affd684541318c4492d5d5210519/resultatkonferen-2026.jpeg",
+   "source": "auto"
+  },
+  {
+   "title": "Från klimatdeklaration till klimatkrav – införande av EPBD med livscykel-GWP och gränsvärden",
+   "date": "2026-10-07",
+   "initiative": "obkn",
+   "theme": "Klimatberäkningar",
+   "url": "https://obkn.se/projekt-initiativ/fran-klimatdeklaration-till-klimatkrav-inforande-av-epbd-med-livscykel-gwp-och-gransvarden/",
+   "img": "https://obkn.se/wp/custom/uploads/2026/10/bild-till-hemsidan-eventet.jpg",
+   "source": "auto"
+  },
+  {
+   "title": "Integrering av hållbarhet – från strategiska beslut till genomförande",
+   "date": "2026-10-02",
+   "initiative": "obkn",
+   "theme": "",
+   "url": "https://obkn.se/projekt-initiativ/integrering-av-hallbarhet-fran-strategiska-beslut-till-genomforande/",
+   "img": "https://obkn.se/wp/custom/uploads/2026/10/bilder-till-hemsida.jpg",
+   "source": "auto"
+  },
+  {
+   "title": "EDAY 2026: Så stärker vi samhällets motståndskraft",
+   "date": "2026-09-29",
+   "initiative": "obkn",
+   "theme": "",
+   "url": "https://obkn.se/nyheter/eday-2026-sa-starker-vi-samhallets-motstandskraft/",
+   "img": "https://obkn.se/wp/custom/uploads/2026/09/cto-hemsida.jpg",
+   "source": "auto"
+  },
+  {
+   "title": "Klimatarena Stockholms Högnivåmöte 2026: När omvärlden bromsar krävs modigt ledarskap",
+   "date": "2026-10-23",
+   "initiative": "kas",
+   "theme": "Nätverk & medlemmar",
+   "url": "https://klimatarenastockholm.se/klimatarena-stockholms-hognivamote-2026-nar-omvarlden-bromsar-kravs-modigt-ledarskap/",
+   "source": "auto"
+  },
+  {
+   "title": "Bygg klimatsmart – utan högre kostnader",
+   "date": "2026-09-15",
+   "initiative": "kas",
+   "theme": "Klimatberäkningar",
+   "url": "https://klimatarenastockholm.se/bygg-klimatsmart-utan-hogre-kostnader/",
+   "img": "https://klimatarenastockholm.se/wp-content/uploads/2026/08/pp-3566-scaled-e1788789808169.jpg",
+   "source": "auto"
+  },
+  {
+   "title": "Uppföljning av Klimatarena Stockholms klimatlöfte 2025",
+   "date": "2026-09-04",
+   "initiative": "kas",
+   "theme": "Klimatfärdplaner",
+   "url": "https://klimatarenastockholm.se/uppfoljning-av-klimatarena-stockholms-klimatlofte-2025/",
+   "source": "auto"
+  },
+  {
+   "title": "Gävle klimatavtals intervju med Trädgårdsinteriör: ”Att få hjälp med att förstå och följa upp våra siffror har gjort klimatarbetet mer konkret”",
+   "date": "2026-10-26",
+   "initiative": "gka",
+   "theme": "Klimatberäkningar",
+   "url": "https://www.gavle.se/klimatavtal/gavle-klimatavtals-intervju-med-tradgardsinterior-att-fa-hjalp-med-att-forsta-och-folja-upp-vara-siffror-har-gjort-klimatarbetet-mer-konkret/",
+   "img": "https://www.gavle.se/wp-content/uploads/2026/10/Fotograf-Linda-Dahlqvist-Tra%CC%88dga%CC%8Ardsinterio%CC%88r-Juni-2026-264-300x200.webp",
+   "source": "auto"
+  },
+  {
+   "title": "Medlemsenkät visar på fortsatt stärkt klimatarbete och affärsnytta",
+   "date": "2026-09-29",
+   "initiative": "gka",
+   "theme": "Nätverk & medlemmar",
+   "url": "https://www.gavle.se/klimatavtal/medlemsenkat-visar-starkt-klimatarbete-och-affarsnytta/",
+   "img": "https://www.gavle.se/wp-content/uploads/2026/09/test-300x168.webp",
+   "source": "auto"
+  },
+  {
+   "title": "Gävle klimatavtals intervju med Valbo trä: ”Nyckeln är att vi gör förflyttningen tillsammans”",
+   "date": "2026-09-24",
+   "initiative": "gka",
+   "theme": "Nätverk & medlemmar",
+   "url": "https://www.gavle.se/klimatavtal/gavle-klimatavtals-intervju-med-valbo-tra-nyckeln-ar-att-vi-gor-forflyttningen-tillsammans/",
+   "img": "https://www.gavle.se/wp-content/uploads/2026/09/Valbo-tra-3-300x158.webp",
+   "source": "auto"
+  },
+  {
+   "title": "Gävle klimatavtals Intervju med Byggkonstruktören: ”Klimatavtalet blev startmotorn som fick oss att komma igång på riktigt”",
+   "date": "2026-09-17",
+   "initiative": "gka",
+   "theme": "Nätverk & medlemmar",
+   "url": "https://www.gavle.se/klimatavtal/gavle-klimatavtals-intervju-med-byggkonstruktoren-klimatavtalet-blev-startmotorn-som-fick-oss-att-komma-igang-pa-riktigt/",
+   "img": "https://www.gavle.se/wp-content/uploads/2026/09/Foto-2025-10-07-09-49-03-300x172.webp",
+   "source": "auto"
+  },
+  {
+   "title": "EPD-skola gav ökad kunskap om byggprodukters klimatpåverkan",
+   "date": "2026-09-11",
+   "initiative": "gka",
+   "theme": "Klimatberäkningar",
+   "url": "https://www.gavle.se/klimatavtal/epd-skola-gav-okad-kunskap-om-byggprodukters-klimatpaverkan/",
+   "img": "https://www.gavle.se/wp-content/uploads/2026/05/Miljo-och-hallbarhetsansvariga-Anlaggning-med-lag-klimatpaverkan-300x200.webp",
+   "source": "auto"
+  },
+  {
+   "title": "Klimattinget 2026 | När klimatinitiativ möts växer möjligheterna – från samverkan till samarbete",
+   "date": "2026-10-27",
+   "initiative": "lfm30",
+   "theme": "Nätverk & medlemmar",
+   "url": "https://lfm30.se/nyheter/klimattinget-2026-nar-klimatinitiativ-mots-vaxer-mojligheterna-fran-samverkan-till-samarbete/",
+   "source": "auto"
+  },
+  {
+   "title": "Kartläggning av byggavfall – byggarbetsplatsens stora problem är det blandade avfallet, inte deponin",
+   "date": "2026-10-26",
+   "initiative": "lfm30",
+   "theme": "Återbruk & cirkularitet",
+   "url": "https://lfm30.se/nyheter/kartlaggning-byggavfall-blandat-avfall-0deponi/",
+   "source": "auto"
+  },
+  {
+   "title": "Byggherreforum: Upphandling kan bli nyckeln till ökat återbruk i byggsektorn",
+   "date": "2026-10-26",
+   "initiative": "lfm30",
+   "theme": "Upphandling & krav",
+   "url": "https://lfm30.se/nyheter/byggherreforum-upphandling-kan-bli-nyckeln-till-okat-aterbruk-i-byggsektorn/",
+   "source": "auto"
+  },
+  {
+   "title": "Nominerade till Klimatrådets till Klimatpris",
+   "date": "2026-10-07",
+   "initiative": "ccc",
+   "theme": "Nätverk & medlemmar",
+   "url": "https://www.cccjonkopingslan.com/nyheter/nominerade-till-klimatradets-till-klimatpris/",
+   "img": "https://www.cccjonkopingslan.com/media/e5uluf4d/20250618-155154.jpg?width=550&height=600&v=1dcbac59dea3d90&quality=80&format=webp",
+   "source": "auto"
+  },
+  {
+   "title": "Studiebesök Heidelberg Brevik",
+   "date": "2026-09-16",
+   "initiative": "ccc",
+   "theme": "Material (betong, trä)",
+   "url": "https://www.cccjonkopingslan.com/nyheter/studiebesok-heidelberg-brevik/",
+   "img": "https://www.cccjonkopingslan.com/media/azknoksh/brevik-1.jpg",
+   "source": "auto"
+  },
+  {
+   "title": "Ny medlem i nätverket",
+   "date": "2026-09-14",
+   "initiative": "ccc",
+   "theme": "Nätverk & medlemmar",
+   "url": "https://www.cccjonkopingslan.com/nyheter/ny-medlem-ecog/",
+   "img": "https://www.cccjonkopingslan.com/media/aiejusib/skarmbild-2026-09-14-091647.png?rxy=0.48628159633703666%2C0.6324392606007994&width=550&height=600&v=1dd4419b8b82550&quality=80&format=webp",
+   "source": "auto"
+  },
+  {
+   "title": "Konkreta resultat och klartecken för fortsättning",
+   "date": "2026-10-19",
+   "initiative": "bruka",
+   "theme": "Återbruk & cirkularitet",
+   "url": "https://www.brukahalland.se/post/bruka-halland-resultat-fortsattning",
+   "img": "https://static.wixstatic.com/media/d05783_bc5d49306de74d65936ab365deb21f7a~mv2.jpg",
+   "source": "auto"
+  },
+  {
+   "title": "Från rivningsbeslut till skollokaler – Renen 13 i Varberg",
+   "date": "2026-10-15",
+   "initiative": "bruka",
+   "theme": "Befintligt bestånd",
+   "url": "https://www.brukahalland.se/post/renen-13-varberg-skola",
+   "img": "https://static.wixstatic.com/media/d05783_a4dd879e67bd46d88e0a3a2aad646a3f~mv2.jpg",
+   "source": "auto"
+  },
+  {
+   "title": "Senaste rapporten om Västra Götalands koldioxidbudget",
+   "date": "2026-10-08",
+   "initiative": "k2030",
+   "theme": "Klimatfärdplaner",
+   "url": "https://klimat2030.se/senaste-rapporten-om-vastra-gotalands-koldioxidbudget/",
+   "source": "auto"
+  },
+  {
+   "title": "Save the Date: Lansering av Kommunernas krafttag",
+   "date": "2026-10-01",
+   "initiative": "k2030",
+   "theme": "Klimatfärdplaner",
+   "url": "https://klimat2030.se/save-the-date-lansering-av-kommunernas-krafttag/",
+   "source": "auto"
+  },
+  {
+   "title": "Från samverkan till test och genomförande – nu är Lunds omställningslabb i gång",
+   "date": "2026-09-22",
+   "initiative": "coaction",
+   "theme": "",
+   "url": "https://lund.se/coaction-lund/coactions-nyheter/2026-09-22-fran-samverkan-till-test-och-genomforande---nu-ar-lunds-omstallningslabb-i-gang",
+   "img": "https://lund.se/images/18.ab933a51a0adb70b805d2/1789989667902/Visionsbild_geolabb-kollage.webp",
+   "source": "auto"
+  },
+  {
+   "title": "300 pendlare testar att ta cykeln till jobbet",
+   "date": "2026-09-17",
+   "initiative": "coaction",
+   "theme": "Transport & logistik",
+   "url": "https://lund.se/coaction-lund/coactions-nyheter/2026-09-17-300-pendlare-testar-att-ta-cykeln-till-jobbet",
+   "img": "https://lund.se/images/18.ab933a51a0adb70b8047/1789648327477/Cykelspr%C3%A5nget%202026.webp",
+   "source": "auto"
+  },
+  {
+   "title": "Smart energistyrning ska minska kostnader och klimatavtryck på campus Alnarp",
+   "date": "2026-09-16",
+   "initiative": "coaction",
+   "theme": "Energi",
+   "url": "https://lund.se/coaction-lund/coactions-nyheter/2026-09-16-smart-energistyrning-ska-minska-kostnader-och-klimatavtryck-pa-campus-alnarp",
+   "img": "https://lund.se/images/18.2b684d891a086246c0ab77/1789556128699/_KRA0961.webp",
+   "source": "auto"
+  }
+ ],
+ "sources": [
+  {
+   "id": "upk",
+   "status": "ok",
+   "lastSync": "2026-10-30T10:30:00+01:00",
+   "note": "5 kommande träffar (år saknas på sidan, tolkat som 2026)",
+   "newsNote": "3 nyheter sedan september"
+  },
+  {
+   "id": "obkn",
+   "status": "ok",
+   "lastSync": "2026-10-30T10:30:00+01:00",
+   "note": "Inga kommande träffar (senaste träff 13 okt)",
+   "newsNote": "3 nyheter sedan september"
+  },
+  {
+   "id": "kas",
+   "status": "ok",
+   "lastSync": "2026-10-30T10:30:00+01:00",
+   "note": "2 kommande träffar",
+   "newsNote": "3 nyheter sedan september"
+  },
+  {
+   "id": "hs30",
+   "status": "ok",
+   "lastSync": "2026-10-30T10:30:00+01:00",
+   "note": "Inga kommande träffar med säkert år (aktiviteterna saknar årtal)",
+   "newsNote": "Inga nyheter sedan september (senaste 2023)"
+  },
+  {
+   "id": "kio",
+   "status": "ok",
+   "lastSync": "2026-10-30T10:30:00+01:00",
+   "note": "1 kommande träff",
+   "newsNote": "Nyhetssidan gick inte att läsa"
+  },
+  {
+   "id": "gka",
+   "status": "ok",
+   "lastSync": "2026-10-30T10:30:00+01:00",
+   "note": "6 kommande träffar (endast starttid angiven)",
+   "newsNote": "5 nyheter sedan september"
+  },
+  {
+   "id": "lfm30",
+   "status": "ok",
+   "lastSync": "2026-10-30T10:30:00+01:00",
+   "note": "7 kommande träffar (sida 1 av kalendern; år antaget 2026)",
+   "newsNote": "3 nyheter sedan september"
+  },
+  {
+   "id": "ccc",
+   "status": "ok",
+   "lastSync": "2026-10-30T10:30:00+01:00",
+   "note": "3 kommande träffar (Beställarforum och Julfrukost endast för medlemmar)",
+   "newsNote": "3 nyheter sedan september"
+  },
+  {
+   "id": "bruka",
+   "status": "ok",
+   "lastSync": "2026-10-30T10:30:00+01:00",
+   "note": "Inga evenemang för tillfället",
+   "newsNote": "2 nyheter sedan september (år för 19 okt antaget 2026)"
+  },
+  {
+   "id": "k2030",
+   "status": "ok",
+   "lastSync": "2026-10-30T10:30:00+01:00",
+   "note": "1 kommande träff (save the date, ingen tid/plats)",
+   "newsNote": "2 nyheter sedan september"
+  },
+  {
+   "id": "coaction",
+   "status": "ok",
+   "lastSync": "2026-10-30T10:30:00+01:00",
+   "note": "3 kommande träffar (år saknas på sidan, tolkat som närmaste datum)",
+   "newsNote": "3 nyheter sedan september"
+  },
+  {
+   "id": "gpkb",
+   "status": "ok",
+   "lastSync": "2026-10-30T10:30:00+01:00",
+   "note": "5 kommande träffar",
+   "newsNote": "Inga nyheter sedan september (senaste maj 2026)"
+  },
+  {
+   "id": "vks",
+   "status": "fel",
+   "lastSync": "2026-10-30T10:30:00+01:00",
+   "note": "Sidan gick inte att läsa (blockerad för automatisk hämtning)",
+   "newsNote": "Nyheter gick inte att läsa"
+  },
+  {
+   "id": "hbg",
+   "status": "ok",
+   "lastSync": "2026-10-30T10:30:00+01:00",
+   "note": "7 kommande träffar (endast starttid, plats ej angiven)",
+   "newsNote": "Inga daterade nyheter sedan september"
+  },
+  {
+   "id": "shift",
+   "status": "fel",
+   "lastSync": "2026-10-30T10:30:00+01:00",
+   "note": "Sidan gick inte att läsa (blockerad för automatisk hämtning)",
+   "newsNote": "Nyheter gick inte att läsa"
+  }
+ ]
+}

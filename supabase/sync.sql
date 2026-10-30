@@ -14,7 +14,8 @@ create table if not exists public.sync_config (
 alter table public.sync_config enable row level security;   -- inga policies = ingen kan läsa via API
 revoke all on public.sync_config from anon, authenticated;
 
-create or replace function public.sync_import(p_token text, p_payload jsonb)
+-- Intern: skriver synkdata. Kan bara köras av databasens ägare (SQL Editor) eller via sync_import.
+create or replace function public.sync_apply(p_payload jsonb)
 returns jsonb
 language plpgsql security definer set search_path = public, extensions as $$
 declare
@@ -26,11 +27,6 @@ declare
   n_written int := 0;
   n_kept    int := 0;
 begin
-  if p_token is null or not exists (
-       select 1 from public.sync_config
-       where token_hash = encode(extensions.digest(p_token, 'sha256'), 'hex')) then
-    raise exception 'ogiltig synknyckel' using errcode = '28000';
-  end if;
 
   foreach v_coll in array array['events','news','sources'] loop
     for v_item in select * from jsonb_array_elements(coalesce(p_payload -> v_coll, '[]'::jsonb)) loop
@@ -58,6 +54,20 @@ begin
   end loop;
 
   return jsonb_build_object('skrivna', n_written, 'manuella_orörda', n_kept);
+end $$;
+
+revoke all on function public.sync_apply(jsonb) from public, anon, authenticated;
+
+create or replace function public.sync_import(p_token text, p_payload jsonb)
+returns jsonb
+language plpgsql security definer set search_path = public, extensions as $$
+begin
+  if p_token is null or not exists (
+       select 1 from public.sync_config
+       where token_hash = encode(extensions.digest(p_token, 'sha256'), 'hex')) then
+    raise exception 'ogiltig synknyckel' using errcode = '28000';
+  end if;
+  return public.sync_apply(p_payload);
 end $$;
 
 revoke all on function public.sync_import(text, jsonb) from public;
