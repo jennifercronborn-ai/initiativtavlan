@@ -52,7 +52,7 @@ Gör stegen i ordning. Kryssa i statusdokumentet i Claude-projektet.
 - [ ] Skapa **privat** repo `initiativtavlan` (personligt konto under piloten – se fallgrop 1 i receptet).
 - [ ] Ladda upp innehållet i den här mappen.
 - [ ] Settings › Collaborators: lägg till Claudes GitHub-konto.
-- [ ] Settings › Secrets › Actions: `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`.
+- [ ] Settings › Secrets and variables › Actions: `SYNC_TOKEN` (synknyckeln, se steg 6).
 
 ### 2. Supabase
 - [ ] Nytt projekt `initiativtavlan`, region **Stockholm (eu-north-1)**.
@@ -78,8 +78,12 @@ Gör stegen i ordning. Kryssa i statusdokumentet i Claude-projektet.
 - [ ] Byt lösenord vid behov: Supabase › Authentication › Users › `initiativtavlan@lfm30.se`.
 
 ### 6. Veckosynk
-- [ ] Skapa en schemalagd uppgift i Claude (måndagar 06:00) med texten i `data/sync/SYNK-INSTRUKTION.md` och åtkomst till repot.
+- [ ] Kör `supabase/sync.sql` i SQL Editor och sätt synknyckelns hash (se längst ned i filen).
+- [ ] Lägg synknyckeln som `SYNC_TOKEN` i GitHub › Settings › Secrets and variables › Actions.
+- [ ] Schemalagd Claude-uppgift (måndagar) med texten i `data/sync/SYNK-INSTRUKTION.md`.
 - [ ] Bestäm vem som granskar och mergar synk-PR:en varje vecka.
+
+Synknyckeln kan bara lägga in automatiskt hämtade träffar, nyheter och källstatus – aldrig ändra eller ta bort manuellt innehåll. Supabase hemliga nyckel behövs inte för synken.
 
 ## Arbetssätt efter start
 

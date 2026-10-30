@@ -1,6 +1,6 @@
-# Läser in nya synkfiler (data/sync/*.json) i Supabase när de hamnar på main.
-# Kräver två hemligheter i GitHub: Settings › Secrets and variables › Actions
-#   SUPABASE_URL och SUPABASE_SERVICE_ROLE_KEY
+# Läser in nya synkfiler (data/sync/*.json) i Initiativtavlan när de hamnar på main.
+# Kräver EN hemlighet i GitHub: Settings › Secrets and variables › Actions › SYNC_TOKEN
+# (synknyckeln – kan bara lägga in automatiskt hämtade träffar, nyheter och källstatus).
 name: Synka till Initiativtavlan
 on:
   push:
@@ -19,13 +19,12 @@ jobs:
         with: { fetch-depth: 2 }
       - uses: actions/setup-node@v4
         with: { node-version: 20 }
-      - run: npm install --omit=dev
       - name: Läs in synkfiler
         env:
-          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          SYNC_TOKEN: ${{ secrets.SYNC_TOKEN }}
           INPUT_FILE: ${{ github.event.inputs.file }}
         run: |
+          if [ -z "$SYNC_TOKEN" ]; then echo "SYNC_TOKEN saknas i repots hemligheter."; exit 1; fi
           if [ -n "$INPUT_FILE" ]; then FILES="$INPUT_FILE"
           else FILES=$(git diff --name-only HEAD~1 HEAD -- 'data/sync/*.json'); fi
-          for f in $FILES; do [ -f "$f" ] && node scripts/import.mjs "$f"; done
+          for f in $FILES; do [ -f "$f" ] && node scripts/sync-push.mjs "$f"; done
