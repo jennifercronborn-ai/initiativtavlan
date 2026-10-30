@@ -2,8 +2,8 @@
 -- Kör en gång i Supabase › SQL Editor (efter schema.sql).
 --
 -- Synken använder en egen synknyckel i stället för Supabase hemliga nyckel.
--- Nyckeln kan BARA lägga in/uppdatera automatiskt hämtade träffar (events),
--- nyheter (news) och källstatus (sources). Manuellt innehåll rörs aldrig.
+-- Nyckeln kan BARA lägga in/uppdatera automatiskt hämtade träffar (events), nyheter (news),
+-- källstatus (sources), arbetsgrupper (groups) och material (resources). Manuellt innehåll rörs aldrig.
 -- Endast nyckelns hash sparas i databasen.
 
 create table if not exists public.sync_config (
@@ -28,17 +28,18 @@ declare
   n_kept    int := 0;
 begin
 
-  foreach v_coll in array array['events','news','sources'] loop
+  foreach v_coll in array array['events','news','sources','groups','resources'] loop
     for v_item in select * from jsonb_array_elements(coalesce(p_payload -> v_coll, '[]'::jsonb)) loop
       v_data := v_item - 'id';
       if v_coll = 'sources' then
         v_id := v_item ->> 'id';
         if v_id is null then continue; end if;
       else
-        v_data := v_data || jsonb_build_object('source', 'auto');
+        v_data := v_data || jsonb_build_object('source',
+                  case when coalesce(v_data ->> 'source', '') in ('', 'manuell') then 'auto' else v_data ->> 'source' end);
         v_id := coalesce(v_item ->> 'id', v_coll || '-' || left(encode(extensions.digest(
                   concat_ws('|', v_data ->> 'initiative', v_data ->> 'date',
-                            lower(trim(coalesce(v_data ->> 'title', ''))), v_data ->> 'url'), 'sha1'), 'hex'), 16));
+                            lower(trim(coalesce(v_data ->> 'title', v_data ->> 'name', ''))), v_data ->> 'url'), 'sha1'), 'hex'), 16));
       end if;
 
       select data into v_old from public.docs where collection = v_coll and id = v_id;
