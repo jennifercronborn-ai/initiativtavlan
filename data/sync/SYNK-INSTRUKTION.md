@@ -12,7 +12,9 @@ Du synkar Initiativtavlan från klimatinitiativens egna webbplatser.
    - **Nyheter** publicerade de senaste 60 dagarna → `news`: `title`, `date`, `initiative`, `theme`, `url`, `source: "auto"`. Ta med `img` bara om nyheten har en egen bild-URL.
    - **Källstatus** per initiativ → `sources`: `id` (= initiativnyckeln), `status` ("ok" eller "fel"), `lastSync` (nu, ISO-tid), `note` (kort om kalendern, t.ex. "3 kommande träffar" eller "Sidan saknar kalender"), `newsNote`.
 3. Regler: ta bara med det som faktiskt står på sidorna. Hitta inte på datum, tider eller platser. Hoppa över det du är osäker på. Ingen sammanfattande eller värderande text – bara rubrik och länk tillbaka.
-4. Skriv allt till `data/sync/<dagens datum>.json` i formatet `{ "events": [...], "news": [...], "sources": [...] }`.
-5. Skapa en branch `synk/<datum>`, committa filen och öppna en pull request till `main` med rubriken "Synk <datum>" och en kort sammanställning per initiativ (antal träffar, antal nyheter, vilka sidor som inte gick att läsa).
+4. Kontrollera innan du skriver: varje `theme` är exakt en sträng ur `THEMES` eller tom, inga träffar före dagens datum, giltig JSON. Max 15 träffar och 6 nyheter per initiativ.
+5. Skriv allt till `data/sync/<dagens datum>.json` i formatet `{ "events": [...], "news": [...], "sources": [...] }`.
+6. Committa filen direkt på `main` med meddelandet "Synk <datum>: X träffar, Y nyheter" och pusha. GitHub Action "Synka till Initiativtavlan" läser då in den automatiskt (kräver hemligheten `SYNC_TOKEN`).
+7. Avsluta med en kort sammanställning per initiativ: antal träffar, antal nyheter och vilka sidor som inte gick att läsa.
 
-Pull requesten granskas och mergas av en redaktör. När den mergas läser GitHub in filen i Supabase automatiskt.
+Synken lägger bara till och uppdaterar automatiskt hämtade träffar, nyheter och källstatus. Manuellt inlagt innehåll rörs aldrig, och inget tas bort.
