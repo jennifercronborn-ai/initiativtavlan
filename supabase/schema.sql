@@ -121,8 +121,13 @@ do $$ begin
   alter publication supabase_realtime add table public.docs;
 exception when duplicate_object then null; end $$;
 
--- ---------- första admin ----------
--- Byt adressen och kör raden nedan en gång. Skapa sedan samma användare i
--- Authentication › Users › Add user (eller med scripts/invite.mjs).
--- insert into public.members (email, name, initiative, role)
---   values ('din.adress@lfm30.se', 'Ditt namn', 'lfm30', 'admin') on conflict (email) do nothing;
+-- ---------- inloggning ----------
+-- Alla loggar in med samma lösenord via ett gemensamt konto.
+-- 1. Skapa kontot i Authentication › Users › Add user › Create new user:
+--    e-post initiativtavlan@lfm30.se, lösenordet, "Auto Confirm User" ikryssad.
+-- 2. Raden nedan ger kontot rätt att läsa och skriva på tavlan.
+insert into public.members (email, name, initiative, role)
+  values ('initiativtavlan@lfm30.se', 'Gemensam inloggning', null, 'redaktor')
+  on conflict (email) do nothing;
+-- Byta lösenord: Authentication › Users › initiativtavlan@lfm30.se › byt lösenord.
+-- Alla som är inloggade får logga in igen nästa gång sessionen löper ut.

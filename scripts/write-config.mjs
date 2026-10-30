@@ -5,6 +5,7 @@ import { writeFileSync } from "node:fs";
 const url = process.env.SUPABASE_URL || "";
 const anon = process.env.SUPABASE_ANON_KEY || "";
 const ai = !!process.env.ANTHROPIC_API_KEY;
+const shared = (process.env.SHARED_LOGIN_EMAIL || "initiativtavlan@lfm30.se").toLowerCase();
 
 if (!url || !anon) console.warn("VARNING: SUPABASE_URL eller SUPABASE_ANON_KEY saknas. Sidan kan inte logga in.");
 function isSecretKey(k) {
@@ -19,6 +20,6 @@ if (isSecretKey(anon)) throw new Error("SUPABASE_ANON_KEY är en hemlig nyckel (
 
 writeFileSync(
   new URL("../public/config.js", import.meta.url),
-  `window.IT_CONFIG = ${JSON.stringify({ SUPABASE_URL: url, SUPABASE_ANON_KEY: anon, AI_ENABLED: ai })};\n`
+  `window.IT_CONFIG = ${JSON.stringify({ SUPABASE_URL: url, SUPABASE_ANON_KEY: anon, AI_ENABLED: ai, SHARED_LOGIN_EMAIL: shared })};\n`
 );
 console.log("config.js skriven. Claude-sammanfattning:", ai ? "på" : "av");

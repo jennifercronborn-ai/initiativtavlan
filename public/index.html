@@ -391,18 +391,13 @@ dialog .ev { background: var(--surface); }
       <p class="muted" style="margin-top:8px">Gemensamt arbetsrum för kanslierna i Sveriges lokala och regionala klimatinitiativ inom bygg och anläggning.</p>
     </div>
     <form id="gate-form">
-      <div class="field" id="gate-step-email">
-        <label for="gate-email">E-postadress</label>
-        <input type="email" id="gate-email" autocomplete="email" required>
+      <div class="field">
+        <label for="gate-pw">Lösenord</label>
+        <input type="password" id="gate-pw" autocomplete="current-password" required>
       </div>
-      <div class="field" id="gate-step-code" hidden>
-        <label for="gate-code">Kod från mejlet</label>
-        <input type="text" id="gate-code" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6}" maxlength="6">
-      </div>
-      <p id="gate-err" class="status-line" hidden style="color:var(--danger)"></p>
-      <p id="gate-info" class="status-line" hidden></p>
-      <button class="btn primary" type="submit" id="gate-btn">Skicka inloggningskod</button>
-      <p class="status-line">Bara inbjudna adresser kan logga in. Saknar du inbjudan? Kontakta LFM30:s kansli.</p>
+      <p id="gate-err" class="status-line" hidden style="color:var(--danger)">Fel lösenord. Försök igen.</p>
+      <button class="btn primary" type="submit" id="gate-btn">Logga in</button>
+      <p class="status-line">Lösenordet får du från LFM30:s kansli.</p>
     </form>
   </div>
 </div>
@@ -492,29 +487,15 @@ function sortEvents(a, b) { return (a.date || "").localeCompare(b.date || "") ||
 
 // ---------- inloggning ----------
 function authed() { return !!(window.IT && IT.auth.isAuthed()); }
-let _gateEmail = "";
-function gateMsg(err, info) {
-  const e = $("#gate-err"), i = $("#gate-info");
-  e.hidden = !err; e.textContent = err || ""; i.hidden = !info; i.textContent = info || "";
-}
 $("#gate-form").addEventListener("submit", async e => {
   e.preventDefault();
-  if (!window.IT) { gateMsg("Sidan är inte rätt konfigurerad. Kontakta administratören."); return; }
+  const err = $("#gate-err");
+  if (!window.IT) { err.textContent = "Sidan är inte rätt konfigurerad. Kontakta LFM30:s kansli."; err.hidden = false; return; }
   const btn = $("#gate-btn"); btn.disabled = true;
   try {
-    if (!_gateEmail) {
-      const email = $("#gate-email").value.trim().toLowerCase();
-      const { error } = await IT.auth.sendCode(email);
-      if (error) { gateMsg("Vi kunde inte skicka en kod. Kontrollera adressen eller be om en inbjudan."); return; }
-      _gateEmail = email;
-      $("#gate-step-email").hidden = true; $("#gate-step-code").hidden = false; $("#gate-code").required = true;
-      btn.textContent = "Logga in"; gateMsg("", "Vi har skickat en kod till " + email + ". Du kan också klicka på länken i mejlet.");
-      $("#gate-code").focus();
-    } else {
-      const { error } = await IT.auth.verifyCode(_gateEmail, $("#gate-code").value.trim());
-      if (error) { gateMsg("Fel eller utgången kod. Försök igen."); return; }
-      gateMsg(""); enter(); connect();
-    }
+    const { error } = await IT.auth.signInPassword($("#gate-pw").value);
+    if (error) { err.textContent = "Fel lösenord. Försök igen."; err.hidden = false; return; }
+    err.hidden = true; enter(); connect();
   } finally { btn.disabled = false; }
 });
 $("#logout").addEventListener("click", async () => {

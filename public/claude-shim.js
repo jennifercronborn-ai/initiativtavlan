@@ -25,12 +25,10 @@
     ready,
     isAuthed: () => !!session,
     email: () => session?.user?.email || "",
-    // Skickar mejl med 6-siffrig kod (och länk). Bara inbjudna adresser (shouldCreateUser: false).
-    sendCode: (email) => sb.auth.signInWithOtp({
-      email, options: { shouldCreateUser: false, emailRedirectTo: location.origin + location.pathname },
-    }),
-    verifyCode: async (email, token) => {
-      const res = await sb.auth.verifyOtp({ email, token, type: "email" });
+    // Gemensamt lösenord: loggar in på det delade kontot (SHARED_LOGIN_EMAIL).
+    // Lösenordet finns inte i sidans kod – Supabase kontrollerar det.
+    signInPassword: async (password) => {
+      const res = await sb.auth.signInWithPassword({ email: cfg.SHARED_LOGIN_EMAIL, password });
       if (!res.error && res.data?.session) session = res.data.session;
       return res;
     },

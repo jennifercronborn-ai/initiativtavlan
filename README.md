@@ -4,7 +4,7 @@ Gemensamt arbetsrum för kanslierna i Sveriges lokala och regionala klimatinitia
 
 | Ändrat | Före (artefakt) | Nu (live) |
 |---|---|---|
-| Inloggning | Gemensamt lösenord | E-post + 6-siffrig kod, bara inbjudna |
+| Inloggning | Lösenordet stod i sidans kod | Gemensamt lösenord som kontrolleras av Supabase (inte synligt i koden) |
 | Delad data | Claude-artefaktens databas | Supabase (Stockholm) med ändringslogg |
 | Sammanfatta avstämning | Claude i artefakten | Netlify-funktion mot Claude API (valfri) |
 
@@ -29,7 +29,7 @@ Inloggade kanslier ◄── Netlify (sidan) ◄── Supabase (docs, members, 
 | Koppling sida ↔ Supabase | `public/claude-shim.js` |
 | Databas, behörigheter, logg | `supabase/schema.sql` |
 | Claude-sammanfattning | `netlify/functions/sample.mjs` |
-| Bjud in personer | `scripts/invite.mjs` |
+| Lägg till personliga konton (valfritt, senare) | `scripts/invite.mjs` |
 | Läs in data (flytt + synk) | `scripts/import.mjs` |
 | Veckosynk | `data/sync/SYNK-INSTRUKTION.md` + `.github/workflows/synk.yml` |
 
@@ -37,9 +37,9 @@ Inloggade kanslier ◄── Netlify (sidan) ◄── Supabase (docs, members, 
 
 | Roll | Behöver Claude? | Kan |
 |---|---|---|
-| Läsare | Nej | Se allt, lägga lappar, rösta, lägga till träffar/länkar |
-| Redaktör | Nej | Som läsare + granska och merga synk-PR:er (kräver GitHub) |
-| Admin | Nej | Som redaktör + bjuda in, se ändringsloggen |
+| Alla med lösenordet | Nej | Se allt, lägga lappar, rösta, lägga till träffar/länkar, ladda upp avstämningar |
+| Redaktör för synken | Nej | Granska och merga veckans synk-PR (kräver GitHub) |
+| Admin | Nej | Byta lösenord och se ändringsloggen i Supabase |
 | Kodredigerare | Ja | Ändra sidan via Claude Code → PR → förhandsvisning → publicering |
 
 ---
@@ -57,13 +57,10 @@ Gör stegen i ordning. Kryssa i statusdokumentet i Claude-projektet.
 ### 2. Supabase
 - [ ] Nytt projekt `initiativtavlan`, region **Stockholm (eu-north-1)**.
 - [ ] SQL Editor: kör `supabase/schema.sql`.
-- [ ] Kör raden längst ned i schemat med din egen adress (första admin).
-- [ ] Authentication › Sign In / Providers › Email: på. **Allow new users to sign up: av.**
-- [ ] Authentication › URL Configuration:
-  - Site URL: `https://<site>.netlify.app`
-  - Redirect URLs: `https://<site>.netlify.app/**` och `https://deploy-preview-*--<site>.netlify.app/**`
-- [ ] Authentication › Emails › Magic Link: lägg in `{{ .Token }}` i mallen så koden syns (kräver egen SMTP, steg 4).
-- [ ] Project Settings › API: kopiera Project URL, publika nyckeln (anon/publishable) och service_role-nyckeln.
+- [ ] Authentication › Users › Add user › **Create new user**: e-post `initiativtavlan@lfm30.se`, det gemensamma lösenordet, kryssa i **Auto Confirm User**.
+- [ ] Authentication › Sign In / Providers: **Allow new users to sign up: av.**
+- [ ] Authentication › URL Configuration: Site URL `https://initiativtavlan.netlify.app`.
+- [ ] Project Settings › API Keys › Legacy API keys: kopiera anon- och service_role-nyckeln.
 
 ### 3. Netlify
 - [ ] Add new project › Import from GitHub › välj repot. Build-inställningarna läses från `netlify.toml`.
@@ -72,21 +69,15 @@ Gör stegen i ordning. Kryssa i statusdokumentet i Claude-projektet.
 - [ ] Kontrollera att Deploy Previews för pull requests är på.
 - [ ] Byt site-namn till t.ex. `initiativtavlan` och uppdatera URL:erna i Supabase steg 2.
 
-### 4. E-post (SMTP)
-- [ ] Sätt upp e-posttjänst och verifiera avsändardomän (t.ex. `noreply@lfm30.se`).
-- [ ] Supabase › Authentication › Emails › SMTP Settings: fyll i.
-- [ ] Testa: logga in med din adress, kontrollera att koden kommer fram.
-
-### 5. Flytta data från artefakten
+### 4. Flytta data från artefakten
 - [ ] Be Claude, i kontot där artefakten skapades: *"Exportera all data i artefakten Initiativtavlan (alla samlingar) till en JSON-fil med en lista per samling och id på varje objekt."*
 - [ ] Kör `node --env-file=.env scripts/import.mjs export.json --replace` lokalt, eller be Claude Code göra det.
 
-### 6. Bjud in pilot
-- [ ] Fyll i `inbjudningar.csv` (`email,namn,initiativ,roll`).
-- [ ] Kör `node --env-file=.env scripts/invite.mjs inbjudningar.csv`.
-- [ ] Skicka länken till sidan. Personerna loggar in med sin e-post.
+### 5. Dela lösenordet
+- [ ] Skicka länken och lösenordet till kanslierna (inte i samma kanal som publiceras öppet).
+- [ ] Byt lösenord vid behov: Supabase › Authentication › Users › `initiativtavlan@lfm30.se`.
 
-### 7. Veckosynk
+### 6. Veckosynk
 - [ ] Skapa en schemalagd uppgift i Claude (måndagar 06:00) med texten i `data/sync/SYNK-INSTRUKTION.md` och åtkomst till repot.
 - [ ] Bestäm vem som granskar och mergar synk-PR:en varje vecka.
 
@@ -95,9 +86,9 @@ Gör stegen i ordning. Kryssa i statusdokumentet i Claude-projektet.
 | Moment | Så går det till |
 |---|---|
 | Ändra sidan | Be Claude Code göra ändringen → branch → PR → testa i förhandsvisningen → merga |
-| Ny person | Lägg till rad i CSV och kör invite-skriptet (eller lägg in i `members` i Supabase) |
-| Någon slutar | Ta bort raden i `members` – inloggningen slutar fungera direkt |
-| Något försvann | Admin tittar i `audit_log` i Supabase (vem, när, gammalt värde) |
+| Ny person | Ge dem länken och lösenordet |
+| Lösenordet har spridits för brett | Byt lösenord på det gemensamma kontot i Supabase och dela det nya |
+| Något försvann | Admin tittar i `audit_log` i Supabase (när och gammalt värde; alla syns som det gemensamma kontot) |
 | Veckosynk | Granska PR:en "Synk <datum>" → merga → syns på tavlan inom ett par minuter |
 
 ## Kör lokalt
