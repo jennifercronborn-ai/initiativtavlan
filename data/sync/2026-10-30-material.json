@@ -1,0 +1,866 @@
+{
+ "groups": [
+  {
+   "name": "Teknisk kommitté för klimatberäkningar",
+   "initiative": "hs30",
+   "status": "pagar",
+   "themes": [
+    "Klimatberäkningar"
+   ],
+   "description": "Reviderar löpande de gemensamma beräkningsanvisningarna och tar fram schabloner för installationer och ytskikt samt anvisningar för markarbeten.",
+   "url": "https://hs30.se/fokuspunkter/klimatberakningar/",
+   "source": "auto",
+   "updatedAt": "2026-10-30T11:00:00+01:00"
+  },
+  {
+   "name": "Verktygslåda för social hållbarhet knuten till affären",
+   "initiative": "hs30",
+   "status": "pagar",
+   "themes": [
+    "Social hållbarhet"
+   ],
+   "description": "Utvecklar nyckeltal, prioriteringsstöd, handbok och åtgärdskatalog för socialt hållbara bostäder.",
+   "url": "https://hs30.se/fokuspunkter/social-hallbarhet-knuten-till-affaren/",
+   "source": "auto",
+   "updatedAt": "2026-10-30T11:00:00+01:00"
+  },
+  {
+   "name": "Arbetsgrupp klimatkompensation",
+   "initiative": "hs30",
+   "status": "pagar",
+   "themes": [
+    "Klimatfärdplaner"
+   ],
+   "description": "Vidareutvecklar, tillsammans med IVL, vägledningen för ansvarsfull användning av växthusgaskrediter.",
+   "url": "https://hs30.se/fokuspunkter/aterbruk/",
+   "source": "auto",
+   "updatedAt": "2026-10-30T11:00:00+01:00"
+  },
+  {
+   "name": "Gemensamt mål för biologisk mångfald och ekosystemtjänster",
+   "initiative": "hs30",
+   "status": "planeras",
+   "themes": [
+    "Biologisk mångfald"
+   ],
+   "description": "HS30 har för avsikt att ta fram ett gemensamt mål för biologisk mångfald som vägleder medlemmarna.",
+   "url": "https://hs30.se/fokuspunkter/biologisk-mangfald-och-ekosystemtjanster/",
+   "source": "auto",
+   "updatedAt": "2026-10-30T11:00:00+01:00"
+  },
+  {
+   "name": "Samarbete med andra klimatplattformar",
+   "initiative": "hs30",
+   "status": "pagar",
+   "themes": [
+    "Nätverk & medlemmar",
+    "Klimatberäkningar"
+   ],
+   "description": "Regelbunden samordning med Klimatarena Stockholm, LFM30 och Uppsala klimatprotokoll om beräkningar, ambitionsnivåer och åtgärdsbibliotek.",
+   "url": "https://hs30.se/fokuspunkter/samarbete/",
+   "source": "auto",
+   "updatedAt": "2026-10-30T11:00:00+01:00"
+  },
+  {
+   "name": "Byggutmaningen Bevara",
+   "initiative": "k2030",
+   "status": "pagar",
+   "themes": [
+    "Befintligt bestånd"
+   ],
+   "description": "Kostnadsfri mötesserie under ett år där organisationer gemensamt övar på att bevara och bygga om istället för att riva.",
+   "url": "https://klimat2030.se/byggutmaningen-bevara/",
+   "source": "auto",
+   "updatedAt": "2026-10-30T11:00:00+01:00"
+  },
+  {
+   "name": "Nätverket Återbruk Väst",
+   "initiative": "k2030",
+   "status": "pagar",
+   "themes": [
+    "Återbruk & cirkularitet"
+   ],
+   "description": "Regionalt nätverk inom CCBuild som arbetar för att återbruk ska bli standard i organisationerna och inte bara piloter.",
+   "url": "https://ccbuild.se/aterbruk-vast/",
+   "source": "auto",
+   "updatedAt": "2026-10-30T11:00:00+01:00"
+  },
+  {
+   "name": "Stöd till kommunernas klimatlöften (trä, återbruk, energi)",
+   "initiative": "k2030",
+   "status": "pagar",
+   "themes": [
+    "Material (betong, trä)",
+    "Återbruk & cirkularitet"
+   ],
+   "description": "Gruppcoachning, webbinarier och stödmaterial för kommuner som antagit byggrelaterade klimatlöften.",
+   "url": "https://klimat2030.se/stod-och-fordjupning-kommunernas-klimatloften/",
+   "source": "auto",
+   "updatedAt": "2026-10-30T11:00:00+01:00"
+  },
+  {
+   "name": "Fastighetsbranschens omställningspodd",
+   "initiative": "k2030",
+   "status": "pagar",
+   "themes": [
+    "Material (betong, trä)",
+    "Energi"
+   ],
+   "description": "Poddserie om nya material, återbruk, träbyggande och energieffektivisering i fastighetsbranschen.",
+   "url": "https://samhallsbyggnad.lindholmen.se/node/4668",
+   "source": "auto",
+   "updatedAt": "2026-10-30T11:00:00+01:00"
+  },
+  {
+   "name": "Arena Bygg",
+   "initiative": "coaction",
+   "status": "pagar",
+   "themes": [
+    "Återbruk & cirkularitet",
+    "Nätverk & medlemmar"
+   ],
+   "description": "Samverkansarena för bygg- och fastighetsaktörer i Lund, startad 2026, för klimatsmart och cirkulärt byggande.",
+   "url": "https://lund.se/coaction-lund/det-gor-vi-inom-bygg",
+   "source": "auto",
+   "updatedAt": "2026-10-30T11:00:00+01:00"
+  },
+  {
+   "name": "Geografiskt omställningslabb nordöstra Lund",
+   "initiative": "coaction",
+   "status": "pagar",
+   "themes": [
+    "Återbruk & cirkularitet",
+    "Transport & logistik"
+   ],
+   "description": "Testmiljö 2025–2030 inom ShiftSweden där sju innovationsprojekt prövar cirkulärt byggande och hållbar mobilitet.",
+   "url": "https://lund.se/nyheter/aktuellt/lunds-omstallningslabb",
+   "source": "auto",
+   "updatedAt": "2026-10-30T11:00:00+01:00"
+  },
+  {
+   "name": "Arena Energi",
+   "initiative": "coaction",
+   "status": "pagar",
+   "themes": [
+    "Energi"
+   ],
+   "description": "Arena där aktörer samverkar kring ett flexibelt, klimatneutralt energisystem, bland annat energistyrning i byggnader.",
+   "url": "https://lund.se/coaction-lund/det-gor-vi-inom-energi",
+   "source": "auto",
+   "updatedAt": "2026-10-30T11:00:00+01:00"
+  }
+ ],
+ "resources": [
+  {
+   "title": "Guide: Tre sätt att komma igång med beräkning och minskad klimatpåverkan i anläggningsprojekt",
+   "initiative": "upk",
+   "partners": [
+    "kas",
+    "lfm30"
+   ],
+   "type": "Guide",
+   "theme": "Klimatberäkningar",
+   "year": "2026",
+   "description": "Gemensam guide med Klimatarena Stockholm och LFM30 som hjälper dig välja rätt beräkningsmetod i varje projektskede.",
+   "url": "https://klimatprotokollet.uppsala.se/globalassets/klimatprotokollet2/dokument/guide-anlaggningsberakningar-2026.pdf",
+   "source": "auto",
+   "createdAt": "2026-10-30T11:00:00+01:00"
+  },
+  {
+   "title": "Gränsvärden och metod – beräkningsanvisningar för bygg och anläggning",
+   "initiative": "upk",
+   "type": "Metod",
+   "theme": "Klimatberäkningar",
+   "year": "2023",
+   "description": "Fokusgruppens gemensamma metod för klimatberäkning och rapportering, med gränsvärden för byggnader och minskningstakt för anläggning.",
+   "url": "https://klimatprotokollet.uppsala.se/globalassets/klimatprotokollet2/bilder/nyhetsbilder/d.4/berakningsanvisningar-slutversion-1.0.pdf",
+   "source": "auto",
+   "createdAt": "2026-10-30T11:00:00+01:00"
+  },
+  {
+   "title": "Klimatutmaning 14: Klimatneutrala bygg- och anläggningsprojekt 2030",
+   "initiative": "upk",
+   "type": "Upprop",
+   "theme": "Klimatfärdplaner",
+   "year": "2023",
+   "description": "Medlemsutmaning som förbinder aktörer att driva klimatneutrala bygg- och anläggningsprojekt senast 2030.",
+   "url": "https://klimatprotokollet.uppsala.se/globalassets/klimatprotokollet2/bilder/nyhetsbilder/d.4/klimatutmaning-d4-slutversion.pdf",
+   "source": "auto",
+   "createdAt": "2026-10-30T11:00:00+01:00"
+  },
+  {
+   "title": "Klimatbokslut period V: 2021–2024",
+   "initiative": "upk",
+   "type": "Rapport",
+   "theme": "Nätverk & medlemmar",
+   "year": "2024",
+   "description": "Sammanställning av nätverkets utsläppsresultat, fokusgruppernas arbete och klimatutmaningar under perioden.",
+   "url": "https://klimatprotokollet.uppsala.se/globalassets/klimatprotokollet2/bokslut-period-v/klimatbokslut-period-v.pdf",
+   "source": "auto",
+   "createdAt": "2026-10-30T11:00:00+01:00"
+  },
+  {
+   "title": "CCBuild för Klimatprotokollets medlemmar",
+   "initiative": "upk",
+   "type": "Verktyg",
+   "theme": "Återbruk & cirkularitet",
+   "year": "2024",
+   "description": "Medlemmar får tillgång till CCBuilds digitala återbruksplattform och marknadsplats som lokalt kluster.",
+   "url": "https://klimatprotokollet.uppsala.se/nyheter/ccbuild-for-klimatprotokollets-medlemmar/",
+   "source": "auto",
+   "createdAt": "2026-10-30T11:00:00+01:00"
+  },
+  {
+   "title": "Förstudie: Återbruk byggmaterial Uppsala",
+   "initiative": "upk",
+   "type": "Rapport",
+   "theme": "Återbruk & cirkularitet",
+   "year": "2021",
+   "description": "Kartlägger förutsättningarna för en lokal återbruksmarknad i Uppsala, bland annat behov av lager och direktöverföring.",
+   "url": "https://klimatprotokollet.uppsala.se/globalassets/klimatprotokollet2/dokument/forstudie-aterbruk-byggmaterial-uppsala-tillganlighetsanp.pdf",
+   "source": "auto",
+   "createdAt": "2026-10-30T11:00:00+01:00"
+  },
+  {
+   "title": "Vad kostar klimatambitionerna?",
+   "initiative": "kas",
+   "type": "Rapport",
+   "theme": "Klimatberäkningar",
+   "year": "2026",
+   "description": "Klimatekonomisk analys som visar att stora utsläppsminskningar ofta ryms i ordinarie budget, med åtgärdsguide per skede.",
+   "url": "https://klimatarenastockholm.se/wp-content/uploads/2026/09/Vad-kostar-klimatambitionerna.pdf",
+   "source": "auto",
+   "createdAt": "2026-10-30T11:00:00+01:00"
+  },
+  {
+   "title": "Vägledning för mer cirkulär upphandling av massor utifrån AMA-koder",
+   "initiative": "kas",
+   "type": "Vägledning",
+   "theme": "Upphandling & krav",
+   "year": "2026",
+   "description": "Praktiska råd per AMA-kod för att undanröja vanliga upphandlingshinder vid cirkulär masshantering.",
+   "url": "https://klimatarenastockholm.se/ny-vagledning-for-mer-cirkular-upphandling-av-massor-utifran-ama-koder/",
+   "source": "auto",
+   "createdAt": "2026-10-30T11:00:00+01:00"
+  },
+  {
+   "title": "Handbok för cirkulära bygg- och anläggningsprojekt",
+   "initiative": "kas",
+   "type": "Handbok",
+   "theme": "Återbruk & cirkularitet",
+   "year": "2026",
+   "description": "En av tre handböcker från projektet Klimatarena Stockholm bygger cirkulärt, inriktad på projektgenomförande.",
+   "url": "https://klimatarenastockholm.se/wp-content/uploads/2026/05/Klimatarena_Cirkulara-Bygg-och-anlaggningsprojekt.pdf",
+   "source": "auto",
+   "createdAt": "2026-10-30T11:00:00+01:00"
+  },
+  {
+   "title": "Handbok för cirkulär samhällsplanering",
+   "initiative": "kas",
+   "type": "Handbok",
+   "theme": "Återbruk & cirkularitet",
+   "year": "2026",
+   "description": "Stöd för kommuner och planerare att bygga in cirkularitet tidigt i planprocessen.",
+   "url": "https://klimatarenastockholm.se/wp-content/uploads/2026/05/Klimatarena_Cirkular-Samhallsplanering.pdf",
+   "source": "auto",
+   "createdAt": "2026-10-30T11:00:00+01:00"
+  },
+  {
+   "title": "Upphandling av elektrifierade entreprenader – en exempelsammanställning",
+   "initiative": "kas",
+   "type": "Vägledning",
+   "theme": "Upphandling & krav",
+   "year": "2026",
+   "description": "Exempel på kravformuleringar, utvärderingskriterier och avtalsvillkor för eldrivna entreprenader, framtagen med Fossilfritt Sverige.",
+   "url": "https://klimatarenastockholm.se/ny-vagledning-for-upphandling-av-elektrifierade-entreprenader/",
+   "source": "auto",
+   "createdAt": "2026-10-30T11:00:00+01:00"
+  },
+  {
+   "title": "Guide för cirkulär masshantering",
+   "initiative": "kas",
+   "type": "Guide",
+   "theme": "Återbruk & cirkularitet",
+   "year": "2025",
+   "description": "Checklista med åtgärder för varje steg i anläggningsprocessen, från tidig planering till produktion.",
+   "url": "https://klimatarenastockholm.se/ny-guide-for-cirkular-masshantering-i-anlaggningsbyggandet/",
+   "source": "auto",
+   "createdAt": "2026-10-30T11:00:00+01:00"
+  },
+  {
+   "title": "Vägledning för minskad klimatpåverkan i anläggningsprojekt",
+   "initiative": "kas",
+   "type": "Vägledning",
+   "theme": "Klimatberäkningar",
+   "year": "2025",
+   "description": "Går igenom metoder, systemgränser och de största utsläppskällorna i anläggningsprojekt.",
+   "url": "https://klimatarenastockholm.se/ny-vagledning-for-minskad-klimatpaverkan-i-anlaggningsprojekt/",
+   "source": "auto",
+   "createdAt": "2026-10-30T11:00:00+01:00"
+  },
+  {
+   "title": "Guide för cirkulärt byggande i markanvisningar",
+   "initiative": "kas",
+   "type": "Guide",
+   "theme": "Upphandling & krav",
+   "year": "2024",
+   "description": "Hjälper kommuner att främja cirkulärt byggande genom villkor i markanvisningar.",
+   "url": "https://klimatarenastockholm.se/ny-guide-for-cirkulart-byggande-i-markanvisningar/",
+   "source": "auto",
+   "createdAt": "2026-10-30T11:00:00+01:00"
+  },
+  {
+   "title": "Beräkningsanvisningar för klimatpåverkan från byggprojekt, inkl. mark/grund (v2.0)",
+   "initiative": "hs30",
+   "type": "Metod",
+   "theme": "Klimatberäkningar",
+   "year": "2024",
+   "description": "Gemensamma beräkningskriterier baserade på Boverkets klimatdeklaration, utökade så att flerbostadsprojekt kan jämföras.",
+   "url": "https://hs30.se/wp-content/uploads/2024/05/berakningsanvisningarnyproduktionv2.0maj2024.pdf",
+   "source": "auto",
+   "createdAt": "2026-10-30T11:00:00+01:00"
+  },
+  {
+   "title": "Vägledning för klimatberäkningar av ROT-projekt samt åtgärdsguide",
+   "initiative": "hs30",
+   "partners": [
+    "kas"
+   ],
+   "type": "Vägledning",
+   "theme": "Befintligt bestånd",
+   "year": "2025",
+   "description": "Metod, beräkningsinstruktioner och åtgärdsförslag för renovering, till- och ombyggnad, framtagen med Klimatarena Stockholm.",
+   "url": "https://hs30.se/wp-content/uploads/2025/06/vagledningrotv1.1250617.pdf",
+   "source": "auto",
+   "createdAt": "2026-10-30T11:00:00+01:00"
+  },
+  {
+   "title": "HS30 Klimatstöd – kunskapsläget byggdel 7 och 8",
+   "initiative": "hs30",
+   "type": "Rapport",
+   "theme": "Klimatberäkningar",
+   "year": "2023",
+   "description": "Samlar kunskap om klimatberäkning av installationer och invändiga ytskikt som saknas i klimatdeklarationen.",
+   "url": "https://hs30.se/wp-content/uploads/2023/02/hs30klimatstodsammanstallningavkunskapslagetbd78.pdf",
+   "source": "auto",
+   "createdAt": "2026-10-30T11:00:00+01:00"
+  },
+  {
+   "title": "PM Vägledning för implementering av HS30:s klimatmål",
+   "initiative": "hs30",
+   "type": "Vägledning",
+   "theme": "Klimatfärdplaner",
+   "year": "2024",
+   "description": "Stöd för att omsätta målet om 70 procent lägre byggutsläpp 2020–2030 i medlemmarnas projekt.",
+   "url": "https://hs30.se/wp-content/uploads/2024/05/pmvagledningforimplementeringavhs30sklimatmal240419.pdf",
+   "source": "auto",
+   "createdAt": "2026-10-30T11:00:00+01:00"
+  },
+  {
+   "title": "Förutsättningar för användning av växthusgaskrediter",
+   "initiative": "hs30",
+   "type": "Vägledning",
+   "theme": "Klimatfärdplaner",
+   "year": "2023",
+   "description": "Första version, tagen fram med IVL, om hur medlemmar ansvarsfullt kan använda klimatkompensation.",
+   "url": "https://hs30.se/wp-content/uploads/2023/06/230616forutsattningarforanvandningavvaxhusgaskrediterhs30.pdf",
+   "source": "auto",
+   "createdAt": "2026-10-30T11:00:00+01:00"
+  },
+  {
+   "title": "HS30 Handbok för social hållbarhet i bostadssektorn",
+   "initiative": "hs30",
+   "type": "Handbok",
+   "theme": "Social hållbarhet",
+   "year": "2026",
+   "description": "Handbok för ett effektfokuserat arbetssätt med social hållbarhet i bostadsprojekt och förvaltning.",
+   "url": "https://hs30.se/wp-content/uploads/2026/05/handboksocialhallbarhet260526.pptx",
+   "source": "auto",
+   "createdAt": "2026-10-30T11:00:00+01:00"
+  },
+  {
+   "title": "Vägledning för att prioritera social hållbarhet",
+   "initiative": "hs30",
+   "type": "Vägledning",
+   "theme": "Social hållbarhet",
+   "year": "2025",
+   "description": "Stöd för att prioritera sociala åtgärder och hantera avvägningar på ett transparent sätt, framtagen med RISE.",
+   "url": "https://hs30.se/wp-content/uploads/2025/05/vagledningforattprioriterasocialhallbarhetrisehs30.pdf",
+   "source": "auto",
+   "createdAt": "2026-10-30T11:00:00+01:00"
+  },
+  {
+   "title": "Prototyp: 10 KPI:er för socialt hållbara bostäder",
+   "initiative": "hs30",
+   "type": "Verktyg",
+   "theme": "Social hållbarhet",
+   "year": "2024",
+   "description": "Förslag på nyckeltal för att följa upp social hållbarhet i bostadsbeståndet.",
+   "url": "https://hs30.se/wp-content/uploads/2024/06/10kpierforsocialthallbarabostaderjuni2024final.pdf",
+   "source": "auto",
+   "createdAt": "2026-10-30T11:00:00+01:00"
+  },
+  {
+   "title": "LFM30:s metod för klimatbudget: Beräkningsanvisningar (version 2026:2)",
+   "initiative": "lfm30",
+   "type": "Metod",
+   "theme": "Klimatberäkningar",
+   "year": "2026",
+   "description": "Anvisningar för hur projekt klimatberäknas och jämförs mot LFM30:s målgränsvärden för klimatpåverkan.",
+   "url": "https://lfm30.se/dokument/berakningsanvisningar/",
+   "source": "auto",
+   "createdAt": "2026-10-30T11:00:00+01:00"
+  },
+  {
+   "title": "LFM30 klimatredovisning: Resultatrapport 2025",
+   "initiative": "lfm30",
+   "type": "Rapport",
+   "theme": "Klimatberäkningar",
+   "year": "2025",
+   "description": "Sammanställning av medlemmarnas klimatredovisade projekt och hur långt de nått mot målen.",
+   "url": "https://lfm30.se/dokument/lfm30-klimatredovisning-resultatrapport-2025/",
+   "source": "auto",
+   "createdAt": "2026-10-30T11:00:00+01:00"
+  },
+  {
+   "title": "UnderDB – öppen databas för klimatberäkningar",
+   "initiative": "lfm30",
+   "type": "Verktyg",
+   "theme": "Data & AI",
+   "year": "2025",
+   "description": "Öppen databas där klimatberäkningar från bygg- och anläggningsprojekt kan jämföras och följas upp.",
+   "url": "https://underdb.se",
+   "source": "auto",
+   "createdAt": "2026-10-30T11:00:00+01:00"
+  },
+  {
+   "title": "LFM30 Hjälpmedel: Upphandlingsstyrning utifrån Metod för Klimatbudget",
+   "initiative": "lfm30",
+   "type": "Verktyg",
+   "theme": "Upphandling & krav",
+   "year": "",
+   "description": "Stöd för att föra in klimatbudgetmetoden i upphandling och styra leverantörer mot klimatmålen.",
+   "url": "https://lfm30.se/dokument/lfm30-hjalpmedel-upphandlingsstyrning-utifran-metod-for-klimatbudget/",
+   "source": "auto",
+   "createdAt": "2026-10-30T11:00:00+01:00"
+  },
+  {
+   "title": "Upphandlingstexter för återbruk",
+   "initiative": "lfm30",
+   "type": "Mall",
+   "theme": "Återbruk & cirkularitet",
+   "year": "",
+   "description": "Färdiga formuleringar att använda i förfrågningsunderlag när återbruk ska efterfrågas.",
+   "url": "https://lfm30.se/dokument/upphandlingstexter-for-aterbruk/",
+   "source": "auto",
+   "createdAt": "2026-10-30T11:00:00+01:00"
+  },
+  {
+   "title": "LFM30 Hjälpmedel: Cirkularitetsinventering",
+   "initiative": "lfm30",
+   "type": "Verktyg",
+   "theme": "Återbruk & cirkularitet",
+   "year": "",
+   "description": "Stöd för att inventera byggdelar och material inför återbruk i befintliga byggnader.",
+   "url": "https://lfm30.se/dokument/lfm30-hjalpmedel-cirkularitetsinventering/",
+   "source": "auto",
+   "createdAt": "2026-10-30T11:00:00+01:00"
+  },
+  {
+   "title": "Slutrapport BioBas30 – Innovationskluster inom LFM30",
+   "initiative": "lfm30",
+   "type": "Rapport",
+   "theme": "Material (betong, trä)",
+   "year": "2025",
+   "description": "Lärdomar från innovationsklustret om biobaserade byggmaterial och hur de kan användas i fler projekt.",
+   "url": "https://lfm30.se/dokument/slutrapport-biobas30/",
+   "source": "auto",
+   "createdAt": "2026-10-30T11:00:00+01:00"
+  },
+  {
+   "title": "Beräkningsanvisningar för bygg- och anläggningsprojekt",
+   "initiative": "gka",
+   "type": "Metod",
+   "theme": "Klimatberäkningar",
+   "year": "2025",
+   "description": "Gemensamma regler för klimatberäkning av bygg- och anläggningsprojekt, antagna av klimatavtalets rundabordsmöte hösten 2025.",
+   "url": "https://www.gavle.se/kommun-och-politik/samarbeten-projekt-och-arbetssatt/gavle-klimatavtal/berakningsanvisningar-for-bygg-och-anlaggningsprojekt/",
+   "source": "auto",
+   "createdAt": "2026-10-30T11:00:00+01:00"
+  },
+  {
+   "title": "Potentialstudie om återbruk i Halland (kortversion)",
+   "initiative": "bruka",
+   "type": "Rapport",
+   "theme": "Återbruk & cirkularitet",
+   "year": "",
+   "description": "Studie med fallexempel som uppskattar hur mycket återbruk Hallands bygg- och fastighetssektor kan åstadkomma.",
+   "url": "https://www.brukahalland.se/_files/ugd/0a6885_6e1ff4b74c82417c97c104afcc5f2800.pdf",
+   "source": "auto",
+   "createdAt": "2026-10-30T11:00:00+01:00"
+  },
+  {
+   "title": "Återbruk i Halland: hubbar, digitala plattformar och aktörer att ha koll på",
+   "initiative": "bruka",
+   "type": "Guide",
+   "theme": "Återbruk & cirkularitet",
+   "year": "2026",
+   "description": "Översikt över återbrukshubbar, digitala plattformar och företag i och nära Halland.",
+   "url": "https://www.brukahalland.se/post/%C3%A5terbruk-i-halland-hubbar-digitala-plattformar-och-akt%C3%B6rer-att-ha-koll-p%C3%A5",
+   "source": "auto",
+   "createdAt": "2026-10-30T11:00:00+01:00"
+  },
+  {
+   "title": "CCBuild introduktion med Bruka Halland",
+   "initiative": "bruka",
+   "type": "Webbinarium",
+   "theme": "Återbruk & cirkularitet",
+   "year": "2025",
+   "description": "Inspelad genomgång av hur plattformen CCBuild används för att hantera återbrukade byggprodukter.",
+   "url": "https://vimeo.com/1084273082?share=copy",
+   "source": "auto",
+   "createdAt": "2026-10-30T11:00:00+01:00"
+  },
+  {
+   "title": "Konferens för ökad cirkularitet inom bygg och fastighet",
+   "initiative": "bruka",
+   "type": "Webbinarium",
+   "theme": "Återbruk & cirkularitet",
+   "year": "",
+   "description": "Digital konferens där sex cirkulära utvecklingsprojekt delar erfarenheter och praktiska verktyg.",
+   "url": "https://vimeo.com/1234035752?share=copy&fl=sv&fe=ci",
+   "source": "auto",
+   "createdAt": "2026-10-30T11:00:00+01:00"
+  },
+  {
+   "title": "Webbinar: Cirkulära affärsmodeller i byggbranschen",
+   "initiative": "bruka",
+   "type": "Webbinarium",
+   "theme": "Återbruk & cirkularitet",
+   "year": "",
+   "description": "Genomgång av affärsmodeller, garantier och certifiering som gör återbruk möjligt.",
+   "url": "https://vimeo.com/1023258960/9b62aaf508",
+   "source": "auto",
+   "createdAt": "2026-10-30T11:00:00+01:00"
+  },
+  {
+   "title": "Webbinarie Upphandling: hållbarhet, tidig dialog & innovationer",
+   "initiative": "bruka",
+   "type": "Webbinarium",
+   "theme": "Upphandling & krav",
+   "year": "",
+   "description": "Hur offentliga beställare kan använda tidig dialog och innovationsupphandling för hållbarare byggande.",
+   "url": "https://vimeo.com/1003989100?share=copy",
+   "source": "auto",
+   "createdAt": "2026-10-30T11:00:00+01:00"
+  },
+  {
+   "title": "Byggutmaning Bevara: Guiden för dig som vill minska klimatpåverkan genom bevarande",
+   "initiative": "k2030",
+   "type": "Guide",
+   "theme": "Befintligt bestånd",
+   "year": "2026",
+   "description": "Råd från Byggutmaningen om att förlänga livslängden på befintliga byggnader istället för att riva.",
+   "url": "https://www.lindholmen.se/sites/default/files/2026-01/Byggutmaning_Bevara_Guide.pdf",
+   "source": "auto",
+   "createdAt": "2026-10-30T11:00:00+01:00"
+  },
+  {
+   "title": "Byggutmaning Optimering – Guide för dig som vill minska klimatpåverkan och öka lönsamheten",
+   "initiative": "k2030",
+   "type": "Guide",
+   "theme": "Klimatberäkningar",
+   "year": "2024",
+   "description": "Tretton tips om effektivare materialanvändning som både sänker utsläpp och kostnader.",
+   "url": "https://klimat2030.se/content/uploads/2024/09/byggutmaningen2024web.pdf",
+   "source": "auto",
+   "createdAt": "2026-10-30T11:00:00+01:00"
+  },
+  {
+   "title": "Byggutmaningen Klimatbudget – resultat",
+   "initiative": "k2030",
+   "type": "Vägledning",
+   "theme": "Klimatberäkningar",
+   "year": "2022",
+   "description": "Lärdomar om att beräkna projektens utsläpp och omsätta klimatmål till klimatbudgetar per projekt.",
+   "url": "https://klimat2030.se/byggutmaningen-klimatbudget/",
+   "source": "auto",
+   "createdAt": "2026-10-30T11:00:00+01:00"
+  },
+  {
+   "title": "Stödmaterial klimatlöfte 29: Vi bygger i trä",
+   "initiative": "k2030",
+   "type": "Vägledning",
+   "theme": "Material (betong, trä)",
+   "year": "",
+   "description": "Stöd för kommuner som lovat öka andelen träbyggande i egna och andras projekt.",
+   "url": "https://klimat2030.se/content/uploads/2023/11/stodmaterial-kommunernas-klimatlofte-292024-2026.pdf",
+   "source": "auto",
+   "createdAt": "2026-10-30T11:00:00+01:00"
+  },
+  {
+   "title": "Stödmaterial klimatlöfte 30: Vi arbetar med återbruk av byggmaterial",
+   "initiative": "k2030",
+   "type": "Vägledning",
+   "theme": "Återbruk & cirkularitet",
+   "year": "",
+   "description": "Hjälp för kommuner att komma igång med och följa upp återbruk av byggmaterial.",
+   "url": "https://klimat2030.se/content/uploads/2023/06/stodmaterial-kommunernas-klimatlofte-302024-2026.pdf",
+   "source": "auto",
+   "createdAt": "2026-10-30T11:00:00+01:00"
+  },
+  {
+   "title": "Stödmaterial klimatlöfte 28: Vi energieffektiviserar vårt fastighetsbestånd",
+   "initiative": "k2030",
+   "type": "Vägledning",
+   "theme": "Energi",
+   "year": "",
+   "description": "Stöd för kommuner som vill minska energianvändningen i sina egna fastigheter.",
+   "url": "https://klimat2030.se/content/uploads/2023/05/stodmaterial-kommunernas-klimatlofte-282024-2026.pdf",
+   "source": "auto",
+   "createdAt": "2026-10-30T11:00:00+01:00"
+  },
+  {
+   "title": "30 klimatlöften för 2024–2026",
+   "initiative": "k2030",
+   "type": "Upprop",
+   "theme": "Klimatfärdplaner",
+   "year": "",
+   "description": "Kommunernas åtagandelista, med bland annat löften om energieffektivisering, träbyggande och återbruk.",
+   "url": "https://klimat2030.se/content/uploads/2023/03/30-klimatloften-for-2024-2026-1.pdf",
+   "source": "auto",
+   "createdAt": "2026-10-30T11:00:00+01:00"
+  },
+  {
+   "title": "Plan för klimatneutralt byggande och anläggning",
+   "initiative": "coaction",
+   "type": "Vägledning",
+   "theme": "Klimatfärdplaner",
+   "year": "2023",
+   "description": "Lunds kommuns plan för att halvera klimatpåverkan från eget byggande och skapa en samverkansplattform till 2030.",
+   "url": "https://lund.se/download/18.292367a818a9322ce7f11849/1695724764460/Plan%20f%C3%B6r%20klimatneutralt%20byggande.pdf",
+   "source": "auto",
+   "createdAt": "2026-10-30T11:00:00+01:00"
+  },
+  {
+   "title": "Byggsektorns klimatomställning: omvärldssignaler inför 2026",
+   "initiative": "gpkb",
+   "type": "Rapport",
+   "theme": "Klimatfärdplaner",
+   "year": "2026",
+   "description": "RISE-rapport om trender som påverkar byggsektorns väg mot klimatneutralitet, med fokus på små och medelstora företag.",
+   "url": "https://www.businessregiongoteborg.se/publikationer/byggsektorns-klimatomstallning-omvarldssignaler-infor-2026",
+   "source": "auto",
+   "createdAt": "2026-10-30T11:00:00+01:00"
+  },
+  {
+   "title": "Webbinarium: Byggsektorns klimatomställning – omvärldssignaler inför 2026",
+   "initiative": "gpkb",
+   "type": "Webbinarium",
+   "theme": "Klimatfärdplaner",
+   "year": "2026",
+   "description": "Inspelad genomgång av omvärldsrapportens viktigaste förändringssignaler för byggbranschen.",
+   "url": "https://play.mediaflow.com/ovp/16/74PEHK8C7Q",
+   "source": "auto",
+   "createdAt": "2026-10-30T11:00:00+01:00"
+  },
+  {
+   "title": "Storskalig återbruksmarknad: byggprodukter som kan driva omställningen",
+   "initiative": "gpkb",
+   "type": "Guide",
+   "theme": "Återbruk & cirkularitet",
+   "year": "2025",
+   "description": "Pekar ut 18 produktgrupper med störst återbrukspotential och vad som krävs för en fungerande marknad.",
+   "url": "https://www.businessregiongoteborg.se/kunskapsbank/guider/storskalig-aterbruksmarknad-byggprodukter-som-kan-driva-omstallningen",
+   "source": "auto",
+   "createdAt": "2026-10-30T11:00:00+01:00"
+  },
+  {
+   "title": "Resurshierarki – hållbarhet steg-för-steg",
+   "initiative": "gpkb",
+   "type": "Guide",
+   "theme": "Återbruk & cirkularitet",
+   "year": "2026",
+   "description": "Förklarar byggsektorns resurshierarki för att prioritera resursanvändning, med länkar till riktlinjer och bevarandeguide.",
+   "url": "https://www.businessregiongoteborg.se/nyheter/resurshierarki-hallbarhet-steg-steg",
+   "source": "auto",
+   "createdAt": "2026-10-30T11:00:00+01:00"
+  },
+  {
+   "title": "Byggbranschen i omställning: nya material skapar nya affärer",
+   "initiative": "gpkb",
+   "type": "Rapport",
+   "theme": "Material (betong, trä)",
+   "year": "2026",
+   "description": "Artikel om hur nya byggmaterial öppnar för nya affärsmöjligheter i klimatomställningen.",
+   "url": "https://www.businessregiongoteborg.se/nyheter/byggbranschen-i-omstallning-nya-material-skapar-nya-affarer",
+   "source": "auto",
+   "createdAt": "2026-10-30T11:00:00+01:00"
+  },
+  {
+   "title": "Deklaration för klimatneutralt byggande",
+   "initiative": "gpkb",
+   "type": "Upprop",
+   "theme": "Nätverk & medlemmar",
+   "year": "",
+   "description": "Tio gemensamma åtaganden som aktörer i plattformen ställer sig bakom för klimatneutralt byggande.",
+   "url": "https://www.businessregiongoteborg.se/naringslivsutveckling/hallbar-utveckling/goteborgs-plattform-klimatneutralt-byggande/deklaration-klimatneutralt-byggande",
+   "source": "auto",
+   "createdAt": "2026-10-30T11:00:00+01:00"
+  },
+  {
+   "title": "Avsiktsförklaring cirkulärt byggande (Handslaget)",
+   "initiative": "gpkb",
+   "type": "Upprop",
+   "theme": "Återbruk & cirkularitet",
+   "year": "",
+   "description": "Gemensam avsiktsförklaring där fastighetsägare och byggaktörer förbinder sig att öka återbruk och cirkularitet.",
+   "url": "https://www.businessregiongoteborg.se/naringslivsutveckling/hallbar-utveckling/goteborgs-plattform-klimatneutralt-byggande/handslag-cirkulart-byggande/avsiktsforklaring-cirkulart-byggande",
+   "source": "auto",
+   "createdAt": "2026-10-30T11:00:00+01:00"
+  },
+  {
+   "title": "Enkät självskattning – cirkulärt byggande",
+   "initiative": "gpkb",
+   "type": "Verktyg",
+   "theme": "Återbruk & cirkularitet",
+   "year": "",
+   "description": "Självskattning där organisationer bedömer hur långt de kommit i arbetet med cirkulärt byggande.",
+   "url": "https://www.businessregiongoteborg.se/naringslivsutveckling/hallbar-utveckling/goteborgs-plattform-klimatneutralt-byggande/handslag-cirkulart-byggande/enkat-sjalvskattning",
+   "source": "auto",
+   "createdAt": "2026-10-30T11:00:00+01:00"
+  },
+  {
+   "title": "Klimatberäkningsanvisning och gränsvärden för nyproduktion",
+   "initiative": "hbg",
+   "type": "Metod",
+   "theme": "Klimatberäkningar",
+   "year": "2026",
+   "description": "Gemensam beräkningsmetod och gränsvärden för nybyggnation, antagen av stadens förvaltningar och bolag.",
+   "url": "https://media.helsingborg.se/uploads/networks/4/sites/169/2026/01/klimatberakningsanvisning-och-gransvarden-for-nyproduktion.pdf",
+   "source": "auto",
+   "createdAt": "2026-10-30T11:00:00+01:00"
+  },
+  {
+   "title": "Klimatberäkningsanvisning för ROT",
+   "initiative": "hbg",
+   "type": "Metod",
+   "theme": "Befintligt bestånd",
+   "year": "2026",
+   "description": "Metod framtagen med IVL för att beräkna klimatpåverkan vid renovering, ombyggnad och tillbyggnad.",
+   "url": "https://media.helsingborg.se/uploads/networks/4/sites/169/2024/10/klimatberakningsanvisning-for-rot-12-maj-2026.pdf",
+   "source": "auto",
+   "createdAt": "2026-10-30T11:00:00+01:00"
+  },
+  {
+   "title": "Verktyg för klimatdata – material",
+   "initiative": "hbg",
+   "type": "Verktyg",
+   "theme": "Klimatberäkningar",
+   "year": "2026",
+   "description": "Förenklat verktyg som jämför materials och ytors koldioxidavtryck som stöd i tidiga planeringsskeden.",
+   "url": "https://innovation.helsingborg.se/initiativ/verktyg-for-klimatdata-material/",
+   "source": "auto",
+   "createdAt": "2026-10-30T11:00:00+01:00"
+  },
+  {
+   "title": "Kort guide om klimatsmart detaljplanering",
+   "initiative": "hbg",
+   "type": "Guide",
+   "theme": "Klimatfärdplaner",
+   "year": "2024",
+   "description": "Visar hur detaljplaner kan minska klimatpåverkan via markanvändning, gestaltning, material, grönska och mobilitet.",
+   "url": "https://media.helsingborg.se/uploads/networks/4/sites/169/2024/10/pm-kort-guide-om-klimatsmart-detaljplanering-1-0.pdf",
+   "source": "auto",
+   "createdAt": "2026-10-30T11:00:00+01:00"
+  },
+  {
+   "title": "Forskningsuppdrag återbruk med RISE",
+   "initiative": "hbg",
+   "type": "Rapport",
+   "theme": "Återbruk & cirkularitet",
+   "year": "2024",
+   "description": "Kartlägger materialflöden och hinder för återbruk i byggandet samt möjliga finansieringsvägar.",
+   "url": "https://media.helsingborg.se/uploads/networks/4/sites/169/2024/10/forskningsuppdrag-aterbruk-med-rise.pdf",
+   "source": "auto",
+   "createdAt": "2026-10-30T11:00:00+01:00"
+  },
+  {
+   "title": "CoBuild NetZero – first year summary",
+   "initiative": "hbg",
+   "type": "Rapport",
+   "theme": "Upphandling & krav",
+   "year": "2024",
+   "description": "Sammanfattar projektets första år: gemensamma klimatkrav, beräkningsmetoder och testade lösningar.",
+   "url": "https://media.helsingborg.se/uploads/networks/4/sites/169/2024/10/cobuild-netzero-1-year-summary.pdf",
+   "source": "auto",
+   "createdAt": "2026-10-30T11:00:00+01:00"
+  },
+  {
+   "title": "Förstudie regulatorisk försöksverksamhet",
+   "initiative": "hbg",
+   "type": "Rapport",
+   "theme": "Upphandling & krav",
+   "year": "2024",
+   "description": "Förstudie med RISE om regulatoriska sandlådor och var staden kan testa nya lösningar i verklig miljö.",
+   "url": "https://media.helsingborg.se/uploads/networks/4/sites/169/2024/10/regulatorisk-forsoksverksamhet-helsingborg.pdf",
+   "source": "auto",
+   "createdAt": "2026-10-30T11:00:00+01:00"
+  },
+  {
+   "title": "Möllarps LSS-boende (sammanfattning)",
+   "initiative": "hbg",
+   "type": "Rapport",
+   "theme": "Material (betong, trä)",
+   "year": "2024",
+   "description": "Exempel på klimatneutralt bostadsprojekt med alternativa material som koljerngrund och hampaisolering.",
+   "url": "https://media.helsingborg.se/uploads/networks/4/sites/169/2024/10/mollarps-lss-boende-one-pager.pdf",
+   "source": "auto",
+   "createdAt": "2026-10-30T11:00:00+01:00"
+  },
+  {
+   "title": "Utvecklad marknad och logistik för återbruk",
+   "initiative": "shift",
+   "type": "Rapport",
+   "theme": "Återbruk & cirkularitet",
+   "year": "",
+   "description": "Rapport om hur marknad och logistik kan utvecklas för att få återbruk av byggmaterial att fungera i större skala.",
+   "url": "https://shiftsweden.se/Media/sg2bfjo0/utvecklad-marknad-och-logistik-for-aterbruk.pdf",
+   "source": "auto",
+   "createdAt": "2026-10-30T11:00:00+01:00"
+  },
+  {
+   "title": "Framtidssäkra storskaliga flerbostadshusområden",
+   "initiative": "shift",
+   "type": "Rapport",
+   "theme": "Befintligt bestånd",
+   "year": "",
+   "description": "Rapport om hur stora befintliga flerbostadsområden kan utvecklas hållbart för framtiden.",
+   "url": "https://shiftsweden.se/Media/rqrknwga/framtidssakra-storskaliga-flerbostadshusomraden.pdf",
+   "source": "auto",
+   "createdAt": "2026-10-30T11:00:00+01:00"
+  },
+  {
+   "title": "En integrerad fyrstegsprincip för ett resurseffektivt samhälle",
+   "initiative": "shift",
+   "type": "Rapport",
+   "theme": "Återbruk & cirkularitet",
+   "year": "",
+   "description": "Insiktsrapport om att tillämpa fyrstegsprincipen samlat för mer resurseffektiv samhällsbyggnad.",
+   "url": "https://shiftsweden.se/Media/40wpo5dv/insiktsrapport-en-integrerad-fyrstegsprincip-for-ett-resurseffektivt-samhalle.pdf",
+   "source": "auto",
+   "createdAt": "2026-10-30T11:00:00+01:00"
+  },
+  {
+   "title": "Hållbart resande i småhusområden?",
+   "initiative": "shift",
+   "type": "Rapport",
+   "theme": "Transport & logistik",
+   "year": "2026",
+   "description": "Kunskapsöversikt om förutsättningar för hållbara resor i områden med småhus.",
+   "url": "https://shiftsweden.se/Media/sjon24fh/state-of-the-art-hallbart-resande-i-smahusomraden-2026.pdf",
+   "source": "auto",
+   "createdAt": "2026-10-30T11:00:00+01:00"
+  }
+ ]
+}
