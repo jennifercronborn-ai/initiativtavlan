@@ -6,7 +6,7 @@ Den här texten är prompten för den schemalagda uppgiften "Synka Initiativtavl
 
 Du synkar Initiativtavlan från klimatinitiativens egna webbplatser.
 
-1. Läs listan `INIT` i `public/index.html`. För varje initiativ: läs kalendersidan (`url`) och nyhetssidan/startsidan (`site`) med WebFetch.
+1. Läs listan `BASE_INIT` i `public/index.html` och dessutom `data/initiativ.json` (initiativ som lagts till på sidan, uppdateras automatiskt varje natt). För varje initiativ: läs kalendersidan (`url`) och nyhetssidan/startsidan (`site`) med WebFetch. Använd initiativets `key` som `initiative`.
 2. Plocka ut:
    - **Träffar** från idag och framåt → `events`: `title`, `date` (ÅÅÅÅ-MM-DD), `time` (t.ex. "09.00–12.00" eller tomt), `place`, `initiative` (nyckeln), `theme` (exakt en sträng från `THEMES`, eller tomt), `url` (länk till träffen eller kalendersidan), `open` (true bara om sidan säger att externa är välkomna), `source: "auto"`.
    - **Nyheter** publicerade de senaste 60 dagarna → `news`: `title`, `date`, `initiative`, `theme`, `url`, `source: "auto"`. Ta med `img` bara om nyheten har en egen bild-URL.

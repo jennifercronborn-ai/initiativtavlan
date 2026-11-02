@@ -1,0 +1,31 @@
+# Hämtar initiativ som lagts till på sidan (Initiativ › "Lägg till initiativ") till data/initiativ.json,
+# så att veckosynken även läser deras webbplatser. Körs varje dag och committar bara om något ändrats.
+# Kräver hemligheten SYNC_TOKEN (samma som "Synka till Initiativtavlan") och att supabase/sync.sql körts igen.
+name: Hämta nya initiativ
+on:
+  schedule:
+    - cron: "17 3 * * *"
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20 }
+      - name: Hämta initiativ
+        env:
+          SYNC_TOKEN: ${{ secrets.SYNC_TOKEN }}
+        run: |
+          if [ -z "$SYNC_TOKEN" ]; then echo "SYNC_TOKEN saknas i repots hemligheter."; exit 1; fi
+          node scripts/sync-initiatives.mjs
+      - name: Spara ändringar
+        run: |
+          git add data/initiativ.json
+          if git diff --cached --quiet; then echo "Inga ändringar."; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Nya initiativ från sidan"
+          git push

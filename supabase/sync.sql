@@ -77,3 +77,30 @@ grant execute on function public.sync_import(text, jsonb) to anon, authenticated
 -- Sätt synknyckeln (byt HASH mot sha256-hashen av nyckeln, inte nyckeln själv):
 -- insert into public.sync_config (id, token_hash) values (1, 'HASH')
 --   on conflict (id) do update set token_hash = excluded.token_hash, updated_at = now();
+
+-- ---------- initiativ som lagts till på sidan ----------
+-- Läser ut initiativ som lagts till under Initiativ › "Lägg till initiativ" (samlingen initiatives),
+-- så att veckosynken även hämtar från deras webbplatser. Ger bara namn, region och webbadresser,
+-- aldrig kontaktuppgifter. Kräver synknyckeln. Lades till nov 2026 – kör filen igen för att få med den.
+create or replace function public.sync_initiatives(p_token text)
+returns jsonb
+language plpgsql security definer set search_path = public, extensions as $$
+begin
+  if p_token is null or not exists (
+       select 1 from public.sync_config
+       where token_hash = encode(extensions.digest(p_token, 'sha256'), 'hex')) then
+    raise exception 'ogiltig synknyckel' using errcode = '28000';
+  end if;
+  return coalesce((
+    select jsonb_agg(jsonb_build_object(
+             'key', id, 'name', data ->> 'name', 'short', coalesce(nullif(data ->> 'short', ''), data ->> 'name'),
+             'region', coalesce(data ->> 'region', ''), 'site', coalesce(data ->> 'site', ''),
+             'url', coalesce(nullif(data ->> 'url', ''), data ->> 'site', ''))
+           order by created_at)
+    from public.docs
+    where collection = 'initiatives'
+      and coalesce(data ->> 'site', data ->> 'url', '') ~ '^https?://'), '[]'::jsonb);
+end $$;
+
+revoke all on function public.sync_initiatives(text) from public;
+grant execute on function public.sync_initiatives(text) to anon, authenticated;
