@@ -32,6 +32,8 @@ Inloggade kanslier ◄── Netlify (sidan) ◄── Supabase (docs, members, 
 | Lägg till personliga konton (valfritt, senare) | `scripts/invite.mjs` |
 | Läs in data (flytt + synk) | `scripts/import.mjs` |
 | Veckosynk | `data/sync/SYNK-INSTRUKTION.md` + `.github/workflows/synk.yml` |
+| Initiativ tillagda på sidan → synken | `scripts/sync-initiatives.mjs` + `.github/workflows/initiativ.yml` → `data/initiativ.json` |
+| PDF:er i Material & verktyg | `supabase/storage.sql` (privat bucket `material`) |
 
 ## Roller
 

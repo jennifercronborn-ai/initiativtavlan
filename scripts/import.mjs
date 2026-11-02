@@ -18,7 +18,7 @@ import { readFileSync } from "node:fs";
 import { createHash } from "node:crypto";
 import { createClient } from "@supabase/supabase-js";
 
-const COLLECTIONS = ["events", "groups", "notes", "sources", "news", "network", "resources", "board", "profiles", "contacts", "ideas"];
+const COLLECTIONS = ["events", "groups", "notes", "sources", "news", "network", "resources", "board", "profiles", "contacts", "ideas", "initiatives"];
 const [file, flag] = process.argv.slice(2);
 if (!file) { console.error("Ange en JSON-fil."); process.exit(1); }
 const replace = flag === "--replace";

@@ -7,7 +7,8 @@ Live-sida för klimatinitiativens kanslier: https://initiativtavlan.netlify.app
 - `public/index.html` – hela sidan (samma som Claude-artefakten). Det är här de flesta ändringar görs.
 - `public/claude-shim.js` – kopplar sidans `window.claude.use("db" | "user" | "sample")` till Supabase. Ändra bara om datalagret ska ändras.
 - `scripts/write-config.mjs` – skriver `public/config.js` vid publicering (publik projektadress och anon-nyckel).
-- `supabase/*.sql` – databasschema och synkfunktion. Ändringar här måste också köras i Supabase › SQL Editor av någon med åtkomst.
+- `supabase/*.sql` – databasschema, synkfunktion och lagring av PDF:er (`storage.sql`). Ändringar här måste också köras i Supabase › SQL Editor av någon med åtkomst.
+- `data/initiativ.json` – initiativ som lagts till på sidan (samlingen `initiatives`), exporteras varje natt av Action "Hämta nya initiativ" så att veckosynken läser deras webbplatser. De fasta initiativen står i `BASE_INIT` i `index.html`.
 - `data/sync/` – synkfiler från initiativens **webbplatser** (offentligt material). Se `SYNK-INSTRUKTION.md`.
 - `netlify/functions/sample.mjs` – valfri Claude-sammanfattning av avstämningar.
 

@@ -148,7 +148,7 @@ a.out:hover { text-decoration: underline; color: var(--accent); }
 
 /* Material & verktyg */
 .res-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
-.res { display: grid; grid-template-rows: auto auto 1fr auto auto; gap: 8px; background: color-mix(in srgb, var(--ic) 11%, var(--bg)); border-radius: var(--r-lg); padding: 16px 18px; text-decoration: none; color: var(--ink); border-top: 4px solid var(--ic); transition: transform .15s, box-shadow .15s; }
+.res { display: grid; grid-template-rows: auto auto 1fr auto auto auto; gap: 8px; background: color-mix(in srgb, var(--ic) 11%, var(--bg)); border-radius: var(--r-lg); padding: 16px 18px; text-decoration: none; color: var(--ink); border-top: 4px solid var(--ic); transition: transform .15s, box-shadow .15s; }
 .res:hover { transform: translateY(-2px); box-shadow: 0 10px 24px -14px color-mix(in srgb, var(--accent) 45%, transparent); }
 .res-top { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
 .res-type { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: color-mix(in srgb, var(--ic) 70%, var(--ink)); }
@@ -350,6 +350,10 @@ dialog .ev { background: var(--surface); }
 .prof-head .pill { white-space: nowrap; flex-shrink: 0; }
 .prof-sec { display: grid; gap: 4px; font-size: 0.92rem; }
 .prof-sec p { margin: 0; }
+.contact-line { font-size: 0.82rem; color: var(--muted); overflow-wrap: anywhere; }
+.contact-line a { text-decoration: none; } .contact-line a:hover { text-decoration: underline; }
+input[type=file] { max-width: 100%; font-size: 0.88rem; }
+.hint { font-size: 0.8rem; color: var(--muted); }
 .contact-mail { font-family: var(--font-mono, monospace); font-size: 0.82rem; overflow-wrap: anywhere; }
 .focus-list { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
 .prof-stats { display: flex; flex-wrap: wrap; gap: 4px 10px; }
@@ -424,7 +428,7 @@ dialog .ev { background: var(--surface); }
 <div class="toast" id="toast" hidden role="status"></div>
 
 <script>
-const INIT = [
+const BASE_INIT = [
   { key: "upk", site: "https://klimatprotokollet.uppsala.se/", name: "Uppsala klimatprotokoll", short: "Uppsala", region: "Uppsala", url: "https://klimatprotokollet.uppsala.se/kalendarium/" },
   { key: "obkn", site: "https://obkn.se/", name: "Östergötland bygger klimatneutralt", short: "ÖBKN", region: "Östergötland", url: "https://obkn.se/kalendarium/" },
   { key: "kas", site: "https://klimatarenastockholm.se/", name: "Klimatarena Stockholm", short: "Klimatarena Stockholm", region: "Stockholm", url: "https://klimatarenastockholm.se/kalendarium/" },
@@ -441,7 +445,29 @@ const INIT = [
   { key: "hbg", site: "https://innovation.helsingborg.se/", name: "Helsingborgs stad", short: "Helsingborg", region: "Helsingborg", url: "https://innovation.helsingborg.se/" },
   { key: "shift", site: "https://shiftsweden.se/", name: "ShiftSweden", short: "ShiftSweden", region: "Nationellt", url: "https://shiftsweden.se/" },
 ];
-const IMAP = Object.fromEntries(INIT.map(i => [i.key, i]));
+// Initiativ som lagts till på sidan (samlingen "initiatives") läggs efter de fasta.
+// De får en färg ur XCOLORS (ljust, mörkt läge) i tur och ordning.
+let INIT = BASE_INIT.slice();
+let IMAP = Object.fromEntries(INIT.map(i => [i.key, i]));
+const XCOLORS = [["#6B7A00", "#C7D46A"], ["#A13D2D", "#F0A090"], ["#3949AB", "#9FA8F0"], ["#C2185B", "#F48FB1"], ["#2E7D32", "#8FD694"], ["#5D6B7A", "#B5C2D0"], ["#6A1B9A", "#CE93D8"], ["#00695C", "#80CBC4"]];
+function rebuildInit() {
+  const base = new Set(BASE_INIT.map(i => i.key));
+  const extra = (S.initiatives || [])
+    .filter(x => /^[a-z0-9-]{1,40}$/.test(x.id || "") && !base.has(x.id) && x.name)
+    .sort((a, b) => String(a.createdAt || "").localeCompare(String(b.createdAt || "")))
+    .map((x, n) => ({ key: x.id, name: x.name, short: x.short || x.name, region: x.region || "", site: x.site || "", url: x.url || x.site || "", custom: true, color: Number.isInteger(x.color) ? x.color : n }));
+  INIT = [...BASE_INIT, ...extra];
+  IMAP = Object.fromEntries(INIT.map(i => [i.key, i]));
+  let el = document.getElementById("xinit-colors");
+  if (!el) { el = document.createElement("style"); el.id = "xinit-colors"; document.head.appendChild(el); }
+  const vars = k => extra.map(i => `--i-${i.key}:${XCOLORS[i.color % XCOLORS.length][k]};`).join("");
+  el.textContent = extra.length ? `:root{${vars(0)}}@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){${vars(1)}}}:root[data-theme="dark"]{${vars(1)}}` : "";
+}
+function slugKey(s) {
+  let k = String(s || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, "").slice(0, 20) || "initiativ";
+  let out = k, n = 2; while (IMAP[out]) out = k + n++;
+  return out;
+}
 const THEMES = ["Klimatberäkningar", "Återbruk & cirkularitet", "Upphandling & krav", "Material (betong, trä)", "Biologisk mångfald", "Energi", "Transport & logistik", "Befintligt bestånd", "Klimatfärdplaner", "Social hållbarhet", "Data & AI", "Nätverk & medlemmar"];
 const STATUS = [
   { key: "planeras", label: "Planeras" },
@@ -453,7 +479,7 @@ const MONTHS_LONG = ["januari", "februari", "mars", "april", "maj", "juni", "jul
 const DAYS = ["Mån", "Tis", "Ons", "Tor", "Fre", "Lör", "Sön"];
 
 const S = {
-  view: "oversikt", events: [], groups: [], notes: [], sources: [], news: [], network: [], resources: [], board: [], uid: null, boardInit: new Set(), profiles: [], contacts: [], ideas: [],
+  view: "oversikt", events: [], groups: [], notes: [], sources: [], news: [], network: [], resources: [], board: [], uid: null, boardInit: new Set(), profiles: [], contacts: [], ideas: [], initiatives: [],
   rsInit: new Set(), rsTheme: "", rsQ: "", rsType: "",
   nwInit: new Set(), nwTheme: "", nwQ: "", nwMode: "aktuellt",
   dbState: "loading", db: null, sample: null,
@@ -515,9 +541,10 @@ async function connect() {
   S.db = db; S.dbState = "ok";
   const sub = (name, field) => db.collection(name).onSnapshot(snap => {
     S[field] = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    if (name === "initiatives") rebuildInit();
     render();
   }, err => { S.dbState = "error"; render(); });
-  sub("events", "events"); sub("groups", "groups"); sub("notes", "notes"); sub("sources", "sources"); sub("news", "news"); sub("network", "network"); sub("resources", "resources"); sub("board", "board"); sub("profiles", "profiles"); sub("contacts", "contacts"); sub("ideas", "ideas");
+  sub("events", "events"); sub("groups", "groups"); sub("notes", "notes"); sub("sources", "sources"); sub("news", "news"); sub("network", "network"); sub("resources", "resources"); sub("board", "board"); sub("profiles", "profiles"); sub("contacts", "contacts"); sub("ideas", "ideas"); sub("initiatives", "initiatives");
   claude.use("user").then(async u => { if (u) { try { S.uid = await u.id(); } catch (e) {} } }).catch(() => {});
 }
 
@@ -594,7 +621,7 @@ function evRow(e, opts = {}) {
     <div class="ev-date ${isToday ? "now" : ""}"><div class="d">${d.getDate()}</div><div class="m">${DAYS[(d.getDay() + 6) % 7]} ${MONTHS[d.getMonth()]}</div></div>
     <div class="ev-body">
       <div class="ev-title">${e.url ? `<a class="out" href="${esc(e.url)}" target="_blank" rel="noopener">${esc(e.title)}</a>` : esc(e.title)}</div>
-      <div class="ev-meta">${e.time ? `<span class="mono">${esc(e.time)}</span>` : ""}${e.place ? `<span>${esc(e.place)}</span>` : ""}</div>
+      <div class="ev-meta">${e.time ? `<span class="mono">${esc(e.time)}</span>` : ""}${e.place ? `<span>${esc(e.place)}</span>` : ""}${contactLine(e)}</div>
       <div class="row" style="gap:6px 12px;margin-top:2px">${initTag(e.initiative)}${e.theme ? `<span class="theme-tag">${esc(e.theme)}</span>` : ""}${e.open ? `<span class="flag-open">Öppen för externa</span>` : ""}${e.share ? `<span class="flag-share ${esc(e.share)}">${esc(SHARE[e.share] || "")}</span>` : ""}</div>
     </div>
     <div class="ev-side">
@@ -829,7 +856,7 @@ function viewResources() {
   ).sort((a, b) => (b.year || "").localeCompare(a.year || "") || (a.title || "").localeCompare(b.title || "", "sv"));
   const types = RTYPES.filter(t => S.resources.some(r => r.type === t));
   return `<div class="page-head">
-    <div><h1>Material &amp; verktyg</h1><p class="sub">Guider, metoder, mallar och rapporter som initiativen tagit fram. Allt hämtas från initiativens egna sidor, så länkarna går alltid till senaste versionen.</p></div>
+    <div><h1>Material &amp; verktyg</h1><p class="sub">Guider, metoder, mallar och rapporter som initiativen tagit fram. Det mesta hämtas från initiativens egna sidor, så länkarna går till senaste versionen. Material kan också läggas till som PDF.</p></div>
     <button class="btn primary" id="add-rs">+ Lägg till material</button>
   </div>
   ${filterBar("rs", S.rsInit, S.rsTheme, S.rsQ, `<span class="status-line">${list.length} av ${S.resources.length}</span>`)}
@@ -842,7 +869,8 @@ function viewResources() {
 function resCard(r) {
   let host = ""; try { host = new URL(r.url).hostname.replace(/^www\./, ""); } catch (e) {}
   const partners = (r.partners || []).map(k => IMAP[k]?.name).filter(Boolean);
-  return `<a class="res" style="--ic:var(--i-${esc(r.initiative)})" href="${esc(r.url)}" target="_blank" rel="noopener">
+  const link = r.file ? `href="#" data-pdf="${esc(r.file)}"` : `href="${esc(r.url)}" target="_blank" rel="noopener"`;
+  return `<a class="res" style="--ic:var(--i-${esc(r.initiative)})" ${link}>
     <div class="res-top"><span class="res-type">${esc(r.type || "Material")}</span>${r.year ? `<span class="mono muted" style="font-size:0.78rem">${esc(r.year)}</span>` : ""}</div>
     <h3>${esc(r.title)}</h3>
     ${r.description ? `<p>${esc(r.description)}</p>` : ""}
@@ -850,7 +878,8 @@ function resCard(r) {
       <span class="init-tag">${initDot(r.initiative)}${esc(IMAP[r.initiative]?.name || r.initiative)}${partners.length ? `<span class="muted" style="font-weight:500">&nbsp;med ${esc(partners.join(", "))}</span>` : ""}</span>
       ${r.theme ? `<span class="theme-tag">${esc(r.theme)}</span>` : ""}
     </div>
-    <span class="res-get">Hämta från ${esc(host)} ↗</span>
+    ${contactLine(r, false)}
+    <span class="res-get">${r.file ? `Öppna PDF${r.fileName ? " · " + esc(r.fileName) : ""} ↗` : `Hämta från ${esc(host)} ↗`}</span>
   </a>`;
 }
 function addResourceDialog() {
@@ -862,15 +891,46 @@ function addResourceDialog() {
       <div class="field"><label for="r-theme">Tema</label><select id="r-theme" name="theme">${themeOptions("", true)}</select></div>
       <div class="field"><label for="r-year">År</label><input type="text" id="r-year" name="year" inputmode="numeric" value="${today().getFullYear()}"></div>
       <div class="field full"><label for="r-desc">Kort beskrivning</label><input type="text" id="r-desc" name="description"></div>
-      <div class="field full"><label for="r-url">Länk till materialet</label><input type="url" id="r-url" name="url" required placeholder="https://"></div>
+      <div class="field full"><label for="r-url">Länk till materialet</label><input type="url" id="r-url" name="url" placeholder="https://"></div>
+      <div class="field full"><label for="r-file">…eller ladda upp en PDF</label><input type="file" id="r-file" name="pdf" accept="application/pdf,.pdf"><span class="hint">Ange en länk eller ladda upp en PDF (högst ${PDF_MAX_MB} MB). Filen syns bara för inloggade.</span></div>
+      ${contactFields()}
     </div>
     <div class="row" style="justify-content:flex-end"><button class="btn" value="cancel" formnovalidate>Avbryt</button><button class="btn primary" value="ok">Lägg till</button></div>`,
   async fd => {
     if (needDb()) return false;
-    const d = Object.fromEntries(fd.entries());
+    const pdf = fd.get("pdf"); const hasPdf = pdf && pdf.size > 0;
+    const d = { title: String(fd.get("title") || "").trim(), initiative: fd.get("initiative"), type: fd.get("type"), theme: fd.get("theme") || "", year: String(fd.get("year") || "").trim(), description: String(fd.get("description") || "").trim(), url: String(fd.get("url") || "").trim(), ...contactData(fd) };
+    if (!d.url && !hasPdf) { toast("Ange en länk eller välj en PDF."); return false; }
+    let path = null;
+    if (hasPdf) {
+      if (!/\.pdf$/i.test(pdf.name) && pdf.type !== "application/pdf") { toast("Filen måste vara en PDF."); return false; }
+      if (pdf.size > PDF_MAX_MB * 1024 * 1024) { toast(`Filen är för stor (högst ${PDF_MAX_MB} MB).`); return false; }
+      if (!window.IT || !IT.sb) { toast("Uppladdning är inte tillgänglig i den här vyn."); return false; }
+      const btn = $("#dlg-form button[value=ok]"); if (btn) { btn.disabled = true; btn.textContent = "Laddar upp…"; }
+      path = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}-${slugFile(pdf.name)}.pdf`;
+      const { error } = await IT.sb.storage.from(PDF_BUCKET).upload(path, pdf, { contentType: "application/pdf", upsert: false });
+      if (btn) { btn.disabled = false; btn.textContent = "Lägg till"; }
+      if (error) { console.error(error); toast("PDF:en kunde inte laddas upp. Försök igen."); return false; }
+      Object.assign(d, { file: path, fileName: pdf.name, fileSize: pdf.size });
+    }
     try { await S.db.collection("resources").add({ ...d, source: "manuell", createdAt: new Date().toISOString() }); toast("Materialet är tillagt"); }
-    catch (e) { toast(e.code === "invalid_argument" ? "Du har inte behörighet att lägga till." : "Kunde inte spara. Försök igen."); return false; }
+    catch (e) {
+      if (path) IT.sb.storage.from(PDF_BUCKET).remove([path]).catch(() => {});
+      toast(e.code === "invalid_argument" ? "Du har inte behörighet att lägga till." : "Kunde inte spara. Försök igen."); return false;
+    }
   });
+}
+// PDF:er sparas i Supabase Storage (privat bucket, se supabase/storage.sql) och öppnas med en tidsbegränsad länk.
+const PDF_BUCKET = "material", PDF_MAX_MB = 20;
+function slugFile(name) { return String(name || "fil").replace(/\.pdf$/i, "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 60) || "fil"; }
+async function openPdf(path) {
+  const w = window.open("", "_blank");
+  try {
+    if (!window.IT || !IT.sb) throw new Error("no-sb");
+    const { data, error } = await IT.sb.storage.from(PDF_BUCKET).createSignedUrl(path, 3600);
+    if (error || !data?.signedUrl) throw error || new Error("no-url");
+    if (w) { w.opener = null; w.location.href = data.signedUrl; } else location.href = data.signedUrl;
+  } catch (e) { if (w) w.close(); console.error(e); toast("PDF:en kunde inte öppnas."); }
 }
 const NEWS_DAYS = 90;
 function viewNews() {
@@ -1040,8 +1100,9 @@ function cardHtml(g) {
   const i = IMAP[g.initiative] || {};
   return `<article class="card" style="--ic:var(--i-${esc(g.initiative)})">
     <div class="card-init">${initDot(g.initiative)}${esc(i.name || g.initiative)}</div>
-    <h3>${g.url ? `<a class="out" href="${esc(g.url)}" target="_blank" rel="noopener">${esc(g.name)}</a>` : `<a class="out" href="${esc(i.site || "#")}" target="_blank" rel="noopener">${esc(g.name)}</a>`}</h3>
+    <h3>${g.url || i.site ? `<a class="out" href="${esc(g.url || i.site)}" target="_blank" rel="noopener">${esc(g.name)}</a>` : esc(g.name)}</h3>
     ${g.description ? `<p>${esc(g.description)}</p>` : ""}
+    ${contactLine(g)}
     <div class="card-top">${(g.themes || []).map(t => `<button class="theme-tag" data-gr-theme="${esc(t)}" title="Filtrera på ${esc(t)}">${esc(t)}</button>`).join("")}</div>
   </article>`;
 }
@@ -1114,7 +1175,7 @@ function profileCard(i) {
   const focus = p.focus || [];
   return `<article class="prof" style="--ic:var(--i-${i.key})">
     <div class="prof-head">
-      <div><h3><a class="out" href="${esc(i.site)}" target="_blank" rel="noopener">${esc(i.name)}</a></h3><div class="status-line">${esc(i.region)}</div></div>
+      <div><h3>${i.site ? `<a class="out" href="${esc(i.site)}" target="_blank" rel="noopener">${esc(i.name)}</a>` : esc(i.name)}</h3><div class="status-line">${esc(i.region)}${i.custom ? `${i.region ? " · " : ""}Tillagt manuellt` : ""}</div></div>
       ${p.surveyAt ? `<span class="pill ok">Enkät besvarad</span>` : `<span class="pill wait">Inväntar enkät</span>`}
     </div>
     <div class="prof-sec"><div class="label">Kontaktperson</div>${c && (c.name || c.email) ? `<div>${esc(c.name || "")}${c.org ? `<span class="muted"> · ${esc(c.org)}</span>` : ""}</div>${c.email ? `<div class="contact-mail">${esc(c.email)}</div>` : ""}` : `<div class="muted">Läggs in från kontaktlistan</div>`}</div>
@@ -1127,14 +1188,14 @@ function profileCard(i) {
       <button class="btn ghost" data-jump-init="resurser:${i.key}">${nR} material</button>
       ${seek.length ? `<button class="btn ghost" data-jump-init="tavla:${i.key}">${seek.length} söker samarbete</button>` : ""}
     </div>
-    <button class="btn" data-edit-prof="${i.key}" style="justify-self:start">Redigera profil</button>
+    <div class="row"><button class="btn" data-edit-prof="${i.key}">Redigera profil</button>${i.custom ? `<button class="btn ghost" data-edit-init="${i.key}">Ändra uppgifter</button>` : ""}</div>
   </article>`;
 }
 function viewSources() {
   const answered = INIT.filter(i => profileOf(i.key).surveyAt).length;
   const cmd = "Synka kalendariet och På gång i Initiativtavlan från initiativens webbplatser";
-  return `<div class="page-head"><div><h1>Initiativ</h1><p class="sub">En profil per initiativ med kontaktperson, fokusområden och vad de söker samarbete kring. Profilerna fylls på med svaren från enkäten inför Klimattinget.</p></div>
-    <div class="survey-meter"><b class="mono">${answered}/${INIT.length}</b><span>har svarat på enkäten</span></div></div>
+  return `<div class="page-head"><div><h1>Initiativ</h1><p class="sub">En profil per initiativ med kontaktperson, fokusområden och vad de söker samarbete kring. Profilerna fylls på med svaren från enkäten inför Klimattinget. Saknas ett initiativ kan du lägga till det.</p></div>
+    <div class="row" style="align-items:flex-end;gap:16px"><div class="survey-meter"><b class="mono">${answered}/${INIT.length}</b><span>har svarat på enkäten</span></div><button class="btn primary" id="add-init">+ Lägg till initiativ</button></div></div>
   <div class="prof-grid">${INIT.map(profileCard).join("")}</div>
   <div class="grid-2" style="margin-top:40px">
     <div class="section">
@@ -1144,13 +1205,13 @@ function viewSources() {
         const n = S.events.filter(e => e.initiative === i.key && e.source !== "manuell" && e.date >= ymd(today())).length;
         const g = S.groups.filter(x => x.initiative === i.key).length;
         const nn = S.news.filter(x => x.initiative === i.key).length;
-        return `<div class="source"><div style="display:grid;gap:2px;min-width:0">${initTag(i.key)}<a href="${esc(i.url)}" target="_blank" rel="noopener" style="font-size:0.82rem;overflow-wrap:anywhere">${esc(i.url.replace(/^https?:\/\/(www\.)?/, ""))}</a>${s.note ? `<span class="status-line" style="font-size:0.82rem">Kalender: ${esc(s.note)}</span>` : ""}${s.newsNote ? `<span class="status-line" style="font-size:0.82rem">Nyheter: ${esc(s.newsNote)}</span>` : ""}</div>
+        return `<div class="source"><div style="display:grid;gap:2px;min-width:0">${initTag(i.key)}${i.url ? `<a href="${esc(i.url)}" target="_blank" rel="noopener" style="font-size:0.82rem;overflow-wrap:anywhere">${esc(i.url.replace(/^https?:\/\/(www\.)?/, ""))}</a>` : `<span class="status-line" style="font-size:0.82rem">Ingen webbplats angiven – synkas inte</span>`}${s.note ? `<span class="status-line" style="font-size:0.82rem">Kalender: ${esc(s.note)}</span>` : ""}${s.newsNote ? `<span class="status-line" style="font-size:0.82rem">Nyheter: ${esc(s.newsNote)}</span>` : ""}</div>
         <div style="display:grid;gap:4px;justify-items:end;text-align:right">${s.status ? `<span class="pill ${s.status === "ok" ? "ok" : "fel"}">${s.status === "ok" ? "Läst" : "Kunde inte läsas"}</span>` : `<span class="pill fel">Ej synkad</span>`}<span class="mono muted" style="font-size:0.75rem">${n} träffar · ${nn} nyheter · ${g} grupper${s.lastSync ? " · " + esc(fmtDate(s.lastSync.slice(0, 10))) : ""}</span></div></div>`;
       }).join("")}</div>
     </div>
     <div class="section">
       <div class="section-head"><h2>Synka från webbplatserna</h2></div>
-      <p>Claude läser initiativens kalender- och nyhetssidor och lägger till nya träffar och nyheter. Allt länkar tillbaka till initiativens egna sidor. Manuellt tillagt innehåll rörs inte.</p>
+      <p>Claude läser initiativens kalender- och nyhetssidor och lägger till nya träffar och nyheter. Allt länkar tillbaka till initiativens egna sidor. Manuellt tillagt innehåll rörs inte. Initiativ som läggs till här med webbplats tas med från och med nästa veckosynk.</p>
       <div class="cmd"><code>${esc(cmd)}</code><button class="btn" data-copy="${esc(cmd)}">Kopiera</button></div>
       <div class="section-head" style="margin-top:16px"><h2>Så används enkätsvaren</h2></div>
       <ul class="map-list">
@@ -1178,7 +1239,7 @@ function viewConference() {
   const seekNotes = S.board.filter(b => b.type === "soker");
   const seekProf = INIT.filter(i => profileOf(i.key).seeking);
   const openEv = S.events.filter(e => e.date >= tY && (e.open || e.share === "ja" || e.share === "kontakt")).sort((a, b) => a.date.localeCompare(b.date)).slice(0, 12);
-  return `<div class="page-head"><div><h1>Klimattinget</h1><p class="sub">Underlag inför och under Klimattinget den 21 oktober. Fylls på automatiskt när enkätsvaren läggs in.</p></div>
+  return `<div class="page-head"><div><h1>Klimattinget 2026</h1><p class="sub">Underlag inför och under Klimattinget den 21 oktober. Fylls på automatiskt när enkätsvaren läggs in.</p></div>
     <div class="survey-meter"><b class="mono">${answered}/${INIT.length}</b><span>har svarat på enkäten</span></div></div>
   ${answered ? "" : `<div class="example-banner" style="margin-bottom:24px"><strong>Väntar på svar</strong> Ingen har svarat på enkäten än. Tabellerna nedan fylls i när svaren läggs in.</div>`}
   <div class="section">
@@ -1232,6 +1293,41 @@ function editProfileDialog(key) {
     } catch (e) { toast(e.code === "invalid_argument" ? "Du har inte behörighet att spara." : "Kunde inte spara. Försök igen."); return false; }
   });
 }
+function initiativeDialog(key) {
+  const x = key ? (S.initiatives.find(d => d.id === key) || {}) : {};
+  const c = key ? (contactOf(key) || {}) : {};
+  openDialog(`<h2>${key ? "Ändra initiativ" : "Lägg till initiativ"}</h2>
+    <div class="form-grid">
+      <div class="field full"><label for="in-name">Namn</label><input type="text" id="in-name" name="name" required maxlength="120" value="${esc(x.name || "")}" placeholder="T.ex. Klimatinitiativ Norrbotten"></div>
+      <div class="field"><label for="in-short">Kortnamn</label><input type="text" id="in-short" name="short" maxlength="30" value="${esc(x.short || "")}" placeholder="Visas i filter"></div>
+      <div class="field"><label for="in-region">Region</label><input type="text" id="in-region" name="region" maxlength="60" value="${esc(x.region || "")}"></div>
+      <div class="field full"><label for="in-site">Webbplats</label><input type="url" id="in-site" name="site" placeholder="https://" value="${esc(x.site || "")}"></div>
+      <div class="field full"><label for="in-url">Kalender- eller nyhetssida (valfritt)</label><input type="url" id="in-url" name="url" placeholder="https://" value="${esc(x.url || "")}"><span class="hint">Med en webbplats hämtar veckosynken träffar, nyheter och material därifrån, från och med nästa synk. Utan egen kalendersida läses webbplatsen.</span></div>
+      <div class="field"><label for="in-cn">Kontaktperson</label><input type="text" id="in-cn" name="cname" value="${esc(c.name || "")}"></div>
+      <div class="field"><label for="in-co">Organisation</label><input type="text" id="in-co" name="corg" value="${esc(c.org || "")}"></div>
+      <div class="field full"><label for="in-ce">E-post</label><input type="email" id="in-ce" name="cemail" value="${esc(c.email || "")}"></div>
+    </div>
+    <div class="row" style="justify-content:space-between">${key ? `<button class="btn ghost danger" value="delete" formnovalidate>Ta bort initiativet</button>` : "<span></span>"}<div class="row"><button class="btn" value="cancel" formnovalidate>Avbryt</button><button class="btn primary" value="ok">${key ? "Spara" : "Lägg till"}</button></div></div>`,
+  async (fd, action) => {
+    if (needDb()) return false;
+    if (action === "delete") {
+      if (!confirm(`Ta bort ${x.name || "initiativet"} från tavlan? Träffar, material och lappar som hör till initiativet ligger kvar.`)) return false;
+      try { await S.db.doc("initiatives/" + key).delete(); toast("Initiativet är borttaget"); } catch (e) { toast("Kunde inte ta bort."); return false; }
+      return;
+    }
+    const name = String(fd.get("name") || "").trim();
+    if (!name) { toast("Ange ett namn."); return false; }
+    if (!key && INIT.some(i => i.name.toLowerCase() === name.toLowerCase())) { toast("Det initiativet finns redan på tavlan."); return false; }
+    const k = key || slugKey(fd.get("short") || name);
+    const data = { name, short: String(fd.get("short") || "").trim(), region: String(fd.get("region") || "").trim(), site: String(fd.get("site") || "").trim(), url: String(fd.get("url") || "").trim(), color: Number.isInteger(x.color) ? x.color : S.initiatives.length % XCOLORS.length, createdAt: x.createdAt || new Date().toISOString(), updatedAt: new Date().toISOString() };
+    try {
+      await S.db.doc("initiatives/" + k).set(data);
+      const cn = { name: String(fd.get("cname") || "").trim(), org: String(fd.get("corg") || "").trim(), email: String(fd.get("cemail") || "").trim() };
+      if (cn.name || cn.org || cn.email || contactOf(k)) await S.db.doc("contacts/" + k).set(cn);
+      toast(key ? "Initiativet är sparat" : "Initiativet är tillagt");
+    } catch (e) { toast(e.code === "invalid_argument" ? "Du har inte behörighet att spara." : "Kunde inte spara. Försök igen."); return false; }
+  });
+}
 function addIdeaDialog() {
   openDialog(`<h2>Ny samverkansidé</h2>
     <div class="form-grid">
@@ -1260,11 +1356,24 @@ async function voteIdea(id) {
 function openDialog(html, onSubmit) {
   const dlg = $("#dlg"); const f = $("#dlg-form");
   f.innerHTML = html;
-  f.onsubmit = async e => { e.preventDefault(); if (e.submitter && e.submitter.value === "cancel") { dlg.close(); return; } const ok = await onSubmit(new FormData(f)); if (ok !== false) dlg.close(); };
+  f.onsubmit = async e => { e.preventDefault(); if (e.submitter && e.submitter.value === "cancel") { dlg.close(); return; } const ok = await onSubmit(new FormData(f), e.submitter && e.submitter.value); if (ok !== false) dlg.close(); };
   dlg.showModal();
 }
 function initOptions(sel) { return INIT.map(i => `<option value="${i.key}" ${i.key === sel ? "selected" : ""}>${esc(i.name)}</option>`).join(""); }
 function themeOptions(sel, blank) { return (blank ? `<option value="">Inget tema</option>` : "") + THEMES.map(t => `<option ${t === sel ? "selected" : ""}>${esc(t)}</option>`).join(""); }
+
+// Kontaktperson (valfritt) på träffar, material och arbetsgrupper/projekt
+function contactFields(pre = {}) {
+  return `<div class="field"><label for="c-name">Kontaktperson (valfritt)</label><input type="text" id="c-name" name="contactName" autocomplete="off" value="${esc(pre.contactName || "")}"></div>
+      <div class="field"><label for="c-email">E-post till kontaktperson</label><input type="email" id="c-email" name="contactEmail" autocomplete="off" value="${esc(pre.contactEmail || "")}"></div>`;
+}
+function contactData(fd) { return { contactName: String(fd.get("contactName") || "").trim(), contactEmail: String(fd.get("contactEmail") || "").trim() }; }
+function contactLine(x, link = true) {
+  if (!x.contactName && !x.contactEmail) return "";
+  const who = esc(x.contactName || x.contactEmail);
+  const mail = x.contactEmail ? (link ? `<a href="mailto:${esc(x.contactEmail)}">${x.contactName ? esc(x.contactEmail) : who}</a>` : `<span class="contact-mail">${esc(x.contactEmail)}</span>`) : "";
+  return `<span class="contact-line">Kontakt: ${x.contactName ? who : ""}${x.contactName && mail ? " · " : ""}${mail}</span>`;
+}
 
 function needDb() { if (!S.db) { toast("Delad data är inte tillgänglig i den här vyn."); return true; } return false; }
 
@@ -1280,11 +1389,12 @@ function addEventDialog(pre = {}) {
       <div class="field full"><label for="f-url">Länk till evenemanget</label><input type="url" id="f-url" name="url" placeholder="https://" value="${esc(pre.url || "")}"></div>
       <label class="row" style="gap:8px;font-size:0.9rem"><input type="checkbox" name="open" ${pre.open ? "checked" : ""}> Öppen för externa deltagare</label>
       <div class="field"><label for="f-share">Får spridas via gemensamma kanaler?</label><select id="f-share" name="share"><option value="">Inte angivet</option>${Object.entries(SHARE).map(([k, v]) => `<option value="${k}" ${pre.share === k ? "selected" : ""}>${v}</option>`).join("")}</select></div>
+      ${contactFields(pre)}
     </div>
     <div class="row" style="justify-content:flex-end"><button class="btn" value="cancel" formnovalidate>Avbryt</button><button class="btn primary" value="ok">Lägg till</button></div>`,
   async fd => {
     if (needDb()) return false;
-    const d = Object.fromEntries(fd.entries()); d.open = fd.get("open") === "on";
+    const d = Object.fromEntries(fd.entries()); d.open = fd.get("open") === "on"; Object.assign(d, contactData(fd));
     try { await S.db.collection("events").add({ ...d, source: "manuell", createdAt: new Date().toISOString() }); toast("Träffen är tillagd"); }
     catch (e) { toast(e.code === "invalid_argument" ? "Du har inte behörighet att lägga till." : "Kunde inte spara. Försök igen."); return false; }
   });
@@ -1298,13 +1408,14 @@ function addGroupDialog(pre = {}) {
       <div class="field"><label for="g-theme2">Andra tema (valfritt)</label><select id="g-theme2" name="theme2">${themeOptions((pre.themes || [])[1], true)}</select></div>
       <div class="field full"><label for="g-desc">Kort beskrivning</label><textarea id="g-desc" name="description" rows="3" style="min-height:80px">${esc(pre.description || "")}</textarea></div>
       <div class="field full"><label for="g-url">Länk (valfritt)</label><input type="url" id="g-url" name="url" placeholder="https://" value="${esc(pre.url || "")}"></div>
+      ${contactFields(pre)}
     </div>
     <div class="row" style="justify-content:flex-end"><button class="btn" value="cancel" formnovalidate>Avbryt</button><button class="btn primary" value="ok">Lägg till</button></div>`,
   async fd => {
     if (needDb()) return false;
     const d = Object.fromEntries(fd.entries());
     const themes = [d.theme, d.theme2].filter(Boolean).filter((t, i, a) => a.indexOf(t) === i);
-    try { await S.db.collection("groups").add({ name: d.name, initiative: d.initiative, status: "pagar", themes, description: d.description, url: d.url, updatedAt: new Date().toISOString() }); toast("Arbetsgruppen är tillagd"); }
+    try { await S.db.collection("groups").add({ name: d.name, initiative: d.initiative, status: "pagar", themes, description: d.description, url: d.url, ...contactData(fd), source: "manuell", updatedAt: new Date().toISOString() }); toast("Arbetsgruppen är tillagd"); }
     catch (e) { toast(e.code === "invalid_argument" ? "Du har inte behörighet att lägga till." : "Kunde inte spara. Försök igen."); return false; }
   });
 }
@@ -1400,6 +1511,10 @@ async function parseAndSave(raw, title, date, existingId) {
 }
 
 // ---------- händelser ----------
+document.addEventListener("click", e => {
+  const a = e.target.closest("a[data-pdf]"); if (!a) return;
+  e.preventDefault(); openPdf(a.dataset.pdf);
+});
 document.addEventListener("click", async e => {
   const t = e.target.closest("button, [data-go]"); if (!t) return;
   const ds = t.dataset;
@@ -1419,6 +1534,8 @@ document.addEventListener("click", async e => {
     set.clear(); set.add(k); if (v === "arbetsgrupper") S.grTheme = ""; go(v); return;
   }
   if (ds.editProf) { editProfileDialog(ds.editProf); return; }
+  if (t.id === "add-init") { initiativeDialog(); return; }
+  if (ds.editInit) { initiativeDialog(ds.editInit); return; }
   if (t.id === "add-idea") { addIdeaDialog(); return; }
   if (ds.vote) { voteIdea(ds.vote); return; }
   if (ds.openNote) { S.noteSel = ds.openNote; S._uploading = false; go("avstamningar"); return; }

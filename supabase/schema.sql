@@ -4,7 +4,7 @@
 -- Upplägg
 --   docs        All data på tavlan. En rad per objekt, grupperat på "collection":
 --               events, news, groups, notes, sources, network, resources, board,
---               profiles, contacts, ideas (samma namn som i sidan).
+--               profiles, contacts, ideas, initiatives (samma namn som i sidan).
 --   members     Vem som får logga in, med roll och initiativ.
 --   audit_log   Ändringslogg: vem, när, vad (fylls automatiskt).
 
