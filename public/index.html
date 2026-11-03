@@ -148,7 +148,7 @@ a.out:hover { text-decoration: underline; color: var(--accent); }
 
 /* Material & verktyg */
 .res-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
-.res { display: grid; grid-template-rows: auto auto 1fr auto auto auto; gap: 8px; background: color-mix(in srgb, var(--ic) 11%, var(--bg)); border-radius: var(--r-lg); padding: 16px 18px; text-decoration: none; color: var(--ink); border-top: 4px solid var(--ic); transition: transform .15s, box-shadow .15s; }
+.res { position: relative; display: grid; grid-template-rows: auto auto 1fr auto auto auto; gap: 8px; background: color-mix(in srgb, var(--ic) 11%, var(--bg)); border-radius: var(--r-lg); padding: 16px 18px; text-decoration: none; color: var(--ink); border-top: 4px solid var(--ic); transition: transform .15s, box-shadow .15s; }
 .res:hover { transform: translateY(-2px); box-shadow: 0 10px 24px -14px color-mix(in srgb, var(--accent) 45%, transparent); }
 .res-top { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
 .res-type { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: color-mix(in srgb, var(--ic) 70%, var(--ink)); }
@@ -157,7 +157,11 @@ a.out:hover { text-decoration: underline; color: var(--accent); }
 .res h3 { font-size: 1rem; line-height: 1.3; }
 .res p { font-size: 0.86rem; color: var(--muted); line-height: 1.45; }
 .res-foot { display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: center; }
-.res-get { font-size: 0.82rem; font-weight: 600; color: var(--accent); }
+.res-get { font-size: 0.82rem; font-weight: 600; color: var(--accent); text-decoration: none; overflow-wrap: anywhere; }
+.res-get::after { content: ""; position: absolute; inset: 0; border-radius: var(--r-lg); }
+.res-get:focus-visible { outline: none; } .res-get:focus-visible::after { outline: 2px solid var(--accent); outline-offset: 2px; }
+.res-actions { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.res-edit { position: relative; z-index: 1; padding: 2px 0; font-size: 0.82rem; }
 
 /* Vad händer just nu */
 .now-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; }
@@ -870,7 +874,8 @@ function resCard(r) {
   let host = ""; try { host = new URL(r.url).hostname.replace(/^www\./, ""); } catch (e) {}
   const partners = (r.partners || []).map(k => IMAP[k]?.name).filter(Boolean);
   const link = r.file ? `href="#" data-pdf="${esc(r.file)}"` : `href="${esc(r.url)}" target="_blank" rel="noopener"`;
-  return `<a class="res" style="--ic:var(--i-${esc(r.initiative)})" ${link}>
+  // Hela kortet är klickbart via länkens ::after. "Ändra" ligger ovanpå och visas bara för manuellt tillagt material.
+  return `<article class="res" style="--ic:var(--i-${esc(r.initiative)})">
     <div class="res-top"><span class="res-type">${esc(r.type || "Material")}</span>${r.year ? `<span class="mono muted" style="font-size:0.78rem">${esc(r.year)}</span>` : ""}</div>
     <h3>${esc(r.title)}</h3>
     ${r.description ? `<p>${esc(r.description)}</p>` : ""}
@@ -879,46 +884,82 @@ function resCard(r) {
       ${r.theme ? `<span class="theme-tag">${esc(r.theme)}</span>` : ""}
     </div>
     ${contactLine(r, false)}
-    <span class="res-get">${r.file ? `Öppna PDF${r.fileName ? " · " + esc(r.fileName) : ""} ↗` : `Hämta från ${esc(host)} ↗`}</span>
-  </a>`;
-}
-function addResourceDialog() {
-  openDialog(`<h2>Lägg till material</h2>
-    <div class="form-grid">
-      <div class="field full"><label for="r-title">Titel</label><input type="text" id="r-title" name="title" required></div>
-      <div class="field"><label for="r-init">Initiativ</label><select id="r-init" name="initiative">${initOptions()}</select></div>
-      <div class="field"><label for="r-type">Typ</label><select id="r-type" name="type">${RTYPES.map(t => `<option>${t}</option>`).join("")}</select></div>
-      <div class="field"><label for="r-theme">Tema</label><select id="r-theme" name="theme">${themeOptions("", true)}</select></div>
-      <div class="field"><label for="r-year">År</label><input type="text" id="r-year" name="year" inputmode="numeric" value="${today().getFullYear()}"></div>
-      <div class="field full"><label for="r-desc">Kort beskrivning</label><input type="text" id="r-desc" name="description"></div>
-      <div class="field full"><label for="r-url">Länk till materialet</label><input type="url" id="r-url" name="url" placeholder="https://"></div>
-      <div class="field full"><label for="r-file">…eller ladda upp en PDF</label><input type="file" id="r-file" name="pdf" accept="application/pdf,.pdf"><span class="hint">Ange en länk eller ladda upp en PDF (högst ${PDF_MAX_MB} MB). Filen syns bara för inloggade.</span></div>
-      ${contactFields()}
+    <div class="res-actions">
+      <a class="res-get" ${link}>${r.file ? `Öppna PDF${r.fileName ? " · " + esc(r.fileName) : ""} ↗` : `Hämta från ${esc(host)} ↗`}</a>
+      ${r.source === "manuell" ? `<button class="btn ghost res-edit" data-edit-rs="${esc(r.id)}">Ändra</button>` : ""}
     </div>
-    <div class="row" style="justify-content:flex-end"><button class="btn" value="cancel" formnovalidate>Avbryt</button><button class="btn primary" value="ok">Lägg till</button></div>`,
-  async fd => {
+  </article>`;
+}
+// Lägg till (r saknas) eller ändra (r = befintligt material). Bara manuellt tillagt material går att ändra:
+// automatiskt hämtat skulle skrivas över eller läggas tillbaka av veckosynken.
+function resourceDialog(r) {
+  const x = r || { year: String(today().getFullYear()) };
+  openDialog(`<h2>${r ? "Ändra material" : "Lägg till material"}</h2>
+    <div class="form-grid">
+      <div class="field full"><label for="r-title">Titel</label><input type="text" id="r-title" name="title" required value="${esc(x.title || "")}"></div>
+      <div class="field"><label for="r-init">Initiativ</label><select id="r-init" name="initiative">${initOptions(x.initiative)}</select></div>
+      <div class="field"><label for="r-type">Typ</label><select id="r-type" name="type">${RTYPES.map(t => `<option ${t === x.type ? "selected" : ""}>${t}</option>`).join("")}</select></div>
+      <div class="field"><label for="r-theme">Tema</label><select id="r-theme" name="theme">${themeOptions(x.theme || "", true)}</select></div>
+      <div class="field"><label for="r-year">År</label><input type="text" id="r-year" name="year" inputmode="numeric" value="${esc(x.year || "")}"></div>
+      <div class="field full"><label for="r-desc">Kort beskrivning</label><input type="text" id="r-desc" name="description" value="${esc(x.description || "")}"></div>
+      <div class="field full"><label for="r-url">Länk till materialet</label><input type="url" id="r-url" name="url" placeholder="https://" value="${esc(x.url || "")}"></div>
+      ${x.file ? `<div class="field full"><span class="label">Nuvarande PDF</span><span>${esc(x.fileName || "PDF")}</span><label class="row" style="gap:8px;font-size:0.9rem"><input type="checkbox" name="removePdf"> Ta bort PDF:en</label></div>` : ""}
+      <div class="field full"><label for="r-file">${x.file ? "Byt till en annan PDF" : "…eller ladda upp en PDF"}</label><input type="file" id="r-file" name="pdf" accept="application/pdf,.pdf"><span class="hint">Ange en länk eller ladda upp en PDF (högst ${PDF_MAX_MB} MB). Filen syns bara för inloggade.</span></div>
+      ${contactFields(x)}
+    </div>
+    <div class="row" style="justify-content:space-between">${r ? `<button class="btn ghost danger" value="delete" formnovalidate>Ta bort materialet</button>` : "<span></span>"}<div class="row"><button class="btn" value="cancel" formnovalidate>Avbryt</button><button class="btn primary" value="ok">${r ? "Spara" : "Lägg till"}</button></div></div>`,
+  async (fd, action) => {
     if (needDb()) return false;
+    if (action === "delete") {
+      if (!confirm(`Ta bort "${x.title}"? ${x.file ? "PDF:en tas också bort. " : ""}Det går inte att ångra.`)) return false;
+      try { await S.db.doc("resources/" + r.id).delete(); } catch (e) { toast("Kunde inte ta bort. Försök igen."); return false; }
+      if (x.file) removePdf(x.file);
+      toast("Materialet är borttaget"); return;
+    }
     const pdf = fd.get("pdf"); const hasPdf = pdf && pdf.size > 0;
+    const dropOld = !!x.file && (hasPdf || fd.get("removePdf") === "on");
     const d = { title: String(fd.get("title") || "").trim(), initiative: fd.get("initiative"), type: fd.get("type"), theme: fd.get("theme") || "", year: String(fd.get("year") || "").trim(), description: String(fd.get("description") || "").trim(), url: String(fd.get("url") || "").trim(), ...contactData(fd) };
-    if (!d.url && !hasPdf) { toast("Ange en länk eller välj en PDF."); return false; }
+    if (!d.url && !hasPdf && (!x.file || dropOld)) { toast("Ange en länk eller välj en PDF."); return false; }
     let path = null;
     if (hasPdf) {
       if (!/\.pdf$/i.test(pdf.name) && pdf.type !== "application/pdf") { toast("Filen måste vara en PDF."); return false; }
       if (pdf.size > PDF_MAX_MB * 1024 * 1024) { toast(`Filen är för stor (högst ${PDF_MAX_MB} MB).`); return false; }
       if (!window.IT || !IT.sb) { toast("Uppladdning är inte tillgänglig i den här vyn."); return false; }
-      const btn = $("#dlg-form button[value=ok]"); if (btn) { btn.disabled = true; btn.textContent = "Laddar upp…"; }
+      const btn = $("#dlg-form button[value=ok]"); const label = btn ? btn.textContent : ""; if (btn) { btn.disabled = true; btn.textContent = "Laddar upp…"; }
       path = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}-${slugFile(pdf.name)}.pdf`;
       const { error } = await IT.sb.storage.from(PDF_BUCKET).upload(path, pdf, { contentType: "application/pdf", upsert: false });
-      if (btn) { btn.disabled = false; btn.textContent = "Lägg till"; }
-      if (error) { console.error(error); toast("PDF:en kunde inte laddas upp. Försök igen."); return false; }
+      if (btn) { btn.disabled = false; btn.textContent = label; }
+      if (error) { console.error(error); toast(uploadError(error)); return false; }
       Object.assign(d, { file: path, fileName: pdf.name, fileSize: pdf.size });
+    } else if (x.file && !dropOld) {
+      Object.assign(d, { file: x.file, fileName: x.fileName || "", fileSize: x.fileSize || 0 });
     }
-    try { await S.db.collection("resources").add({ ...d, source: "manuell", createdAt: new Date().toISOString() }); toast("Materialet är tillagt"); }
-    catch (e) {
-      if (path) IT.sb.storage.from(PDF_BUCKET).remove([path]).catch(() => {});
-      toast(e.code === "invalid_argument" ? "Du har inte behörighet att lägga till." : "Kunde inte spara. Försök igen."); return false;
+    try {
+      if (r) {
+        const { id, ...old } = r; delete old.file; delete old.fileName; delete old.fileSize;
+        await S.db.doc("resources/" + r.id).set({ ...old, ...d, updatedAt: new Date().toISOString() });
+        if (dropOld) removePdf(x.file);
+        toast("Materialet är sparat");
+      } else {
+        await S.db.collection("resources").add({ ...d, source: "manuell", createdAt: new Date().toISOString() });
+        toast("Materialet är tillagt");
+      }
+    } catch (e) {
+      if (path) removePdf(path);
+      toast(e.code === "invalid_argument" ? "Du har inte behörighet att spara." : "Kunde inte spara. Försök igen."); return false;
     }
   });
+}
+function removePdf(path) { if (window.IT && IT.sb) IT.sb.storage.from(PDF_BUCKET).remove([path]).catch(() => {}); }
+// Översätter Supabase-fel vid uppladdning till något användaren kan agera på.
+function uploadError(err) {
+  const m = String(err?.message || err?.error || "") + " " + String(err?.statusCode || err?.status || "");
+  if (/bucket not found/i.test(m) || /\b404\b/.test(m)) return "Lagringen för PDF:er är inte uppsatt än. Kontakta LFM30:s kansli, eller lägg till materialet som länk så länge.";
+  if (/row-level security|unauthorized|not allowed|\b40[13]\b/i.test(m)) return "Du har inte behörighet att ladda upp. Logga ut och in igen, eller kontakta LFM30:s kansli.";
+  if (/maximum allowed size|too large|\b413\b/i.test(m)) return `Filen är för stor (högst ${PDF_MAX_MB} MB).`;
+  if (/mime|content type|invalid_mime/i.test(m)) return "Filen måste vara en PDF.";
+  if (/already exists|duplicate|\b409\b/i.test(m)) return "Uppladdningen krockade. Försök igen.";
+  return "PDF:en kunde inte laddas upp (" + (err?.message || "okänt fel") + "). Försök igen.";
 }
 // PDF:er sparas i Supabase Storage (privat bucket, se supabase/storage.sql) och öppnas med en tidsbegränsad länk.
 const PDF_BUCKET = "material", PDF_MAX_MB = 20;
@@ -1543,7 +1584,8 @@ document.addEventListener("click", async e => {
   if (t.id === "add-ev") { addEventDialog(); return; }
   if (t.id === "add-gr") { addGroupDialog(); return; }
   if (t.id === "add-nw") { addNewsDialog(); return; }
-  if (t.id === "add-rs") { addResourceDialog(); return; }
+  if (t.id === "add-rs") { resourceDialog(); return; }
+  if (ds.editRs) { const r = S.resources.find(x => x.id === ds.editRs); if (r && r.source === "manuell") resourceDialog(r); return; }
   if (t.id === "add-note") { addBoardNoteDialog(); return; }
   if (ds.plus) { if (!needDb()) plusDialog(ds.plus); return; }
   if (ds.delNote) {
