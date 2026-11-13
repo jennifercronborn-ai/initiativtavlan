@@ -231,6 +231,20 @@ table.matrix { border-collapse: collapse; width: 100%; font-size: 0.86rem; }
 .mx-flag.shared { background: var(--accent); color: var(--accent-ink); }
 .mx-flag.unique { background: var(--signal-soft); color: var(--signal); }
 
+/* Gemensamma satsningar (Översikt) */
+.joint-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 14px; }
+.joint { position: relative; display: grid; gap: 10px; align-content: start; background: var(--surface); border-radius: var(--r-lg); padding: 20px 20px 18px; overflow: hidden; }
+.joint::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 5px; background: var(--stripe); }
+.joint h3 { font-size: 1.08rem; line-height: 1.28; }
+.joint p { font-size: 0.9rem; color: var(--muted); line-height: 1.45; }
+.joint-inits { display: flex; flex-wrap: wrap; gap: 4px 12px; }
+.joint-foot { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 6px 12px; }
+.joint-foot a { font-size: 0.86rem; font-weight: 600; text-decoration: none; }
+.joint-foot a:hover { text-decoration: underline; }
+.joint-status { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--accent); }
+.joint-empty { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; padding: 18px 20px; border: 2px dashed var(--line); border-radius: var(--r-lg); color: var(--muted); font-size: 0.92rem; }
+.flag-joint { font-size: 0.72rem; font-weight: 600; padding: 2px 8px; border-radius: 999px; background: var(--accent); color: var(--accent-ink); }
+
 /* Arbetsgrupper och projekt */
 .board { column-count: 3; column-gap: 14px; }
 .board .card { break-inside: avoid; margin-bottom: 14px; }
@@ -701,6 +715,66 @@ function networkBlock() {
   </div>`;
 }
 
+// ---------- Gemensamma satsningar ----------
+// En arbetsgrupp/ett projekt med joint = true. partners = övriga deltagande initiativ (utöver huvudinitiativet).
+function groupInits(g) { return [g.initiative, ...(Array.isArray(g.partners) ? g.partners : [])].filter((k, i, a) => k && a.indexOf(k) === i); }
+function jointCard(g) {
+  const ks = groupInits(g);
+  const stripe = ks.length > 1 ? `linear-gradient(to right, ${ks.map((k, n) => `var(--i-${esc(k)}) ${(n / ks.length * 100).toFixed(2)}% ${((n + 1) / ks.length * 100).toFixed(2)}%`).join(", ")})` : `var(--i-${esc(ks[0] || "")})`;
+  const st = STATUS.find(x => x.key === g.status);
+  let host = ""; try { host = new URL(g.url).hostname.replace(/^www\./, ""); } catch (e) {}
+  return `<article class="joint" style="--stripe:${stripe}">
+    <div class="row" style="justify-content:space-between;gap:8px"><span class="joint-status">${esc(st ? st.label : "Pågår")}</span><span class="status-line" style="font-size:0.78rem">${ks.length} initiativ</span></div>
+    <h3>${esc(g.name)}</h3>
+    ${g.description ? `<p>${esc(g.description)}</p>` : ""}
+    <div class="joint-inits">${ks.map(initTag).join("")}</div>
+    ${contactLine(g)}
+    <div class="joint-foot">
+      ${g.url ? `<a href="${esc(g.url)}" target="_blank" rel="noopener">Läs mer på ${esc(host || "webbplatsen")} ↗</a>` : "<span></span>"}
+      <button class="btn ghost" data-joint="${esc(g.id)}" style="padding:0;font-size:0.82rem">Ändra</button>
+    </div>
+  </article>`;
+}
+function jointBlock() {
+  const list = S.groups.filter(g => g.joint && g.status !== "avslutas")
+    .sort((a, b) => groupInits(b).length - groupInits(a).length || (a.name || "").localeCompare(b.name || "", "sv"));
+  return `<div class="section" style="margin-bottom:36px">
+    <div class="section-head"><h2>Gemensamma satsningar</h2><button class="btn ghost" data-go="arbetsgrupper">Arbetsgrupper och projekt →</button></div>
+    ${list.length ? `<div class="joint-grid">${list.map(jointCard).join("")}</div>`
+      : `<div class="joint-empty"><span>Här lyfts arbete som flera initiativ driver tillsammans, t.ex. gemensamma beräkningsanvisningar. Markera en arbetsgrupp eller ett projekt som gemensam satsning för att visa det här.</span><button class="btn" id="add-joint">+ Lägg till gemensam satsning</button></div>`}
+  </div>`;
+}
+function jointFields(pre = {}) {
+  const partners = Array.isArray(pre.partners) ? pre.partners : [];
+  return `<label class="full row" style="gap:8px;font-size:0.9rem;font-weight:600"><input type="checkbox" name="joint" ${pre.joint ? "checked" : ""}> Gemensam satsning – visas högst upp på Översikt</label>
+      <div class="field"><label for="g-status">Status</label><select id="g-status" name="status">${STATUS.map(x => `<option value="${x.key}" ${(pre.status || "pagar") === x.key ? "selected" : ""}>${x.label}</option>`).join("")}</select></div>
+      <div class="field full"><span class="label">Andra initiativ som deltar</span><div class="chk-grid">${INIT.map(i => `<label class="row" style="gap:6px;font-size:0.88rem"><input type="checkbox" name="partner" value="${i.key}" ${partners.includes(i.key) ? "checked" : ""}> ${esc(i.short)}</label>`).join("")}</div></div>`;
+}
+function jointData(fd, main) {
+  return { joint: fd.get("joint") === "on", status: fd.get("status") || "pagar", partners: fd.getAll("partner").filter(k => k !== main) };
+}
+// Ändra en befintlig arbetsgrupp/ett projekt: gemensam satsning, deltagare, status och kontakt.
+// Fälten slås ihop med befintlig data, så även automatiskt hämtade grupper kan markeras (synken rör inte fälten).
+function jointDialog(id) {
+  const g = S.groups.find(x => x.id === id); if (!g) return;
+  openDialog(`<h2>${esc(g.name)}</h2>
+    <p class="muted" style="margin-top:-8px">${esc(IMAP[g.initiative]?.name || g.initiative)}</p>
+    <div class="form-grid">
+      ${jointFields(g)}
+      <div class="field full"><label for="j-desc">Kort beskrivning</label><textarea id="j-desc" name="description" rows="3" style="min-height:80px">${esc(g.description || "")}</textarea></div>
+      <div class="field full"><label for="j-url">Länk (valfritt)</label><input type="url" id="j-url" name="url" placeholder="https://" value="${esc(g.url || "")}"></div>
+      ${contactFields(g)}
+    </div>
+    <div class="row" style="justify-content:flex-end"><button class="btn" value="cancel" formnovalidate>Avbryt</button><button class="btn primary" value="ok">Spara</button></div>`,
+  async fd => {
+    if (needDb()) return false;
+    try {
+      await S.db.doc("groups/" + id).update({ ...jointData(fd, g.initiative), description: String(fd.get("description") || "").trim(), url: String(fd.get("url") || "").trim(), ...contactData(fd), updatedAt: new Date().toISOString() });
+      toast("Sparat");
+    } catch (e) { toast(e.code === "invalid_argument" ? "Du har inte behörighet att spara." : "Kunde inte spara. Försök igen."); return false; }
+  });
+}
+
 function viewOverview() {
   const t = today(); const tY = ymd(t);
   const upcoming = S.events.filter(e => e.date >= tY).sort(sortEvents);
@@ -708,6 +782,7 @@ function viewOverview() {
   return `<div class="page-head">
     <div><div class="label">Översikt · vecka ${isoWeek(t)} · ${t.getDate()} ${MONTHS_LONG[t.getMonth()]} ${t.getFullYear()}</div><h1 style="margin-top:6px">Det här händer i initiativen</h1></div>
   </div>
+  ${jointBlock()}
   <div style="margin-bottom:24px">${featuredNote()}</div>
   ${nowBlock()}
 
@@ -1121,7 +1196,7 @@ function monthGrid(list) {
 function viewGroups() {
   const q = S.grQ.toLowerCase();
   const list = S.groups.filter(g =>
-    (!S.grInit.size || S.grInit.has(g.initiative)) &&
+    (!S.grInit.size || groupInits(g).some(k => S.grInit.has(k))) &&
     (!S.grTheme || (g.themes || []).includes(S.grTheme)) &&
     (!q || [g.name, g.description, (g.themes || []).join(" "), IMAP[g.initiative]?.name].join(" ").toLowerCase().includes(q)));
   let h = `<div class="page-head">
@@ -1139,12 +1214,15 @@ function viewGroups() {
 }
 function cardHtml(g) {
   const i = IMAP[g.initiative] || {};
+  const partners = groupInits(g).slice(1);
   return `<article class="card" style="--ic:var(--i-${esc(g.initiative)})">
-    <div class="card-init">${initDot(g.initiative)}${esc(i.name || g.initiative)}</div>
+    <div class="card-init">${initDot(g.initiative)}${esc(i.name || g.initiative)}${partners.length ? `<span class="muted" style="font-weight:500">&nbsp;med ${esc(partners.map(k => IMAP[k]?.short || k).join(", "))}</span>` : ""}</div>
+    ${g.joint ? `<div><span class="flag-joint">Gemensam satsning</span></div>` : ""}
     <h3>${g.url || i.site ? `<a class="out" href="${esc(g.url || i.site)}" target="_blank" rel="noopener">${esc(g.name)}</a>` : esc(g.name)}</h3>
     ${g.description ? `<p>${esc(g.description)}</p>` : ""}
     ${contactLine(g)}
     <div class="card-top">${(g.themes || []).map(t => `<button class="theme-tag" data-gr-theme="${esc(t)}" title="Filtrera på ${esc(t)}">${esc(t)}</button>`).join("")}</div>
+    <button class="btn ghost" data-joint="${esc(g.id)}" style="justify-self:start;padding:0;font-size:0.82rem">${g.joint ? "Ändra gemensam satsning" : "Markera som gemensam satsning"}</button>
   </article>`;
 }
 
@@ -1450,13 +1528,14 @@ function addGroupDialog(pre = {}) {
       <div class="field full"><label for="g-desc">Kort beskrivning</label><textarea id="g-desc" name="description" rows="3" style="min-height:80px">${esc(pre.description || "")}</textarea></div>
       <div class="field full"><label for="g-url">Länk (valfritt)</label><input type="url" id="g-url" name="url" placeholder="https://" value="${esc(pre.url || "")}"></div>
       ${contactFields(pre)}
+      ${jointFields(pre)}
     </div>
     <div class="row" style="justify-content:flex-end"><button class="btn" value="cancel" formnovalidate>Avbryt</button><button class="btn primary" value="ok">Lägg till</button></div>`,
   async fd => {
     if (needDb()) return false;
     const d = Object.fromEntries(fd.entries());
     const themes = [d.theme, d.theme2].filter(Boolean).filter((t, i, a) => a.indexOf(t) === i);
-    try { await S.db.collection("groups").add({ name: d.name, initiative: d.initiative, status: "pagar", themes, description: d.description, url: d.url, ...contactData(fd), source: "manuell", updatedAt: new Date().toISOString() }); toast("Arbetsgruppen är tillagd"); }
+    try { await S.db.collection("groups").add({ name: d.name, initiative: d.initiative, themes, ...jointData(fd, d.initiative), description: d.description, url: d.url, ...contactData(fd), source: "manuell", updatedAt: new Date().toISOString() }); toast("Arbetsgruppen är tillagd"); }
     catch (e) { toast(e.code === "invalid_argument" ? "Du har inte behörighet att lägga till." : "Kunde inte spara. Försök igen."); return false; }
   });
 }
@@ -1583,6 +1662,8 @@ document.addEventListener("click", async e => {
   if (ds.note) { S.noteSel = ds.note; S._uploading = false; S.parseMsg = ""; render(); return; }
   if (t.id === "add-ev") { addEventDialog(); return; }
   if (t.id === "add-gr") { addGroupDialog(); return; }
+  if (t.id === "add-joint") { addGroupDialog({ joint: true }); return; }
+  if (ds.joint) { jointDialog(ds.joint); return; }
   if (t.id === "add-nw") { addNewsDialog(); return; }
   if (t.id === "add-rs") { resourceDialog(); return; }
   if (ds.editRs) { const r = S.resources.find(x => x.id === ds.editRs); if (r && r.source === "manuell") resourceDialog(r); return; }
