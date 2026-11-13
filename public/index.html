@@ -176,7 +176,7 @@ a.out:hover { text-decoration: underline; color: var(--accent); }
 .pinboard { position: relative; background-image: radial-gradient(color-mix(in srgb, var(--accent) 22%, transparent) 1.2px, transparent 1.3px); background-size: 24px 24px; }
 .board-empty { position: absolute; left: 40px; top: 40px; max-width: 360px; display: grid; gap: 6px; color: var(--muted); padding: 20px; border: 2px dashed var(--line); border-radius: var(--r-lg); background: var(--bg); }
 .board-empty b { color: var(--ink); }
-.pnote { position: absolute; width: 220px; min-height: 130px; padding: 12px 14px 10px; display: grid; gap: 8px; grid-template-rows: auto 1fr auto; background: color-mix(in srgb, var(--ic) 20%, var(--bg)); border-top: 5px solid var(--ic); border-radius: 4px 4px 10px 10px; box-shadow: 0 8px 18px -10px rgba(10, 25, 60, 0.45); cursor: grab; touch-action: none; user-select: none; transition: box-shadow .15s; }
+.pnote { position: absolute; width: 220px; min-height: 130px; padding: 12px 14px 10px; display: grid; gap: 8px; grid-template-rows: auto 1fr auto auto; background: color-mix(in srgb, var(--ic) 20%, var(--bg)); border-top: 5px solid var(--ic); border-radius: 4px 4px 10px 10px; box-shadow: 0 8px 18px -10px rgba(10, 25, 60, 0.45); cursor: grab; touch-action: none; user-select: none; transition: box-shadow .15s; }
 .pnote:hover { box-shadow: 0 14px 26px -12px rgba(10, 25, 60, 0.55); }
 .pnote.dragging { cursor: grabbing; z-index: 30; box-shadow: 0 22px 40px -14px rgba(10, 25, 60, 0.6); transform: rotate(0deg) scale(1.03) !important; transition: none; }
 .pnote-head { display: flex; justify-content: space-between; align-items: center; gap: 6px; }
@@ -191,6 +191,7 @@ a.out:hover { text-decoration: underline; color: var(--accent); }
 .pnote-plus:hover { background: var(--bg); }
 .pnote-plus[aria-pressed="true"] { background: var(--ic); color: var(--on-init); }
 .pnote-also { display: flex; gap: 4px; flex-wrap: wrap; }
+.pnote-contact .contact-line { font-size: 0.74rem; display: block; }
 
 /* Arkiv */
 .archive { display: grid; gap: 6px; }
@@ -372,6 +373,12 @@ dialog .ev { background: var(--surface); }
 .contact-line a { text-decoration: none; } .contact-line a:hover { text-decoration: underline; }
 input[type=file] { max-width: 100%; font-size: 0.88rem; }
 .hint { font-size: 0.8rem; color: var(--muted); }
+.people { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.people li { display: grid; gap: 1px; }
+.people .label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.05em; }
+.people a { text-decoration: none; } .people a:hover { text-decoration: underline; }
+.people-row { display: grid; grid-template-columns: 1fr 1.2fr 1.4fr 1fr; gap: 8px; padding-bottom: 6px; border-bottom: 1px solid var(--line); }
+@media (max-width: 560px) { .people-row { grid-template-columns: 1fr 1fr; } }
 .contact-mail { font-family: var(--font-mono, monospace); font-size: 0.82rem; overflow-wrap: anywhere; }
 .focus-list { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
 .prof-stats { display: flex; flex-wrap: wrap; gap: 4px 10px; }
@@ -847,17 +854,23 @@ function viewBoard() {
     </div>
   </div>`;
 }
+// "Vi också" och röster räknas per initiativ, inte per inloggning: alla delar samma konto,
+// så en markering per konto skulle göra att nästa person tog bort den förra.
+function uniqInits(list) { return [...new Set((Array.isArray(list) ? list : []).filter(k => IMAP[k]))]; }
+function initChecks(name, selected = [], exclude = "") {
+  return `<div class="chk-grid">${INIT.filter(i => i.key !== exclude).map(i => `<label class="row" style="gap:6px;font-size:0.88rem"><input type="checkbox" name="${name}" value="${i.key}" ${selected.includes(i.key) ? "checked" : ""}> ${esc(i.short)}</label>`).join("")}</div>`;
+}
 function noteHtml(n) {
   const i = IMAP[n.initiative] || {};
-  const plus = Array.isArray(n.plus) ? n.plus : [];
-  const mine = S.uid && plus.includes(S.uid);
-  const plusInits = [...new Set(Array.isArray(n.plusInits) ? n.plusInits : [])];
+  const plusInits = uniqInits(n.plusInits);
+  const mine = plusInits.includes(load("kp-myinit"));
   return `<div class="pnote" data-note-id="${esc(n.id)}" style="left:${Math.max(0, Math.min(BW - 230, Number(n.x) || 40))}px;top:${Math.max(0, Math.min(BH - 160, Number(n.y) || 40))}px;--ic:var(--i-${esc(n.initiative)});transform:rotate(${((n.id.charCodeAt(0) + n.id.charCodeAt(n.id.length - 1)) % 5 - 2) * 0.6}deg)">
     <div class="pnote-head"><span class="pnote-type">${esc(NMAP[n.type] || "Lapp")}</span><button class="pnote-x" data-del-note="${esc(n.id)}" aria-label="Ta bort lappen" title="Ta bort">×</button></div>
     <p class="pnote-text">${esc(n.text)}</p>
+    ${n.contactName || n.contactEmail ? `<div class="pnote-contact">${contactLine(n)}</div>` : ""}
     <div class="pnote-foot">
       <span class="pnote-init">${esc(i.name || n.initiative)}</span>
-      <button class="pnote-plus" data-plus="${esc(n.id)}" aria-pressed="${mine ? "true" : "false"}" title="${plusInits.map(k => IMAP[k]?.name || k).join(", ")}">Vi också${plus.length ? ` · ${plus.length}` : ""}</button>
+      <button class="pnote-plus" data-plus="${esc(n.id)}" aria-pressed="${mine ? "true" : "false"}" title="${esc(plusInits.map(k => IMAP[k]?.name || k).join(", "))}">Vi också${plusInits.length ? ` · ${plusInits.length}` : ""}</button>
     </div>
     ${plusInits.length ? `<div class="pnote-also">${plusInits.map(k => `<span class="dot" style="background:var(--i-${esc(k)})" title="${esc(IMAP[k]?.name || k)}"></span>`).join("")}</div>` : ""}
   </div>`;
@@ -868,6 +881,8 @@ function addBoardNoteDialog() {
       <div class="field"><label for="bn-type">Typ</label><select id="bn-type" name="type">${NTYPES.map(t => `<option value="${t.key}">${t.label}</option>`).join("")}</select></div>
       <div class="field"><label for="bn-init">Från initiativ</label><select id="bn-init" name="initiative">${initOptions(load("kp-myinit"))}</select></div>
       <div class="field full"><label for="bn-text">Text</label><textarea id="bn-text" name="text" rows="4" maxlength="280" required style="min-height:100px" placeholder="T.ex. Vi planerar en återbruksmässa våren 2027 och söker fler initiativ att göra den med."></textarea></div>
+      ${contactFields()}
+      <p class="hint full" style="margin-top:-6px">Med kontaktuppgift vet den som trycker "Vi också" vem den ska höra av sig till.</p>
     </div>
     <div class="row" style="justify-content:flex-end"><button class="btn" value="cancel" formnovalidate>Avbryt</button><button class="btn primary" value="ok">Sätt upp lappen</button></div>`,
   async fd => {
@@ -877,32 +892,30 @@ function addBoardNoteDialog() {
     const wrap = document.getElementById("board-wrap");
     const x = (wrap ? wrap.scrollLeft : 0) + 40 + Math.round(Math.random() * 260);
     const y = (wrap ? wrap.scrollTop : 0) + 40 + Math.round(Math.random() * 140);
-    try { await S.db.collection("board").add({ text: d.text.trim(), type: d.type, initiative: d.initiative, x, y, plus: [], plusInits: [], createdAt: new Date().toISOString() }); toast("Lappen sitter uppe"); }
+    try { await S.db.collection("board").add({ text: d.text.trim(), type: d.type, initiative: d.initiative, ...contactData(fd), x, y, plus: [], plusInits: [], createdAt: new Date().toISOString() }); toast("Lappen sitter uppe"); }
     catch (e) { toast(e.code === "invalid_argument" ? "Du har inte behörighet att sätta upp lappar." : "Kunde inte spara. Försök igen."); return false; }
   });
 }
 function plusDialog(id) {
   const n = S.board.find(x => x.id === id); if (!n) return;
-  if (!S.uid) { toast("Logga in på claude.ai för att markera lappar."); return; }
-  const plus = Array.isArray(n.plus) ? [...n.plus] : [];
-  if (plus.includes(S.uid)) {
-    const idx = plus.indexOf(S.uid); plus.splice(idx, 1);
-    const inits = Array.isArray(n.plusInits) ? [...n.plusInits] : []; inits.splice(idx, 1);
-    S.db.doc("board/" + id).update({ plus, plusInits: inits }).catch(() => toast("Kunde inte spara."));
-    return;
-  }
+  const cur = uniqInits(n.plusInits);
+  const my = load("kp-myinit");
+  const pre = cur.length ? cur : (my && my !== n.initiative ? [my] : []);
   openDialog(`<h2>Vi också</h2><p class="muted">${esc(n.text)}</p>
-    <div class="field"><label for="pl-init">Vilket initiativ?</label><select id="pl-init" name="initiative">${initOptions(load("kp-myinit"))}</select></div>
-    <div class="row" style="justify-content:flex-end"><button class="btn" value="cancel" formnovalidate>Avbryt</button><button class="btn primary" value="ok">Markera</button></div>`,
+    ${n.contactName || n.contactEmail ? `<div class="syn"><div class="label" style="color:var(--accent)">Hör av er till ${esc(IMAP[n.initiative]?.name || n.initiative)}</div><div style="font-size:0.92rem">${contactLine(n)}</div></div>` : `<p class="status-line">Lappen saknar kontaktuppgift. Kontaktpersoner finns under Initiativ.</p>`}
+    <div class="field"><span class="label">Vilka initiativ känner igen sig?</span>${initChecks("ini", pre, n.initiative)}</div>
+    <div class="row" style="justify-content:flex-end"><button class="btn" value="cancel" formnovalidate>Avbryt</button><button class="btn primary" value="ok">Spara</button></div>`,
   async fd => {
-    const k = fd.get("initiative"); store("kp-myinit", k);
-    try { await S.db.doc("board/" + id).update({ plus: [...plus, S.uid], plusInits: [...(Array.isArray(n.plusInits) ? n.plusInits : []), k] }); toast("Markerat"); }
+    if (needDb()) return false;
+    const next = uniqInits(fd.getAll("ini"));
+    const added = next.find(k => !cur.includes(k)); if (added) store("kp-myinit", added);
+    try { await S.db.doc("board/" + id).update({ plusInits: next, plus: [] }); toast(next.length ? "Markerat" : "Markeringen är borttagen"); }
     catch (e) { toast("Kunde inte spara."); return false; }
   });
 }
 // dra lappar
 document.addEventListener("pointerdown", e => {
-  const el = e.target.closest(".pnote"); if (!el || e.target.closest("button") || e.button !== 0) return;
+  const el = e.target.closest(".pnote"); if (!el || e.target.closest("button, a") || e.button !== 0) return;
   if (matchMedia("(max-width: 560px)").matches) return;
   const board = document.getElementById("pinboard"); if (!board) return;
   e.preventDefault();
@@ -1284,6 +1297,39 @@ function noteDetail(n) {
 // ---------- Initiativ & källor ----------
 function profileOf(k) { return S.profiles.find(x => x.id === k) || {}; }
 function contactOf(k) { return S.contacts.find(x => x.id === k) || null; }
+// Kontaktpersoner per initiativ: contacts/<key>.people = [{ role, name, email, phone }].
+// Äldre poster har bara name/email/org och visas som en kontaktperson.
+const ROLES = ["Koordinator", "Ordförande", "Verksamhetsledare", "Projektledare", "Kommunikatör", "Kontaktperson"];
+function contactPeople(c) {
+  if (!c) return [];
+  if (Array.isArray(c.people) && c.people.length) return c.people.filter(x => x && (x.name || x.email || x.phone));
+  return c.name || c.email ? [{ role: "Kontaktperson", name: c.name || "", email: c.email || "" }] : [];
+}
+function peopleHtml(c) {
+  const ppl = contactPeople(c);
+  if (!ppl.length) return `<div class="muted">Ingen kontaktperson inlagd. Lägg till med "Redigera profil".</div>`;
+  return `<ul class="people">${ppl.map(x => `<li><span class="label">${esc(x.role || "Kontaktperson")}</span><span>${esc(x.name || "")}</span>${x.email ? `<a class="contact-mail" href="mailto:${esc(x.email)}">${esc(x.email)}</a>` : ""}${x.phone ? `<a class="contact-mail" href="tel:${esc(String(x.phone).replace(/[^\d+]/g, ""))}">${esc(x.phone)}</a>` : ""}</li>`).join("")}</ul>${c.org ? `<div class="status-line">${esc(c.org)}</div>` : ""}`;
+}
+const PEOPLE_ROWS = 4;
+function peopleFields(c) {
+  const ppl = contactPeople(c);
+  return `<datalist id="roles">${ROLES.map(r => `<option value="${r}">`).join("")}</datalist>
+    <div class="field full"><span class="label">Kontaktpersoner – t.ex. koordinator och ordförande. Tomma rader sparas inte.</span></div>
+    ${Array.from({ length: PEOPLE_ROWS }, (_, n) => { const x = ppl[n] || {}; return `<div class="people-row full">
+      <div class="field"><label for="pp-r${n}">Roll</label><input type="text" id="pp-r${n}" name="pr${n}" list="roles" value="${esc(x.role || (n === 0 ? "Koordinator" : n === 1 ? "Ordförande" : ""))}"></div>
+      <div class="field"><label for="pp-n${n}">Namn</label><input type="text" id="pp-n${n}" name="pn${n}" value="${esc(x.name || "")}"></div>
+      <div class="field"><label for="pp-e${n}">E-post</label><input type="email" id="pp-e${n}" name="pe${n}" value="${esc(x.email || "")}"></div>
+      <div class="field"><label for="pp-p${n}">Telefon</label><input type="text" id="pp-p${n}" name="pp${n}" inputmode="tel" value="${esc(x.phone || "")}"></div>
+    </div>`; }).join("")}
+    <div class="field full"><label for="pp-org">Organisation (valfritt)</label><input type="text" id="pp-org" name="corg" value="${esc(c?.org || "")}"></div>`;
+}
+function peopleData(fd) {
+  const people = Array.from({ length: PEOPLE_ROWS }, (_, n) => ({ role: String(fd.get("pr" + n) || "").trim(), name: String(fd.get("pn" + n) || "").trim(), email: String(fd.get("pe" + n) || "").trim(), phone: String(fd.get("pp" + n) || "").trim() }))
+    .filter(x => x.name || x.email || x.phone).map(x => ({ ...x, role: x.role || "Kontaktperson" }));
+  const first = people[0] || {};
+  // name/email sparas också för bakåtkompatibilitet med äldre data och synk.
+  return { people, name: first.name || "", email: first.email || "", org: String(fd.get("corg") || "").trim() };
+}
 function profileCard(i) {
   const p = profileOf(i.key), c = contactOf(i.key);
   const tY = ymd(today());
@@ -1297,7 +1343,7 @@ function profileCard(i) {
       <div><h3>${i.site ? `<a class="out" href="${esc(i.site)}" target="_blank" rel="noopener">${esc(i.name)}</a>` : esc(i.name)}</h3><div class="status-line">${esc(i.region)}${i.custom ? `${i.region ? " · " : ""}Tillagt manuellt` : ""}</div></div>
       ${p.surveyAt ? `<span class="pill ok">Enkät besvarad</span>` : `<span class="pill wait">Inväntar enkät</span>`}
     </div>
-    <div class="prof-sec"><div class="label">Kontaktperson</div>${c && (c.name || c.email) ? `<div>${esc(c.name || "")}${c.org ? `<span class="muted"> · ${esc(c.org)}</span>` : ""}</div>${c.email ? `<div class="contact-mail">${esc(c.email)}</div>` : ""}` : `<div class="muted">Läggs in från kontaktlistan</div>`}</div>
+    <div class="prof-sec"><div class="label">Kontaktpersoner</div>${peopleHtml(c)}</div>
     <div class="prof-sec"><div class="label">Tre viktigaste fokusområden, 12 månader</div>${focus.length ? `<ol class="focus-list">${focus.map(f => `<li>${esc(f.text)}${f.theme ? ` <span class="theme-tag">${esc(f.theme)}</span>` : ""}</li>`).join("")}</ol>` : `<div class="muted">Fylls i från enkäten</div>`}</div>
     ${p.seeking ? `<div class="prof-sec"><div class="label">Söker samarbetspartner</div><p>${esc(p.seeking)}</p></div>` : ""}
     ${p.collab ? `<div class="prof-sec"><div class="label">Störst nytta att göra tillsammans</div><p>${esc(p.collab)}</p></div>` : ""}
@@ -1354,7 +1400,7 @@ function viewConference() {
   const counts = {};
   INIT.forEach(i => [...new Set(focusThemes(i.key))].forEach(t => { (counts[t] = counts[t] || []).push(i.key); }));
   const ranked = Object.entries(counts).sort((a, b) => b[1].length - a[1].length);
-  const ideas = [...S.ideas].sort((a, b) => (b.votes || []).length - (a.votes || []).length || String(a.createdAt).localeCompare(String(b.createdAt)));
+  const ideas = [...S.ideas].sort((a, b) => uniqInits(b.votes).length - uniqInits(a.votes).length || String(a.createdAt).localeCompare(String(b.createdAt)));
   const seekNotes = S.board.filter(b => b.type === "soker");
   const seekProf = INIT.filter(i => profileOf(i.key).seeking);
   const openEv = S.events.filter(e => e.date >= tY && (e.open || e.share === "ja" || e.share === "kontakt")).sort((a, b) => a.date.localeCompare(b.date)).slice(0, 12);
@@ -1374,13 +1420,13 @@ function viewConference() {
     </div>
     <div class="section">
       <div class="section-head"><h2>Söker samarbete</h2></div>
-      ${seekProf.length || seekNotes.length ? `<div style="display:grid;gap:8px">${seekProf.map(i => `<div class="seek" style="--ic:var(--i-${i.key})">${initTag(i.key)}<p>${esc(profileOf(i.key).seeking)}</p></div>`).join("")}${seekNotes.map(n => `<div class="seek" style="--ic:var(--i-${esc(n.initiative)})">${initTag(n.initiative)}<p>${esc(n.text)}</p><span class="status-line">Från anslagstavlan</span></div>`).join("")}</div>` : `<p class="muted">Fylls i från enkätens fråga 10 och från lappar av typen "Söker" på anslagstavlan.</p>`}
+      ${seekProf.length || seekNotes.length ? `<div style="display:grid;gap:8px">${seekProf.map(i => `<div class="seek" style="--ic:var(--i-${i.key})">${initTag(i.key)}<p>${esc(profileOf(i.key).seeking)}</p></div>`).join("")}${seekNotes.map(n => `<div class="seek" style="--ic:var(--i-${esc(n.initiative)})">${initTag(n.initiative)}<p>${esc(n.text)}</p>${contactLine(n)}<span class="status-line">Från anslagstavlan</span></div>`).join("")}</div>` : `<p class="muted">Fylls i från enkätens fråga 10 och från lappar av typen "Söker" på anslagstavlan.</p>`}
     </div>
   </div>
   <div class="section" style="margin-top:32px">
     <div class="section-head"><h2>Samverkansidéer</h2><button class="btn primary" id="add-idea">Lägg till idé</button></div>
-    <p class="muted" style="margin:0 0 12px">Idéer från enkätens fråga 11 och från konferensen. Rösta på de som ni vill driva vidare. En röst per person och idé.</p>
-    ${ideas.length ? `<div class="ideas">${ideas.map(d => { const v = Array.isArray(d.votes) ? d.votes : []; const mine = S.uid && v.includes(S.uid); return `<div class="idea"><div class="idea-vote"><button class="btn ${mine ? "primary" : ""}" data-vote="${esc(d.id)}" aria-pressed="${mine ? "true" : "false"}">▲ ${v.length}</button></div><div><b>${esc(d.title)}</b>${d.text ? `<p>${esc(d.text)}</p>` : ""}<div class="row" style="gap:4px 12px;margin-top:4px">${(d.initiatives || []).map(initTag).join("")}${d.theme ? `<span class="theme-tag">${esc(d.theme)}</span>` : ""}</div></div></div>`; }).join("")}</div>` : `<p class="muted">Inga idéer ännu.</p>`}
+    <p class="muted" style="margin:0 0 12px">Idéer från enkätens fråga 11 och från konferensen. Rösta på de som ni vill driva vidare. Varje initiativ har en röst per idé.</p>
+    ${ideas.length ? `<div class="ideas">${ideas.map(d => { const v = uniqInits(d.votes); const mine = v.includes(load("kp-myinit")); return `<div class="idea"><div class="idea-vote"><button class="btn ${mine ? "primary" : ""}" data-vote="${esc(d.id)}" aria-pressed="${mine ? "true" : "false"}" title="${esc(v.map(k => IMAP[k]?.name || k).join(", "))}">▲ ${v.length}</button>${v.length ? `<div class="ov-dots" style="margin-top:6px;justify-content:center">${v.map(k => `<span class="dot" style="background:var(--i-${esc(k)})" title="${esc(IMAP[k]?.name || k)}"></span>`).join("")}</div>` : ""}</div><div><b>${esc(d.title)}</b>${d.text ? `<p>${esc(d.text)}</p>` : ""}<div class="row" style="gap:4px 12px;margin-top:4px">${(d.initiatives || []).map(initTag).join("")}${d.theme ? `<span class="theme-tag">${esc(d.theme)}</span>` : ""}</div></div></div>`; }).join("")}</div>` : `<p class="muted">Inga idéer ännu.</p>`}
   </div>
   <div class="section" style="margin-top:32px">
     <div class="section-head"><h2>Öppna och spridningsbara aktiviteter</h2><button class="btn ghost" data-go="kalendarium">Hela kalendariet</button></div>
@@ -1391,9 +1437,7 @@ function editProfileDialog(key) {
   const i = IMAP[key]; const p = profileOf(key); const c = contactOf(key) || {}; const f = p.focus || [];
   openDialog(`<h2>${esc(i.name)}</h2>
     <div class="form-grid">
-      <div class="field"><label for="p-cn">Kontaktperson</label><input type="text" id="p-cn" name="cname" value="${esc(c.name || "")}"></div>
-      <div class="field"><label for="p-co">Organisation</label><input type="text" id="p-co" name="corg" value="${esc(c.org || "")}"></div>
-      <div class="field full"><label for="p-ce">E-post</label><input type="email" id="p-ce" name="cemail" value="${esc(c.email || "")}"></div>
+      ${peopleFields(contactOf(key))}
       ${[0, 1, 2].map(n => `<div class="field"><label for="p-f${n}">Fokusområde ${n + 1}</label><input type="text" id="p-f${n}" name="f${n}" value="${esc(f[n]?.text || "")}"></div><div class="field"><label for="p-t${n}">Tema</label><select id="p-t${n}" name="t${n}">${themeOptions(f[n]?.theme || "", true)}</select></div>`).join("")}
       <div class="field full"><label for="p-seek">Söker samarbetspartner kring</label><textarea id="p-seek" name="seeking" rows="2" style="min-height:60px">${esc(p.seeking || "")}</textarea></div>
       <div class="field full"><label for="p-col">Störst nytta att göra tillsammans</label><textarea id="p-col" name="collab" rows="2" style="min-height:60px">${esc(p.collab || "")}</textarea></div>
@@ -1406,15 +1450,14 @@ function editProfileDialog(key) {
     const prof = { focus, seeking: String(fd.get("seeking") || "").trim(), collab: String(fd.get("collab") || "").trim(), surveyAt: fd.get("answered") === "on" ? (p.surveyAt || new Date().toISOString()) : null, updatedAt: new Date().toISOString() };
     try {
       await S.db.doc("profiles/" + key).set(prof);
-      const cn = { name: String(fd.get("cname") || "").trim(), org: String(fd.get("corg") || "").trim(), email: String(fd.get("cemail") || "").trim() };
-      if (cn.name || cn.org || cn.email || contactOf(key)) await S.db.doc("contacts/" + key).set(cn);
+      const cn = peopleData(fd);
+      if (cn.people.length || cn.org || contactOf(key)) { const { id: _id, ...old } = contactOf(key) || {}; await S.db.doc("contacts/" + key).set({ ...old, ...cn }); }
       toast("Profilen är sparad");
     } catch (e) { toast(e.code === "invalid_argument" ? "Du har inte behörighet att spara." : "Kunde inte spara. Försök igen."); return false; }
   });
 }
 function initiativeDialog(key) {
   const x = key ? (S.initiatives.find(d => d.id === key) || {}) : {};
-  const c = key ? (contactOf(key) || {}) : {};
   openDialog(`<h2>${key ? "Ändra initiativ" : "Lägg till initiativ"}</h2>
     <div class="form-grid">
       <div class="field full"><label for="in-name">Namn</label><input type="text" id="in-name" name="name" required maxlength="120" value="${esc(x.name || "")}" placeholder="T.ex. Klimatinitiativ Norrbotten"></div>
@@ -1422,9 +1465,7 @@ function initiativeDialog(key) {
       <div class="field"><label for="in-region">Region</label><input type="text" id="in-region" name="region" maxlength="60" value="${esc(x.region || "")}"></div>
       <div class="field full"><label for="in-site">Webbplats</label><input type="url" id="in-site" name="site" placeholder="https://" value="${esc(x.site || "")}"></div>
       <div class="field full"><label for="in-url">Kalender- eller nyhetssida (valfritt)</label><input type="url" id="in-url" name="url" placeholder="https://" value="${esc(x.url || "")}"><span class="hint">Med en webbplats hämtar veckosynken träffar, nyheter och material därifrån, från och med nästa synk. Utan egen kalendersida läses webbplatsen.</span></div>
-      <div class="field"><label for="in-cn">Kontaktperson</label><input type="text" id="in-cn" name="cname" value="${esc(c.name || "")}"></div>
-      <div class="field"><label for="in-co">Organisation</label><input type="text" id="in-co" name="corg" value="${esc(c.org || "")}"></div>
-      <div class="field full"><label for="in-ce">E-post</label><input type="email" id="in-ce" name="cemail" value="${esc(c.email || "")}"></div>
+      ${key ? `<p class="hint full">Kontaktpersoner ändras med "Redigera profil" på initiativets kort.</p>` : peopleFields(null)}
     </div>
     <div class="row" style="justify-content:space-between">${key ? `<button class="btn ghost danger" value="delete" formnovalidate>Ta bort initiativet</button>` : "<span></span>"}<div class="row"><button class="btn" value="cancel" formnovalidate>Avbryt</button><button class="btn primary" value="ok">${key ? "Spara" : "Lägg till"}</button></div></div>`,
   async (fd, action) => {
@@ -1441,8 +1482,7 @@ function initiativeDialog(key) {
     const data = { name, short: String(fd.get("short") || "").trim(), region: String(fd.get("region") || "").trim(), site: String(fd.get("site") || "").trim(), url: String(fd.get("url") || "").trim(), color: Number.isInteger(x.color) ? x.color : S.initiatives.length % XCOLORS.length, createdAt: x.createdAt || new Date().toISOString(), updatedAt: new Date().toISOString() };
     try {
       await S.db.doc("initiatives/" + k).set(data);
-      const cn = { name: String(fd.get("cname") || "").trim(), org: String(fd.get("corg") || "").trim(), email: String(fd.get("cemail") || "").trim() };
-      if (cn.name || cn.org || cn.email || contactOf(k)) await S.db.doc("contacts/" + k).set(cn);
+      if (!key) { const cn = peopleData(fd); if (cn.people.length || cn.org) await S.db.doc("contacts/" + k).set(cn); }
       toast(key ? "Initiativet är sparat" : "Initiativet är tillagt");
     } catch (e) { toast(e.code === "invalid_argument" ? "Du har inte behörighet att spara." : "Kunde inte spara. Försök igen."); return false; }
   });
@@ -1462,13 +1502,21 @@ function addIdeaDialog() {
     catch (e) { toast("Kunde inte spara. Försök igen."); return false; }
   });
 }
-async function voteIdea(id) {
-  if (needDb()) return;
-  if (!S.uid) { toast("Logga in på claude.ai för att rösta."); return; }
+function voteIdea(id) {
   const d = S.ideas.find(x => x.id === id); if (!d) return;
-  const v = Array.isArray(d.votes) ? [...d.votes] : [];
-  const next = v.includes(S.uid) ? v.filter(x => x !== S.uid) : [...v, S.uid];
-  try { await S.db.doc("ideas/" + id).update({ votes: next }); } catch (e) { toast("Kunde inte rösta."); }
+  const cur = uniqInits(d.votes);
+  const my = load("kp-myinit");
+  openDialog(`<h2>Rösta</h2><p class="muted">${esc(d.title)}</p>
+    <div class="field"><span class="label">Vilka initiativ vill driva idén vidare?</span>${initChecks("ini", cur.length ? cur : (my ? [my] : []))}</div>
+    <p class="status-line">Varje initiativ har en röst per idé. Kryssa ur för att ta tillbaka en röst.</p>
+    <div class="row" style="justify-content:flex-end"><button class="btn" value="cancel" formnovalidate>Avbryt</button><button class="btn primary" value="ok">Spara</button></div>`,
+  async fd => {
+    if (needDb()) return false;
+    const next = uniqInits(fd.getAll("ini"));
+    const added = next.find(k => !cur.includes(k)); if (added) store("kp-myinit", added);
+    try { await S.db.doc("ideas/" + id).update({ votes: next }); toast("Rösterna är sparade"); }
+    catch (e) { toast("Kunde inte rösta."); return false; }
+  });
 }
 
 // ---------- dialoger ----------
